@@ -11,7 +11,7 @@ namespace dominio
     {
         public int idCiudad { get; set; }
         public string nombre { get; set; }
-        public int idPais { get; set; }
+        public Pais idPais { get; set; }
         public override string ToString()
         {
             return nombre;
