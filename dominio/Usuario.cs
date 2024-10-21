@@ -17,6 +17,6 @@ namespace dominio
         public string Contrasenia { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public Ciudad Ciudad { get; set; }
-        public bool Estado { get; set; }
+        public bool Estado { get; set; } 
     }
 }

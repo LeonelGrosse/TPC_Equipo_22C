@@ -8,11 +8,11 @@ namespace dominio
 {
     public class Disciplina
     {
-        public int idDisciplina { get; set; }
-        public string disciplina { get; set; }
+        public int IdDisciplina { get; set; }
+        public string Descripcion { get; set; }
         public override string ToString()
         {
-            return disciplina;
+            return Descripcion;
         }
     }
 }

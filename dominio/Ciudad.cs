@@ -9,12 +9,12 @@ namespace dominio
 {
     public class Ciudad
     {
-        public int idCiudad { get; set; }
-        public string nombre { get; set; }
-        public Pais idPais { get; set; }
+        public int IdCiudad { get; set; }
+        public string Nombre { get; set; }
+        public Pais Pais { get; set; }
         public override string ToString()
         {
-            return nombre;
+            return Nombre;
         }
     }
 }

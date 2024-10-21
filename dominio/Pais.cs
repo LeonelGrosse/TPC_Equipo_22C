@@ -8,11 +8,11 @@ namespace dominio
 {
     public class Pais
     {
-        public int idPais { get; set; }
-        public string nombre { get; set; }
+        public int IdPais { get; set; }
+        public string Nombre { get; set; }
         public override string ToString()
         {
-            return nombre;
+            return Nombre;
         }
     }
 }

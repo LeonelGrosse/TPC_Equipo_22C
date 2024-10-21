@@ -9,13 +9,13 @@ namespace dominio
 {
     public class Evento
     {
-        public int idEvento { get; set; }
-        public string nombre { get; set; }
-        public DateTime fechaEvento { get; set; }
-        public Ciudad ubicacion { get; set; }
-        public decimal costoInscripcion { get; set; }
-        public char estado { get; set; }
-        public int rangoEdad { get; set; }
-        public int cuposDisponibles { get; set; }
+        public int IdEvento { get; set; }
+        public string Nombre { get; set; }
+        public DateTime FechaEvento { get; set; }
+        public Ciudad Ubicacion { get; set; }
+        public decimal CostoInscripcion { get; set; }
+        public char Estado { get; set; }
+        public int RangoEdad { get; set; }
+        public int CuposDisponibles { get; set; }
     }
 }
