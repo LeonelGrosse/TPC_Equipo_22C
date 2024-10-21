@@ -17,5 +17,6 @@ namespace dominio
         public char Estado { get; set; }
         public int RangoEdad { get; set; }
         public int CuposDisponibles { get; set; }
+        public List<Resultado> Resultado { get; set; }
     }
 }
