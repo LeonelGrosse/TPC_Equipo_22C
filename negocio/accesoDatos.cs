@@ -9,59 +9,55 @@ namespace negocio
 {
     public class accesoDatos
     {
-        private SqlConnection conexion;       
-        private SqlCommand comando;             
-        private SqlDataReader lector;           
+        private SqlConnection Conexion;       
+        private SqlCommand Comando;             
+        private SqlDataReader Reader;           
         public SqlDataReader Lector             
         {
-            get { return lector; }
+            get { return Reader; }
         }
-
         public accesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database = ; integrated security = true"); //Falta poner la BD
-            comando = new SqlCommand();
+            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database = ; integrated security = true"); //Falta poner la BD
+            Comando = new SqlCommand();
         }
         public void setConsulta(string consulta)
         {
-            comando.CommandType = System.Data.CommandType.Text;  
-            comando.CommandText = consulta;                     
+            Comando.CommandType = System.Data.CommandType.Text;  
+            Comando.CommandText = consulta;                     
         }
         public void ejecutarLectura()
         {
-            comando.Connection = conexion;
+            Comando.Connection = Conexion;
             try
             {
-                conexion.Open();
-                lector = comando.ExecuteReader();
+                Conexion.Open();
+                Reader = Comando.ExecuteReader();
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
         public void ejecutarAccion()
         {
-            comando.Connection = conexion;
+            Comando.Connection = Conexion;
             try
             {
-                conexion.Open();
-                comando.ExecuteNonQuery(); 
+                Conexion.Open();
+                Comando.ExecuteNonQuery(); 
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
         public int ejecutarEscalar()
         {
             try
             {
-                conexion.Open();
-                return (int)comando.ExecuteScalar();
+                Conexion.Open();
+                return (int)Comando.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -69,22 +65,20 @@ namespace negocio
             }
             finally
             {
-                conexion.Close();
+                Conexion.Close();
             }
         }
-
-
         public void setParametro(string nombre, object valor)
         {
-            comando.Parameters.AddWithValue(nombre, valor);      
+            Comando.Parameters.AddWithValue(nombre, valor);      
         }
         public void cerrarConexion()
         {
-            if (lector != null)
+            if (Reader != null)
             {
-                lector.Close();
+                Reader.Close();
             }
-            conexion.Close();
+            Conexion.Close();
         }
     }
 }
