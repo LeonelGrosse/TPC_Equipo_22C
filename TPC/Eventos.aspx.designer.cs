@@ -11,7 +11,7 @@ namespace TPC
 {
 
 
-    public partial class Default
+    public partial class Eventos
     {
     }
 }
