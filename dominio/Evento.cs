@@ -13,7 +13,7 @@ namespace dominio
         public string nombre { get; set; }
         public DateTime fechaEvento { get; set; }
         public Ciudad ubicacion { get; set; }
-        public SqlMoney costoInscripcion { get; set; }
+        public decimal costoInscripcion { get; set; }
         public char estado { get; set; }
         public int rangoEdad { get; set; }
         public int cuposDisponibles { get; set; }
