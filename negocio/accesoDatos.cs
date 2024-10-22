@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace negocio
 {
-    public class accesoDatos
+    public class AccesoDatos
     {
         private SqlConnection Conexion;       
         private SqlCommand Comando;             
@@ -16,9 +16,9 @@ namespace negocio
         {
             get { return Reader; }
         }
-        public accesoDatos()
+        public AccesoDatos()
         {
-            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database = ; integrated security = true"); //Falta poner la BD
+            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true"); //Falta poner la BD
             Comando = new SqlCommand();
         }
         public void setConsulta(string consulta)
