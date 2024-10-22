@@ -8,6 +8,10 @@ namespace dominio
 {
     public class Usuario
     {
+        public Usuario()
+        {
+            this.Rol = new Rol();
+        }
         public int IdUsuario { get; set; }
         public Rol Rol { get; set; }
         public string Apellido { get; set; }
