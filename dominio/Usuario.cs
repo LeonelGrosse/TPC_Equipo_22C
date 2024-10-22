@@ -16,7 +16,6 @@ namespace dominio
         public string CorreoElectronico { get; set; }
         public string Contrasenia { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public Ciudad Ciudad { get; set; }
         public bool Estado { get; set; } 
     }
 }
