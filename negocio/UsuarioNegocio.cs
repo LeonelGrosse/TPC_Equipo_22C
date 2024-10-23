@@ -27,6 +27,7 @@ namespace negocio
 
                 while (DB.Lector.Read())
                 {
+                    Usuario Usuario = new Usuario();
                     Usuario.IdUsuario = (int)(Int64)DB.Lector["IDUsuario"];
                     Usuario.Nombre = (string)DB.Lector["Nombre"];
                     Usuario.Apellido = (string)DB.Lector["Apellido"];
@@ -48,6 +49,75 @@ namespace negocio
             finally
             {
                 DB.cerrarConexion();
+            }
+        }
+        public void agregar(Usuario nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, "+ 1 + ")");
+                datos.setParametro("@idRol", nuevo.Rol);
+                datos.setParametro("@contra", nuevo.Contrasenia);
+                datos.setParametro("@apellido", nuevo.Apellido);
+                datos.setParametro("@nombre", nuevo.Nombre);
+                datos.setParametro("@dni", nuevo.Dni);
+                datos.setParametro("@correo", nuevo.CorreoElectronico);
+                datos.setParametro("@fechaNacimiento", nuevo.FechaNacimiento);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Usuario usuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("update Usuario set Apellido = @apellido, Nombre = @nombre, DNI = @dni, CorreoElectronico = @correo, FechaNacimiento = @fechaNacimiento where IDUsuario = @id");
+                datos.setParametro("@apellido", usuario.Apellido);
+                datos.setParametro("@nombre", usuario.Nombre);
+                datos.setParametro("@dni", usuario.Dni);
+                datos.setParametro("@correo", usuario.CorreoElectronico);
+                datos.setParametro("@fechaNacimiento", usuario.FechaNacimiento);
+                datos.setParametro("@id", usuario.IdUsuario);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("delete from Usuario where IDUsuario = @id");
+                datos.setParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
