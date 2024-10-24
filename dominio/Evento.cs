@@ -12,11 +12,12 @@ namespace dominio
         public int IdEvento { get; set; }
         public string Nombre { get; set; }
         public DateTime FechaEvento { get; set; }
-        public Ciudad Ubicacion { get; set; }
+        public Ubicacion Ubicacion { get; set; }
         public decimal CostoInscripcion { get; set; }
         public char Estado { get; set; }
         public int RangoEdad { get; set; }
         public int CuposDisponibles { get; set; }
-        public List<Resultado> Resultado { get; set; }
+        public Resultado Resultado { get; set; }
+        public Imagen Imagen {get; set;}
     }
 }
