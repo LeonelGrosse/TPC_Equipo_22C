@@ -66,8 +66,10 @@
   <ItemGroup>
     <Content Include="Default.aspx" />
     <Content Include="Eventos.aspx" />
+    <Content Include="FormularioRegistro.aspx" />
     <Content Include="Global.asax" />
     <Content Include="LogIn.aspx" />
+    <Content Include="MisResultados.aspx" />
     <Content Include="PerfilUsuario.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -86,6 +88,13 @@
     <Compile Include="Eventos.aspx.designer.cs">
       <DependentUpon>Eventos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormularioRegistro.aspx.cs">
+      <DependentUpon>FormularioRegistro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioRegistro.aspx.designer.cs">
+      <DependentUpon>FormularioRegistro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -102,6 +111,13 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MisResultados.aspx.cs">
+      <DependentUpon>MisResultados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisResultados.aspx.designer.cs">
+      <DependentUpon>MisResultados.aspx</DependentUpon>
     </Compile>
     <Compile Include="PerfilUsuario.aspx.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
@@ -131,6 +147,13 @@
       <Project>{88f37f30-52ca-480c-a650-f16e074eb4c4}</Project>
       <Name>dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\negocio\negocio.csproj">
+      <Project>{879d9139-9cf3-486f-9bc2-d0d0053e121e}</Project>
+      <Name>negocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
