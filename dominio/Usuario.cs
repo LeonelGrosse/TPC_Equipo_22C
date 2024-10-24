@@ -20,6 +20,7 @@ namespace dominio
         public string CorreoElectronico { get; set; }
         public string Contrasenia { get; set; }
         public DateTime FechaNacimiento { get; set; }
+        public Imagen Imagen {get; set;}
         public bool Estado { get; set; } 
     }
 }
