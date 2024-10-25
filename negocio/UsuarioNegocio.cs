@@ -22,7 +22,7 @@ namespace negocio
         {
             try
             {
-                DB.setConsulta("SELECT Us.IDUsuario, Us.Nombre, Us.Apellido, Us.DNI, US.CorreoElectronico, US.Contrasenia, US.FechaNacimiento ,DATEDIFF(YEAR, US.FechaNacimiento, GETDATE()) AS Edad, R.IDRol, R.Rol FROM Usuario AS Us INNER JOIN Rol AS R ON Us.IDrol = R.IDRol");
+                DB.setConsulta("SELECT Us.IDUsuario, Us.Nombre, Us.Apellido, Us.DNI, US.CorreoElectronico, US.Contrasena, US.FechaNacimiento ,DATEDIFF(YEAR, US.FechaNacimiento, GETDATE()) AS Edad, R.IDRol, R.Rol FROM Usuario AS Us INNER JOIN Rol AS R ON Us.IDrol = R.IDRol");
                 DB.ejecutarLectura();
 
                 while (DB.Lector.Read())
@@ -34,7 +34,7 @@ namespace negocio
                     Usuario.Dni = (string)DB.Lector["DNI"];
                     Usuario.CorreoElectronico = (string)DB.Lector["CorreoElectronico"];
                     Usuario.FechaNacimiento = (DateTime)DB.Lector["FechaNacimiento"];
-                    Usuario.Contrasenia = (string)DB.Lector["Contrasenia"];
+                    Usuario.Contrasenia = (string)DB.Lector["Contrasena"];
                     Usuario.Rol.IdRol = (Int16)DB.Lector["IDRol"];
                     Usuario.Rol.Descripcion = (string)DB.Lector["Rol"];
 
