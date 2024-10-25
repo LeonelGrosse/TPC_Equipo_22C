@@ -13,5 +13,15 @@ namespace TPC
         {
 
         }
+
+        protected void btnEnviar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Default.aspx");
+        }
     }
 }

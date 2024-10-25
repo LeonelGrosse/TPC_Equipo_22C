@@ -8,15 +8,18 @@
     </div>
     <section>
         <div>
-            <asp:Label ID="lblUsuario" runat="server" Text="Ingrese su usuario:"></asp:Label>
+            <asp:Label ID="lblUsuario" runat="server" Text="Email:"></asp:Label> <%--El usuario es el mail--%>
             <asp:TextBox ID="txtUsuario" runat="server"></asp:TextBox>
         </div>
         <div>
-            <asp:Label ID="lblContrasena" runat="server" Text="Ingrese su contraseña:"></asp:Label>
-            <asp:TextBox ID="txtContrasena" runat="server" TextMode="Password"></asp:TextBox>
+            <asp:Label ID="lblContrasenia" runat="server" Text="Contraseña:"></asp:Label>
+            <asp:TextBox ID="txtContrasenia" runat="server" TextMode="Password"></asp:TextBox>
         </div>
         <div>
-            <asp:Button ID="btnAceptar" runat="server" Text="Aceptar"/>
+            <asp:Button ID="btnAceptar" runat="server" Text="Iniciar sesión" OnClick="btnAceptar_Click"/>
+        </div>
+        <div>
+            <a href="#">Olvidaste tu contraseña?</a>            
         </div>
     </section>
 
