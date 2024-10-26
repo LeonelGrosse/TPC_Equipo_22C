@@ -11,6 +11,7 @@ namespace dominio
     {
         public int IdEvento { get; set; }
         public string Nombre { get; set; }
+        public Disciplina Disciplina { get; set; }
         public DateTime FechaEvento { get; set; }
         public Ubicacion Ubicacion { get; set; }
         public decimal CostoInscripcion { get; set; }
