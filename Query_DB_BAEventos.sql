@@ -21,6 +21,7 @@ Create Table Direccion(
 )
 
 Create table Ubicacion(
+    IDUbicacion bigint not null primary key identity (1,1),
     IDCiudad bigint not null foreign key references Ciudad(IDCiudad),
     IDDireccion smallint not null foreign key references Direccion(ID)
 )
