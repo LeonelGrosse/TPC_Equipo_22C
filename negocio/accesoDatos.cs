@@ -9,10 +9,10 @@ namespace negocio
 {
     public class AccesoDatos
     {
-        private SqlConnection Conexion;       
-        private SqlCommand Comando;             
-        private SqlDataReader Reader;           
-        public SqlDataReader Lector             
+        private SqlConnection Conexion;
+        private SqlCommand Comando;
+        private SqlDataReader Reader;
+        public SqlDataReader Lector
         {
             get { return Reader; }
         }
@@ -23,8 +23,8 @@ namespace negocio
         }
         public void setConsulta(string consulta)
         {
-            Comando.CommandType = System.Data.CommandType.Text;  
-            Comando.CommandText = consulta;                     
+            Comando.CommandType = System.Data.CommandType.Text;
+            Comando.CommandText = consulta;
         }
         public void ejecutarLectura()
         {
@@ -45,7 +45,7 @@ namespace negocio
             try
             {
                 Conexion.Open();
-                Comando.ExecuteNonQuery(); 
+                Comando.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -70,7 +70,7 @@ namespace negocio
         }
         public void setParametro(string nombre, object valor)
         {
-            Comando.Parameters.AddWithValue(nombre, valor);      
+            Comando.Parameters.AddWithValue(nombre, valor);
         }
         public void cerrarConexion()
         {
@@ -79,6 +79,12 @@ namespace negocio
                 Reader.Close();
             }
             Conexion.Close();
+        }
+
+        public void abrirConexion()
+        {
+            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true");
+            Comando = new SqlCommand();
         }
     }
 }
