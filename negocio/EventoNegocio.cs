@@ -38,7 +38,7 @@ namespace negocio
                     aux.CostoInscripcion = (decimal)datos.Lector["CostoInscripcion"];
 
                     aux.Estado = (char)datos.Lector["Estado"];
-                    aux.RangoEdad = (int)datos.Lector["EdadMinima"];
+                    aux.EdadMinima = (int)datos.Lector["EdadMinima"];
                     aux.CuposDisponibles = (int)datos.Lector["CuposDisponibles"];
 
                     aux.Disciplina = new Disciplina();

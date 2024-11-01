@@ -71,6 +71,7 @@
     <Content Include="LogIn.aspx" />
     <Content Include="MisResultados.aspx" />
     <Content Include="PerfilUsuario.aspx" />
+    <Content Include="StyleSheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

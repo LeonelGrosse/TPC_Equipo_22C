@@ -16,7 +16,7 @@ namespace dominio
         public Ubicacion Ubicacion { get; set; }
         public decimal CostoInscripcion { get; set; }
         public char Estado { get; set; }
-        public int RangoEdad { get; set; }
+        public int EdadMinima { get; set; }
         public int CuposDisponibles { get; set; }
         public Resultado Resultado { get; set; }
         public Imagen Imagen {get; set;}
