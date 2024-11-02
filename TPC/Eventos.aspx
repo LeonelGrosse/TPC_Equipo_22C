@@ -12,29 +12,6 @@
         <button class="btn btn-secondary">Disciplina</button>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        <div class="card mb-3" style="width: 100%;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="..." class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-4">
-                    <div class="card-body">
-                        <h5 class="card-title">Nombre de evento</h5>
-                        <p class="card-text">Fecha</p>
-                        <p class="card-text">Costo Inscripcion</p>
-                        <p class="card-text">Disciplina</p>
-                        <p class="card-text">Edad minima</p>
-                    </div>
-                </div>
-                <div class="col-md-4 d-flex justify-content-end">
-                    <p class="card-text">Cupos</p>
-                    <button class="btn btn-primary align-self-end">Inscribirme</button>
-                </div>
-            </div>
-        </div>
-    </div>    
-
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -54,7 +31,7 @@
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
                                 <p class="card-text">Cupos: <%#Eval("CuposDisponibles") %></p>
-                                <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" CssClass="btn btn-primary" />
+                                <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" CssClass="btn btn-primary align-self-end" />
                             </div>
                         </div>
                     </div>

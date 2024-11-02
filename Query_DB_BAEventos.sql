@@ -166,3 +166,15 @@ INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (2, 3); -- Marat
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Torneo de Basketball Juvenil - Basketball
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 3); -- Competencia de Natación - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 4); -- Campeonato de Ciclismo - Ciclismo
+
+
+Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.IDPais, p.Nombre as Pais, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura, dire.CodigoPostal, d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL from Evento e
+Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento
+Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina
+Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento
+Inner join Imagen i On i.ID = ie.IDImagen
+Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion
+Inner join Ciudad c On c.IDCiudad = u.IDCiudad
+Inner join Pais p On p.IDPais = c.IDPais
+Inner join Direccion dire On dire.ID = u.IDDireccion
+Where e.Estado = 'D'
