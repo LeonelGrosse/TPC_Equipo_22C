@@ -8,8 +8,12 @@ namespace dominio
 {
     public class Ubicacion
     {
-        public Ciudad Ciudad { get; set; } 
-        public Pais Pais { get; set; }
-        public Direccion Direccion {get; set;}
+        public Ubicacion()
+        {
+            Ciudad = new Ciudad();
+            Direccion = new Direccion();
+        }
+        public Ciudad Ciudad { get; set; }
+        public Direccion Direccion { get; set; }
     }
 }
