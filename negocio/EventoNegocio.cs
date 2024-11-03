@@ -18,8 +18,8 @@ namespace negocio
 
         public List<Evento> Listar()
         {
-            string select = "Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.IDPais, p.Nombre as Pais, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura, dire.CodigoPostal, d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL ";
-            string from = "from Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento Inner join Imagen i On i.ID = ie.IDImagen Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Pais p On p.IDPais = c.IDPais Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'";
+            string select = "Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL ";
+            string from = "from Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento Inner join Imagen i On i.ID = ie.IDImagen Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'";
             
             try
             {
@@ -34,27 +34,27 @@ namespace negocio
                     aux.FechaEvento = (DateTime)Datos.Lector["FechaEvento"];
 
                     aux.Ubicacion = new Ubicacion();
-                    aux.Ubicacion.Ciudad.Nombre = (string)datos.Lector["Ciudad"];
-                    aux.Ubicacion.Ciudad.Pais.IdPais = (int)(Int64)datos.Lector["IDPais"];
-                    aux.Ubicacion.Ciudad.Pais.Nombre = (string)datos.Lector["Pais"];
-                    aux.Ubicacion.Direccion.ID = (short)datos.Lector["ID"];
-                    aux.Ubicacion.Direccion.Calle = (string)datos.Lector["Calle"];
-                    aux.Ubicacion.Direccion.Altura = (string)datos.Lector["Altura"];
-                    aux.Ubicacion.Direccion.CodigoPostal = (string)datos.Lector["CodigoPostal"];
+                    aux.Ubicacion.Ciudad.Nombre = (string)Datos.Lector["Ciudad"];
+                    aux.Ubicacion.Ciudad.Provincia.ID = (int)(Int64)Datos.Lector["IDProvincia"];
+                    aux.Ubicacion.Ciudad.Provincia.Nombre = (string)Datos.Lector["Provincia"];
+                    aux.Ubicacion.Direccion.ID = (short)Datos.Lector["ID"];
+                    aux.Ubicacion.Direccion.Calle = (string)Datos.Lector["Calle"];
+                    aux.Ubicacion.Direccion.Altura = (string)Datos.Lector["Altura"];
+                    //aux.Ubicacion.Ciudad.CodigoPostal = (string)Datos.Lector["CodigoPostal"];
 
                     aux.CostoInscripcion = (decimal)Datos.Lector["CostoInscripcion"];
 
-                    aux.Estado = (char)datos.Lector["Estado"];
-                    aux.RangoEdad = (int)datos.Lector["EdadMinima"];
-                    aux.CuposDisponibles = (int)datos.Lector["CuposDisponibles"];
+                    aux.Estado = char.Parse(Datos.Lector["Estado"].ToString());
+                    aux.EdadMinima = (int)(byte)Datos.Lector["EdadMinima"];
+                    aux.CuposDisponibles = (int)Datos.Lector["CuposDisponibles"];
 
                     aux.Disciplina = new Disciplina();
-                    aux.Disciplina.Descripcion = (string)datos.Lector["Disciplina"];
+                    aux.Disciplina.Descripcion = (string)Datos.Lector["Disciplina"];
 
                     aux.Imagen = new Imagen();
                     if (!(Datos.Lector["ImgURL"] is DBNull))
                     {
-                        aux.Imagen.URL = (string)datos.Lector["ImgURL"];
+                        aux.Imagen.URL = (string)Datos.Lector["ImgURL"];
                     }
 
                     Lista.Add(aux);
