@@ -2,28 +2,28 @@ Create Database BAEventos
 
 Use BAEventos
 
-Create Table Pais(
-IDPais bigint not null primary key identity(1,1),
+Create Table Provincia(
+ID bigint not null primary key identity(1,1),
 Nombre varchar(50) not null
 )
 
 Create Table Ciudad(
 IDCiudad bigint not null primary key identity(1,1),
-IDPais bigint not null foreign key references Pais(IDPais),
+IDProvincia bigint not null foreign key references Provincia(ID),
 Nombre varchar(50) not null,
+CodigoPostal varchar(10) not null
 )
 
 Create Table Direccion(
-    ID smallint not null primary key identity(1,1),
-    Calle varchar(50) not null,
-    Altura varchar(10) not null,
-    CodigoPostal varchar(10) not null
+ID smallint not null primary key identity(1,1),
+Calle varchar(50) not null,
+Altura varchar(10) not null,
 )
 
 Create table Ubicacion(
-    IDUbicacion bigint not null primary key identity (1,1),
-    IDCiudad bigint not null foreign key references Ciudad(IDCiudad),
-    IDDireccion smallint not null foreign key references Direccion(ID)
+IDUbicacion bigint not null primary key identity (1,1),
+IDCiudad bigint not null foreign key references Ciudad(IDCiudad),
+IDDireccion smallint not null foreign key references Direccion(ID)
 )
 
 Create Table Rol(
@@ -32,8 +32,8 @@ Rol varchar(50) not null
 )
 
 Create Table Imagen(
-    ID smallint not null primary key identity(1,1),
-    ImgURL nvarchar(999) not null
+ID smallint not null primary key identity(1,1),
+ImgURL nvarchar(999) not null
 )
 
 Create Table Usuario(
@@ -67,6 +67,7 @@ Ubicacion bigint not null foreign key references Ubicacion(IDUbicacion),
 CostoInscripcion money null,
 Estado char(1) not null check (Estado = 'D' or Estado = 'F' or Estado = 'C'),
 EdadMinima tinyint null,
+EdadMaxima tinyint null,
 CuposDisponibles int not null,
 )
 
@@ -89,30 +90,137 @@ Puesto tinyint null,
 Tiempo time null
 )
 
--- Inserciones para la tabla Pais
-INSERT INTO Pais (Nombre) VALUES ('Argentina');
-INSERT INTO Pais (Nombre) VALUES ('Chile');
-INSERT INTO Pais (Nombre) VALUES ('Brasil');
-INSERT INTO Pais (Nombre) VALUES ('Uruguay');
-INSERT INTO Pais (Nombre) VALUES ('Paraguay');
+INSERT INTO Provincia (Nombre) VALUES 
+('Buenos Aires'),
+('Córdoba'),
+('Santa Fe'),
+('Mendoza'),
+('Tucumán'),
+('Entre Ríos'),
+('Salta'),
+('Misiones'),
+('Chaco'),
+('Corrientes'),
+('Santiago del Estero'),
+('San Juan'),
+('Jujuy'),
+('Río Negro'),
+('Neuquén'),
+('Formosa'),
+('Chubut'),
+('San Luis'),
+('Catamarca'),
+('La Rioja'),
+('La Pampa'),
+('Santa Cruz'),
+('Tierra del Fuego');
 
--- Inserciones para la tabla Ciudad
-INSERT INTO Ciudad (IDPais, Nombre) VALUES (1, 'Buenos Aires');
-INSERT INTO Ciudad (IDPais, Nombre) VALUES (1, 'Córdoba');
-INSERT INTO Ciudad (IDPais, Nombre) VALUES (2, 'Santiago');
-INSERT INTO Ciudad (IDPais, Nombre) VALUES (3, 'São Paulo');
-INSERT INTO Ciudad (IDPais, Nombre) VALUES (4, 'Montevideo');
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(1, 'La Plata', '1900'),
+(1, 'Mar del Plata', '7600'),
+(1, 'Bahía Blanca', '8000'),
+(1, 'Tandil', '7000');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(2, 'Villa Carlos Paz', '5152'),
+(2, 'Río Cuarto', '5800');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(3, 'Rosario', '2000'),
+(3, 'Rafaela', '2300');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(4, 'San Rafael', '5600'),
+(4, 'Luján de Cuyo', '5507');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(5, 'San Miguel de Tucumán', '4000'),
+(5, 'Tafí Viejo', '4103'),
+(5, 'Yerba Buena', '4107');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(6, 'Paraná', '3100'),
+(6, 'Concordia', '3200'),
+(6, 'Gualeguaychú', '2820');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(7, 'Cafayate', '4427'),
+(7, 'Tartagal', '4560');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(8, 'Posadas', '3300'),
+(8, 'Oberá', '3360'),
+(8, 'Eldorado', '3380');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(9, 'Resistencia', '3500'),
+(9, 'Barranqueras', '3503'),
+(9, 'Villa Ángela', '3540');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(10, 'Goya', '3450'),
+(10, 'Paso de los Libres', '3230');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(11, 'La Banda', '4300'),
+(11, 'Termas de Río Hondo', '4220');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(12, 'San Juan', '5400'),
+(12, 'Jáchal', '5460'),
+(12, 'Calingasta', '5401');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(13, 'San Salvador de Jujuy', '4600'),
+(13, 'Palpalá', '4612'),
+(13, 'Humahuaca', '4630');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(14, 'Viedma', '8500'),
+(14, 'San Carlos de Bariloche', '8400'),
+(14, 'General Roca', '8332');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(15, 'San Martín de los Andes', '8370'),
+(15, 'Plottier', '8316');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(16, 'Clorinda', '3610');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(17, 'Rawson', '9103'),
+(17, 'Comodoro Rivadavia', '9000'),
+(17, 'Puerto Madryn', '9120');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(18, 'Villa Mercedes', '5730'),
+(18, 'Merlo', '5881');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(19, 'San Fernando del Valle de Catamarca', '4700'),
+(19, 'Belén', '4750');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(20, 'Chilecito', '5360');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(21, 'Santa Rosa', '6300'),
+(21, 'General Pico', '6360');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(22, 'Río Gallegos', '9400'),
+(22, 'Caleta Olivia', '9011');
+
+INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
+(23, 'Río Grande', '9420');
 
 -- Inserciones para la tabla Direccion
-INSERT INTO Direccion (Calle, Altura, CodigoPostal) VALUES ('Av. Libertador', '1000', 'C1000');
-INSERT INTO Direccion (Calle, Altura, CodigoPostal) VALUES ('Calle 7', '200', 'C2000');
-INSERT INTO Direccion (Calle, Altura, CodigoPostal) VALUES ('Av. Brasil', '300', 'C3000');
-INSERT INTO Direccion (Calle, Altura, CodigoPostal) VALUES ('Calle Principal', '400', 'C4000');
-INSERT INTO Direccion (Calle, Altura, CodigoPostal) VALUES ('Calle Uruguay', '500', 'C5000');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Av. Libertador', '1000');
 
 -- Inserciones para la tabla Rol
 INSERT INTO Rol (Rol) VALUES ('Administrador');
 INSERT INTO Rol (Rol) VALUES ('Usuario');
+INSERT INTO Rol (Rol) VALUES ('Organizador');
 
 -- Inserciones para la tabla Imagen
 INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen1.jpg');
@@ -126,32 +234,32 @@ INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico
 VALUES (1, 'contrasena123', 'García', 'Juan', '12345678', 'juan@example.com', '1990-01-01', 1);
 INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
 VALUES (2, 'password456', 'Pérez', 'Ana', '87654321', 'ana@example.com', '1992-02-02', 1);
+INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
+VALUES (3, 'password891', 'Rodriguez', 'Ana', '87333321', 'anarodriguez@example.com', '1992-06-02', 1);
 
 -- Inserciones para la tabla Disciplina
-INSERT INTO Disciplina (Disciplina) VALUES ('Fútbol');
-INSERT INTO Disciplina (Disciplina) VALUES ('Basketball');
 INSERT INTO Disciplina (Disciplina) VALUES ('Natación');
 INSERT INTO Disciplina (Disciplina) VALUES ('Ciclismo');
 INSERT INTO Disciplina (Disciplina) VALUES ('Atletismo');
 
 -- Inserciones para la tabla Ubicacion
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); -- Buenos Aires, Av. Libertador
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (2, 2); -- Córdoba, Calle 7
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (3, 3); -- Santiago, Av. Brasil
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (4, 4); -- São Paulo, Calle Principal
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (5, 5); -- Montevideo, Calle Uruguay
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
 
 -- Inserciones para la tabla Evento
-INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, CuposDisponibles) 
-VALUES ('Torneo de Fútbol', '2024-12-01', 1, 100.00, 'D', 16, 50);
-INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, CuposDisponibles) 
-VALUES ('Maratón de la Ciudad', '2024-11-15', 1, 50.00, 'D', 18, 200);
-INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, CuposDisponibles) 
-VALUES ('Torneo de Basketball Juvenil', '2024-12-10', 2, 75.00, 'D', 14, 100);
-INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, CuposDisponibles) 
-VALUES ('Competencia de Natación', '2024-11-20', 1, 30.00, 'D', 10, 150);
-INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, CuposDisponibles) 
-VALUES ('Campeonato de Ciclismo', '2024-10-30', 3, 40.00, 'D', 15, 120);
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES ('Circuito MDQ Aguas abiertas', '2024-12-01', 1, 100.00, 'D', 16 , 30, 50);
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES ('Maratón de la Ciudad', '2024-11-15', 1, 50.00, 'D', 18 , 30, 200);
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES ('Ciclismo Juvenil', '2024-12-10', 1, 75.00, 'D', 14 , 30, 100);
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES ('Competencia de Natación', '2024-11-20', 1, 30.00, 'D', 10 , 30, 150);
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES ('Campeonato de Ciclismo', '2024-10-30', 1, 40.00, 'D', 15 , 30, 120);
 
 -- Inserciones para la tabla Imagen_x_Evento
 INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (1, 1);
@@ -161,8 +269,197 @@ INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (4, 3);
 INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (5, 4);
 
 -- Inserciones para la tabla Disciplina_x_Evento
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (1, 1); -- Torneo de Fútbol - Fútbol
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (1, 1); -- Circuito MDQ Aguas abiertas - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (2, 3); -- Maratón de la Ciudad - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Torneo de Basketball Juvenil - Basketball
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Ciclismo Juvenil - Basketball
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 3); -- Competencia de Natación - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 4); -- Campeonato de Ciclismo - Ciclismo
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 2); -- Campeonato de Ciclismo - Ciclismo
+GO
+
+CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
+AS
+SELECT * FROM Provincia
+
+GO
+CREATE PROCEDURE SP_OBTENER_CIUDADES
+AS
+SELECT 
+    IDCiudad, 
+    IDProvincia, 
+    C.Nombre AS Ciudad, 
+    P.Nombre AS Provincia 
+FROM Ciudad AS C 
+INNER JOIN Provincia AS P 
+ON IDProvincia = P.ID
+
+GO
+
+
+CREATE TRIGGER  ON Ubicacion
+INSTEAD OF INSERT
+AS
+BEGIN
+BEGIN TRY
+    BEGIN TRANSACTION
+        DECLARE @ID_DIRECCION SMALLINT
+        SET @ID_DIRECCION = @@IDENTITY
+        
+        IF @ID_DIRECCION IS NULL
+        BEGIN
+            RAISERROR('NO HAY REGISTRO UNA NUEVA DIRECCION', 16,1)
+            ROLLBACK
+            RETURN
+        END
+
+        INSERT INTO Ubicacion(IDCiudad, IDDireccion)
+        VALUES((SELECT IDCiudad FROM INSERTED), 
+        (SELECT ID FROM Direccion WHERE ID = @ID_DIRECCION))
+
+        IF(@@TRANCOUNT > 0)
+            COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE()
+    IF(@@TRANCOUNT > 0)
+        ROLLBACK TRANSACTION
+END CATCH
+END
+
+DROP TRIGGER TR_INSERTAR_UBICACION
+GO
+
+CREATE PROCEDURE SP_INSERTAR_UBICACION(@ID_CIUDAD BIGINT)
+AS
+BEGIN
+BEGIN TRY
+    BEGIN TRANSACTION
+        DECLARE @ID_DIRECCION SMALLINT
+        SELECT @ID_DIRECCION = MAX(ID) FROM Direccion
+        
+        IF @ID_DIRECCION IS NULL
+        BEGIN
+            RAISERROR('NO HAY REGISTRO DE UNA NUEVA DIRECCION', 16,1)
+            ROLLBACK TRANSACTION
+            RETURN
+        END
+
+        INSERT INTO Ubicacion(IDCiudad, IDDireccion)
+        VALUES(@ID_CIUDAD, @ID_DIRECCION)
+        
+
+        IF(@@TRANCOUNT > 0)
+            COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE()
+    IF(@@TRANCOUNT > 0)
+        ROLLBACK TRANSACTION
+END CATCH
+END
+
+GO
+
+INSERT INTO Direccion(Calle, Altura)VALUES('Zapiola', '3333')
+EXEC SP_INSERTAR_UBICACION 1
+
+GO
+
+CREATE TRIGGER TR_INSERTAR_EVENTO ON Evento
+INSTEAD OF INSERT
+AS BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION
+    DECLARE @ID_UBICACION BIGINT
+    SELECT @ID_UBICACION = @@IDENTITY
+
+    IF @ID_UBICACION IS NULL
+    BEGIN
+        RAISERROR('NO HAY REGISTRO DE UNA NUEVA DIRECCION', 16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
+
+    INSERT INTO Evento(Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles)
+    (SELECT Nombre, FechaEvento, @ID_UBICACION, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles FROM INSERTED)
+
+        IF(@@TRANCOUNT > 0)
+            COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+        IF(@@TRANCOUNT > 0)
+            ROLLBACK TRANSACTION
+    END CATCH
+END
+
+DROP TRIGGER TR_INSERTAR_EVENTO
+
+INSERT INTO Direccion(Calle, Altura)VALUES('Mitre', '3333')
+EXEC SP_INSERTAR_UBICACION 1
+INSERT INTO Evento(Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles)
+VALUES('Campeonato acuatico', '2024-10-25', 0, 50.00, 'D', 18, 30, 120)
+
+GO
+
+CREATE PROCEDURE SP_INSERTAR_EVENTO(
+    @CALLE VARCHAR(50),
+    @ALTURA VARCHAR(10),
+    @ID_CIUDAD BIGINT,
+    @NOMBRE VARCHAR(100),
+    @FECHA DATE,
+    @COSTO_INSCRIPCION MONEY,
+    @ESTADO CHAR(1),
+    @EDAD_MINIMA TINYINT,
+    @EDAD_MAXIMA TINYINT,
+    @CUPOS_DISPONIBLES INT)
+AS BEGIN
+BEGIN TRY
+    BEGIN TRANSACTION
+
+    DECLARE @ID_DIRECCION SMALLINT
+    DECLARE @ID_UBICACION BIGINT
+    INSERT INTO Direccion(Calle, Altura)VALUES(@CALLE, @ALTURA)
+    IF(@@ROWCOUNT > 0)
+        SET @ID_DIRECCION = @@IDENTITY
+    
+    IF @ID_DIRECCION IS NULL
+    BEGIN
+        RAISERROR('NO HAY REGISTRO DE UNA NUEVA DIRECCION', 16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
+
+    INSERT INTO Ubicacion(IDCiudad, IDDireccion)VALUES(@ID_CIUDAD, @ID_DIRECCION)
+       IF(@@ROWCOUNT > 0)
+        SET @ID_UBICACION = @@IDENTITY
+    
+     IF @ID_UBICACION IS NULL
+     BEGIN
+        RAISERROR('NO HAY REGISTRO DE UNA NUEVA UBICACION', 16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
+
+    INSERT INTO EVENTO(Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles)
+    VALUES(@NOMBRE, @FECHA, @ID_UBICACION, @COSTO_INSCRIPCION, @ESTADO, @EDAD_MINIMA, @EDAD_MAXIMA, @CUPOS_DISPONIBLES)
+
+    IF(@@TRANCOUNT > 0)
+        COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE()
+    IF(@@TRANCOUNT > 0)
+    BEGIN
+        COMMIT TRANSACTION
+    END
+    ROLLBACK TRANSACTION
+END CATCH
+END
+
+EXEC SP_INSERTAR_EVENTO 'Azcuenaga', '2888', 1 , 'Campeonato acuatico', '2024-10-25', 50.00, 'D', 18, 30, 120
+
+SELECT * FROM Direccion
+SELECT * FROM Ubicacion
+SELECT * FROM Evento
+
+DROP PROCEDURE SP_INSERTAR_EVENTO
