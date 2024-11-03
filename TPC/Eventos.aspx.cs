@@ -15,7 +15,7 @@ namespace TPC
         protected void Page_Load(object sender, EventArgs e)
         {
             EventoNegocio negocio = new EventoNegocio();
-            ListaEvento = negocio.listar();
+            ListaEvento = negocio.Listar();
 
             if (!IsPostBack)
             {
