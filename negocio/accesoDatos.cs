@@ -9,10 +9,10 @@ namespace negocio
 {
     public class AccesoDatos
     {
-        private SqlConnection Conexion;       
-        private SqlCommand Comando;             
-        private SqlDataReader Reader;           
-        public SqlDataReader Lector             
+        private SqlConnection Conexion;
+        private SqlCommand Comando;
+        private SqlDataReader Reader;
+        public SqlDataReader Lector
         {
             get { return Reader; }
         }
@@ -23,8 +23,8 @@ namespace negocio
         }
         public void setConsulta(string consulta)
         {
-            Comando.CommandType = System.Data.CommandType.Text;  
-            Comando.CommandText = consulta;                     
+            Comando.CommandType = System.Data.CommandType.Text;
+            Comando.CommandText = consulta;
         }
         public void ejecutarLectura()
         {
@@ -45,13 +45,30 @@ namespace negocio
             try
             {
                 Conexion.Open();
-                Comando.ExecuteNonQuery(); 
+                Comando.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public bool EjecutarAccion()
+        {
+            Comando.Connection = Conexion;
+            try
+            {
+                Conexion.Open();
+                int filasAfectadas = Comando.ExecuteNonQuery();
+
+                return (filasAfectadas > 0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public int ejecutarEscalar()
         {
             try
@@ -70,7 +87,13 @@ namespace negocio
         }
         public void setParametro(string nombre, object valor)
         {
-            Comando.Parameters.AddWithValue(nombre, valor);      
+            Comando.Parameters.AddWithValue(nombre, valor);
+        }
+        
+        public void SetStoredProcedure(string nombreProcedure)
+        {
+            Comando.CommandType = System.Data.CommandType.StoredProcedure;
+            Comando.CommandText = nombreProcedure;
         }
         public void cerrarConexion()
         {
