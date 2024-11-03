@@ -57,7 +57,7 @@ namespace negocio
 
             try
             {
-                datos.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, "+ 1 + ")");
+                datos.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, " + 1 + ")");
                 datos.setParametro("@idRol", nuevo.Rol);
                 datos.setParametro("@contra", nuevo.Contrasenia);
                 datos.setParametro("@apellido", nuevo.Apellido);
@@ -119,6 +119,32 @@ namespace negocio
 
                 throw ex;
             }
+        }
+
+        public bool checkUsuario(int dni)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("select dni from Usuario where dni = @dni"); /*comparar @dni con dni de DB*/
+                datos.setParametro("@dni", dni);
+                datos.ejecutarLectura();
+
+                if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("dni")))
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error al verificar el DNI: " + ex.Message);
+            }
+
+            finally { datos.cerrarConexion(); }
+
+            return true;
         }
     }
 }

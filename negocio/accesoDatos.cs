@@ -103,5 +103,11 @@ namespace negocio
             }
             Conexion.Close();
         }
+
+        public void abrirConexion()
+        {
+            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true");
+            Comando = new SqlCommand();
+        }
     }
 }

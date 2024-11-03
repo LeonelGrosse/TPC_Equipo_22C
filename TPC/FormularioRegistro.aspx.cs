@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
 
 namespace TPC
 {
@@ -16,7 +18,11 @@ namespace TPC
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Default.aspx");
+            int dni;
+            UsuarioNegocio negocio = new UsuarioNegocio();
+            bool isValidDNI = int.TryParse(txtDNI.Text, out dni);
+            //Session.Add("voucher", voucher);
+            //Response.Redirect("Default.aspx");
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
