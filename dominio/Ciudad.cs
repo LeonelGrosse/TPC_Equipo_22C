@@ -9,9 +9,13 @@ namespace dominio
 {
     public class Ciudad
     {
+        public Ciudad()
+        {
+            Provincia = new Provincia();
+        }
         public int IdCiudad { get; set; }
         public string Nombre { get; set; }
-        public Pais Pais { get; set; }
+        public Provincia Provincia { get; set; }
         public override string ToString()
         {
             return Nombre;
