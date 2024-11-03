@@ -11,6 +11,5 @@ namespace dominio
         public int ID { get; set; }
         public string Calle { get; set; }
         public string Altura { get; set; }
-        public string CodigoPostal { get; set; }
     }
 }
