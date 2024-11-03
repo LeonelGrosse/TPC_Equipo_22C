@@ -273,4 +273,88 @@ INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (1, 1); -- Circu
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (2, 3); -- Maratón de la Ciudad - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Ciclismo Juvenil - Basketball
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 3); -- Competencia de Natación - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 4); -- Campeonato de Ciclismo - Ciclismo
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 2); -- Campeonato de Ciclismo - Ciclismo
+GO
+
+CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
+AS
+SELECT * FROM Provincia
+
+GO
+CREATE PROCEDURE SP_OBTENER_CIUDADES
+AS
+SELECT 
+    IDCiudad, 
+    IDProvincia, 
+    C.Nombre AS Ciudad, 
+    P.Nombre AS Provincia 
+FROM Ciudad AS C 
+INNER JOIN Provincia AS P 
+ON IDProvincia = P.ID
+
+GO
+
+CREATE PROCEDURE SP_INSERTAR_EVENTO(
+    @CALLE VARCHAR(50),
+    @ALTURA VARCHAR(10),
+    @ID_CIUDAD BIGINT,
+    @NOMBRE VARCHAR(100),
+    @FECHA DATE,
+    @COSTO_INSCRIPCION MONEY,
+    @ESTADO CHAR(1),
+    @EDAD_MINIMA TINYINT,
+    @EDAD_MAXIMA TINYINT,
+    @CUPOS_DISPONIBLES INT)
+AS BEGIN
+BEGIN TRY
+    BEGIN TRANSACTION
+
+    DECLARE @ID_DIRECCION SMALLINT
+    DECLARE @ID_UBICACION BIGINT
+    INSERT INTO Direccion(Calle, Altura)VALUES(@CALLE, @ALTURA)
+    IF(@@ROWCOUNT > 0)
+        SET @ID_DIRECCION = @@IDENTITY
+    
+    IF @ID_DIRECCION IS NULL
+    BEGIN
+        RAISERROR('NO HAY REGISTRO DE UNA NUEVA DIRECCION', 16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
+
+    INSERT INTO Ubicacion(IDCiudad, IDDireccion)VALUES(@ID_CIUDAD, @ID_DIRECCION)
+       IF(@@ROWCOUNT > 0)
+        SET @ID_UBICACION = @@IDENTITY
+    
+     IF @ID_UBICACION IS NULL
+     BEGIN
+        RAISERROR('NO HAY REGISTRO DE UNA NUEVA UBICACION', 16,1)
+        ROLLBACK TRANSACTION
+        RETURN
+    END
+
+    INSERT INTO EVENTO(Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles)
+    VALUES(@NOMBRE, @FECHA, @ID_UBICACION, @COSTO_INSCRIPCION, @ESTADO, @EDAD_MINIMA, @EDAD_MAXIMA, @CUPOS_DISPONIBLES)
+
+    IF(@@TRANCOUNT > 0)
+        COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+    PRINT ERROR_MESSAGE()
+    IF(@@TRANCOUNT > 0)
+    BEGIN
+        COMMIT TRANSACTION
+    END
+    ROLLBACK TRANSACTION
+END CATCH
+END
+
+EXEC SP_INSERTAR_EVENTO 'Azcuenaga', '2888', 1 , 'Campeonato acuatico', '2024-10-25', 50.00, 'D', 18, 30, 120
+
+SELECT * FROM Direccion
+SELECT * FROM Ubicacion
+SELECT * FROM Evento
+
+DROP PROCEDURE SP_INSERTAR_EVENTO
+
+Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL from Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento Inner join Imagen i On i.ID = ie.IDImagen Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'
