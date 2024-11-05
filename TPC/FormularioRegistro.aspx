@@ -16,7 +16,7 @@
         <div>
             <asp:Label ID="lblApellido" runat="server" Text="Ingrese su apellido: "></asp:Label>
             <asp:TextBox ID="txtApellido" runat="server"></asp:TextBox>
-            <asp:Label ID="lblAvisoApellito" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
+            <asp:Label ID="lblAvisoApellido" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
         </div>
         <div>
             <asp:Label ID="lblEmail" runat="server" Text="Ingrese su E-mail: "></asp:Label>
