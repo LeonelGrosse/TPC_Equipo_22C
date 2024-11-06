@@ -357,8 +357,5 @@ ALTER TABLE Disciplina_x_Evento
 ALTER TABLE Disciplina_x_Evento
     ADD Distancia INT NOT NULL CHECK(Distancia > 0)
 
-SELECT * FROM Evento
-SELECT * FROM Disciplina_x_Evento
-SELECT * FROM Imagen
-SELECT * FROM Imagen_x_Evento
-
+ALTER TABLE Usuario
+    ADD CONSTRAINT PK_Unique_Email UNIQUE(CorreoElectronico)
