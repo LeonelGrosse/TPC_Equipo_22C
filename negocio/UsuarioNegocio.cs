@@ -54,8 +54,8 @@ namespace negocio
         }
         public void agregar(Usuario nuevo)
         {
-            
 
+            DB.LimpiarComando();
             try
             {
                 DB.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, " + 1 + ")");
