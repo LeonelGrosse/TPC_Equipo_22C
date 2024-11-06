@@ -17,6 +17,7 @@ namespace TPC
         private CiudadNegocio ciudadNegocio;
         List<Provincia> provincias;
         List<Ciudad> ciudades;
+        static int contadorDisciplina = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
                 NuevoEvento = new Evento();
@@ -29,6 +30,7 @@ namespace TPC
             if (!IsPostBack)
             {
                 CargarDesplegables();
+                contadorDisciplina = 0;
             }
         }
 
@@ -36,6 +38,35 @@ namespace TPC
         {
             CapturarValores();
             EventoNegocio.RegistrarEvento(NuevoEvento);
+        }
+        protected void BtnAgregarDisciplina_Click(object sender, EventArgs e)
+        {
+            List<Disciplina> discplina = new DisciplinaNegocio().Listar();
+
+            if (contadorDisciplina <= 1)
+            {
+                CargarDropDown(DropDownDisciplina2, "IdDisciplina", "Descripcion", discplina);
+                containerDisciplina2.Visible = true;
+            }
+
+            if (contadorDisciplina >= 1)
+            {
+                CargarDropDown(DropDownDisciplina3, "IdDisciplina", "Descripcion", discplina);
+                containerDisciplina3.Visible = true;
+            }
+            contadorDisciplina++;
+        }
+
+        protected void btnQuitarDisciplina2_Click(object sender, EventArgs e)
+        {
+            containerDisciplina2.Visible = false;
+            contadorDisciplina--;
+        }
+
+        protected void btnQuitarDisciplina3_Click(object sender, EventArgs e)
+        {
+            containerDisciplina3.Visible = false;
+            contadorDisciplina--;
         }
         private void CapturarValores()
         {
