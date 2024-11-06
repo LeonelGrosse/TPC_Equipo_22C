@@ -58,7 +58,7 @@ namespace negocio
             try
             {
                 datos.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, " + 1 + ")");
-                datos.setParametro("@idRol", nuevo.Rol);
+                datos.setParametro("@idRol", nuevo.Rol.IdRol);
                 datos.setParametro("@contra", nuevo.Contrasenia);
                 datos.setParametro("@apellido", nuevo.Apellido);
                 datos.setParametro("@nombre", nuevo.Nombre);

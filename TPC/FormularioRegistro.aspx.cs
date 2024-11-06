@@ -91,7 +91,9 @@ namespace TPC
             }
             else {lblAvisoContrasenias.Visible = false; usuario.Contrasenia = txtContraseniaRegistro.Text;}
 
-            // se agrega usuario (sin rol)
+            usuario.Rol.IdRol = 3;
+
+            // se agrega usuario validado (sin rol)
             negocio.agregar(usuario);
 
 
