@@ -13,10 +13,14 @@ namespace TPC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDatosUsuario();
+            //si no es nulo
+            string email = (Session["Email"].ToString());
+            CargarDatosUsuario(email);
+
+            //sino cargar login
         }
 
-        public void CargarDatosUsuario()
+        public void CargarDatosUsuario(string email)
         {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
             List<Usuario> usuarios = usuarioNegocio.Listar();
