@@ -18,7 +18,7 @@ namespace negocio
         }
         public AccesoDatos()
         {
-            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true"); //Falta poner la BD
+            Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true");
             Comando = new SqlCommand();
         }
         public void setConsulta(string consulta)
@@ -71,10 +71,16 @@ namespace negocio
 
         public int ejecutarEscalar()
         {
+            Comando.Connection = Conexion;
             try
             {
                 Conexion.Open();
-                return (int)Comando.ExecuteScalar();
+                object resultado = Comando.ExecuteScalar();
+
+                if (resultado != null)
+                    return Convert.ToInt32(resultado);
+                else
+                    return 0;
             }
             catch (Exception ex)
             {
@@ -108,6 +114,12 @@ namespace negocio
         {
             Conexion = new SqlConnection("server=.\\SQLEXPRESS; database=BAEventos ; integrated security = true");
             Comando = new SqlCommand();
+        }
+
+        public void LimpiarComando()
+        {
+            Comando.Parameters.Clear();
+            Comando.CommandText = string.Empty;
         }
     }
 }
