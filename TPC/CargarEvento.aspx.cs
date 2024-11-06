@@ -56,7 +56,11 @@ namespace TPC
                 NuevoEvento.EdadMinima = int.Parse(EdadMinEvento.Text);
                 NuevoEvento.EdadMaxima = int.Parse(EdadMaxEvento.Text);
 
-                NuevoEvento.Disciplina.Descripcion = Disciplina1.Text;
+                AgregarDisciplina(NuevoEvento, containerDisciplina, DistanciaDisciplina1, DropDownDisciplina);
+                AgregarDisciplina(NuevoEvento, containerDisciplina2, DistanciaDisciplina2, DropDownDisciplina2);
+                AgregarDisciplina(NuevoEvento, containerDisciplina3, DistanciaDisciplina3, DropDownDisciplina3);
+
+
                 NuevoEvento.Estado = 'D';
             }
             catch (Exception ex)
@@ -64,6 +68,26 @@ namespace TPC
                 throw ex;
             }
         }
+
+        public void AgregarDisciplina(Evento NuevoEvento, HtmlGenericControl container, TextBox txtDistancia, DropDownList dpdDisciplina)
+        {
+            try
+            {
+                if (container.Visible == true)
+                {
+                    Disciplina disciplina = new Disciplina();
+                    disciplina.IdDisciplina = int.Parse(dpdDisciplina.SelectedItem.Value);
+                    disciplina.Descripcion = dpdDisciplina.SelectedItem.Value.ToString();
+                    disciplina.Distancia = decimal.Parse(txtDistancia.Text);
+                    NuevoEvento.Disciplina.Add(disciplina);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private void CargarDesplegables()
         {
             List<Provincia> provincias = provinciaNegocio.ObtenerProvincias();
@@ -77,12 +101,14 @@ namespace TPC
 
             Session["Ciudades"] = ciudades;
         }
+
         protected void DropDownProvincias_SelectedIndexChanged(object sender, EventArgs e)
         {
             int IDProvincia = int.Parse(DropDownProvincias.SelectedItem.Value);
             List<Ciudad> CiudadesFiltradas = ((List<Ciudad>)Session["Ciudades"]).FindAll(Ciudad => Ciudad.Provincia.ID == IDProvincia);
             CargarDropDown(DropDownCiudades, "IdCiudad", "Nombre", CiudadesFiltradas);
         }
+
         private void CargarDropDown<T>(DropDownList dropDown, string dataValueField, string dataTextField, IEnumerable<T> lista)
         {
             dropDown.DataSource = lista;
