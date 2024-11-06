@@ -11,12 +11,13 @@ namespace dominio
     {
         public Evento()
         {
-            Disciplina = new Disciplina();
+            Disciplina = new List<Disciplina>();
             Ubicacion = new Ubicacion();
+            Imagen = new Imagen();
         }
         public int IdEvento { get; set; }
         public string Nombre { get; set; }
-        public Disciplina Disciplina { get; set; }
+        public List<Disciplina> Disciplina { get; set; }
         public DateTime FechaEvento { get; set; }
         public Ubicacion Ubicacion { get; set; }
         public decimal CostoInscripcion { get; set; }
