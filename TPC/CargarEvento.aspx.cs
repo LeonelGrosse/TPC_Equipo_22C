@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace TPC
@@ -68,6 +69,11 @@ namespace TPC
             containerDisciplina3.Visible = false;
             contadorDisciplina--;
         }
+
+        protected void TxtImgUrl_TextChanged(object sender, EventArgs e)
+        {
+            ImgEvento.ImageUrl = TxtImgUrl.Text;
+        }
         private void CapturarValores()
         {
             try
@@ -91,6 +97,7 @@ namespace TPC
                 AgregarDisciplina(NuevoEvento, containerDisciplina2, DistanciaDisciplina2, DropDownDisciplina2);
                 AgregarDisciplina(NuevoEvento, containerDisciplina3, DistanciaDisciplina3, DropDownDisciplina3);
 
+                NuevoEvento.Imagen.URL = TxtImgUrl.Text;
 
                 NuevoEvento.Estado = 'D';
             }
