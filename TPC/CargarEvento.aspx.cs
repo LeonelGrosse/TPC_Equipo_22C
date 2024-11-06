@@ -37,6 +37,12 @@ namespace TPC
 
         protected void BtnCargarEvento_Click(object sender, EventArgs e)
         {
+            try
+            {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
             CapturarValores();
             EventoNegocio.RegistrarEvento(NuevoEvento);
                 if (NuevoEvento.IdEvento != 0)
