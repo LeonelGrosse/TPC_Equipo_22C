@@ -91,6 +91,10 @@ namespace TPC
             }
             else {lblAvisoContrasenias.Visible = false; usuario.Contrasenia = txtContraseniaRegistro.Text;}
 
+            // se agrega usuario (sin rol)
+            negocio.agregar(usuario);
+
+
             Session.Add("dni", dni);
             Response.Redirect("Default.aspx");
         }
