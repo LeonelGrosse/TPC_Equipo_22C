@@ -48,8 +48,8 @@ namespace negocio
                     aux.EdadMinima = (int)(byte)Datos.Lector["EdadMinima"];
                     aux.CuposDisponibles = (int)Datos.Lector["CuposDisponibles"];
 
-                    aux.Disciplina = new Disciplina();
-                    aux.Disciplina.Descripcion = (string)Datos.Lector["Disciplina"];
+                    aux.Disciplina = new List<Disciplina>();
+                    aux.Disciplina[0].Descripcion= (string)Datos.Lector["Disciplina"];
 
                     aux.Imagen = new Imagen();
                     if (!(Datos.Lector["ImgURL"] is DBNull))
@@ -87,11 +87,37 @@ namespace negocio
                 Datos.setParametro("@EDAD_MINIMA", evento.EdadMinima);
                 Datos.setParametro("@EDAD_MAXIMA", evento.EdadMaxima);
                 Datos.setParametro("@CUPOS_DISPONIBLES", evento.CuposDisponibles);
-                Datos.ejecutarAccion();
+                evento.IdEvento = Datos.ejecutarEscalar();
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
+
+        public bool RegistrarDisciplina(int IDEvento, Disciplina disciplina)
+        {
+            try
+            {
+                Datos.LimpiarComando();
+                Datos.setConsulta("INSERT INTO Disciplina_x_Evento(IDEvento, IDDisciplina, Distancia)VALUES(@ID_EVENTO, @ID_DISCIPLINA, @DISTANCIA)");
+                Datos.setParametro("@ID_EVENTO", IDEvento);
+                Datos.setParametro("@ID_DISCIPLINA", disciplina.IdDisciplina);
+                Datos.setParametro("@DISTANCIA", disciplina.Distancia);
+
+                return Datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
             }
         }
     }
