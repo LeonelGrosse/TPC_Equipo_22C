@@ -79,6 +79,7 @@ namespace TPC
         {
             LimpiarCampos();
         }
+
         private void CapturarValores()
         {
             try
@@ -92,11 +93,11 @@ namespace TPC
                 NuevoEvento.Ubicacion.Direccion.Calle = CalleEvento.Text;
                 NuevoEvento.Ubicacion.Direccion.Altura = AlturaEvento.Text;
 
-                NuevoEvento.CostoInscripcion = decimal.Parse(CostoEvento.Text);
+                NuevoEvento.CostoInscripcion = CostoEvento.Text == "" ? 0 : decimal.Parse(CostoEvento.Text);
                 NuevoEvento.CuposDisponibles = int.Parse(CuposDisponibles.Text);
 
-                NuevoEvento.EdadMinima = int.Parse(EdadMinEvento.Text);
-                NuevoEvento.EdadMaxima = int.Parse(EdadMaxEvento.Text);
+                NuevoEvento.EdadMinima = EdadMinEvento.Text == "" ? 0 : int.Parse(EdadMinEvento.Text);
+                NuevoEvento.EdadMaxima = EdadMaxEvento.Text  == "" ? 0 : int.Parse(EdadMaxEvento.Text);
 
                 AgregarDisciplina(NuevoEvento, containerDisciplina, DistanciaDisciplina1, DropDownDisciplina);
                 AgregarDisciplina(NuevoEvento, containerDisciplina2, DistanciaDisciplina2, DropDownDisciplina2);
