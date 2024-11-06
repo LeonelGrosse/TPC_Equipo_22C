@@ -39,6 +39,26 @@ namespace TPC
         {
             CapturarValores();
             EventoNegocio.RegistrarEvento(NuevoEvento);
+                if (NuevoEvento.IdEvento != 0)
+                {
+                    foreach (Disciplina disciplina in NuevoEvento.Disciplina)
+                    {
+                        EventoNegocio.RegistrarDisciplina(NuevoEvento.IdEvento, disciplina);
+                    }
+
+                    if(NuevoEvento.Imagen.URL != null)
+                    {
+                        ImagenNegocio imagenNegocio = new ImagenNegocio();
+                        NuevoEvento.Imagen.ID = imagenNegocio.Insertar(NuevoEvento.Imagen.URL);
+
+                        imagenNegocio.AsociarEvento(NuevoEvento.Imagen.ID, NuevoEvento.IdEvento);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         protected void BtnAgregarDisciplina_Click(object sender, EventArgs e)
         {
