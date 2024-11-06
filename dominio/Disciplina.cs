@@ -10,6 +10,7 @@ namespace dominio
     {
         public int IdDisciplina { get; set; }
         public string Descripcion { get; set; }
+        public Decimal Distancia { get; set; }
         public override string ToString()
         {
             return Descripcion;
