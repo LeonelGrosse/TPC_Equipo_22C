@@ -13,20 +13,30 @@ namespace TPC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            CargarDatosUsuario();
+            //si no es nulo
+
+            if (Session["Email"].ToString() == null)
+            {
+                Response.Redirect("LogIn.aspx");
+            }
+            else {
+                string email = (Session["Email"].ToString());
+                CargarDatosUsuario(email);
+            }
+            //sino cargar login
         }
 
-        public void CargarDatosUsuario()
+        public void CargarDatosUsuario(string email)
         {
             UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-            List<Usuario> usuarios = usuarioNegocio.Listar();
+            Usuario usuario = usuarioNegocio.cargar(email);
 
-            txtNombreUsuario.Text = ($"{usuarios[0].Nombre} , {usuarios[0].Apellido}");
-            txtDniUsuario.Text = usuarios[0].Dni;
-            txtEmailUsuario.Text = usuarios[0].CorreoElectronico;
-            txtFechaNacimiento.Text = usuarios[0].FechaNacimiento.ToString("d"); // Fecha corta
-            txtRolUsuario.Text = usuarios[0].Rol.Descripcion;
-            txtPasswordUsuario.Text = usuarios[0].Contrasenia;
+            txtNombreUsuario.Text = " " + usuario.Nombre + " " +usuario.Apellido;
+            txtDniUsuario.Text = " " + usuario.Dni;
+            txtEmailUsuario.Text = " " + usuario.CorreoElectronico;
+            txtFechaNacimiento.Text = " " + usuario.FechaNacimiento.ToString("d"); // Fecha corta
+            txtRolUsuario.Text = " " + usuario.Rol.Descripcion;
+            txtPasswordUsuario.Text = " " + usuario.Contrasenia;
         }
     }
 }
