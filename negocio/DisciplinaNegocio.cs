@@ -9,21 +9,26 @@ namespace negocio
 {
 	public class DisciplinaNegocio
 	{
+		private AccesoDatos Datos;
+
+		public DisciplinaNegocio()
+		{ 
+			Datos = new AccesoDatos();
+		}
 		public List<Disciplina> Listar()
 		{
 			List<Disciplina> listaDisciplina = new List<Disciplina>();
-			AccesoDatos datosDisciplina = new AccesoDatos();
 
 			try
 			{
-				datosDisciplina.setConsulta("select IDDisciplina, disciplina from Disciplina");
-				datosDisciplina.ejecutarLectura();
+				Datos.setConsulta("select IDDisciplina, disciplina from Disciplina");
+				Datos.ejecutarLectura();
 
-				while (datosDisciplina.Lector.Read())
+				while (Datos.Lector.Read())
 				{
 					Disciplina disciplina = new Disciplina();
-					disciplina.IdDisciplina = (int)datosDisciplina.Lector["IDDisciplina"];
-					disciplina.Descripcion = (string)datosDisciplina.Lector["disciplina"];
+					disciplina.IdDisciplina = (int)(Int64)Datos.Lector["IDDisciplina"];
+					disciplina.Descripcion = (string)Datos.Lector["disciplina"];
 
 					listaDisciplina.Add(disciplina);
 				}
@@ -37,7 +42,9 @@ namespace negocio
 				throw ex;
 			}
 
-			finally { datosDisciplina.cerrarConexion(); }
+			finally { Datos.cerrarConexion(); }
 		}
+
+		
 	}
 }
