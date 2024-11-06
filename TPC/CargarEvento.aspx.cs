@@ -135,7 +135,9 @@ namespace TPC
         {
             List<Provincia> provincias = provinciaNegocio.ObtenerProvincias();
             List<Ciudad> ciudades = ciudadNegocio.ObtenerConStoredProcedure();
+            List<Disciplina> discplina = new DisciplinaNegocio().Listar();
 
+            CargarDropDown(DropDownDisciplina, "IdDisciplina", "Descripcion", discplina);
             CargarDropDown(DropDownProvincias, "ID", "Nombre", provincias);
 
             int IDProvincia = int.Parse(DropDownProvincias.SelectedItem.Value);
