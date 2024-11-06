@@ -130,9 +130,11 @@ namespace negocio
                 DB.setParametro("@email", email);
                 DB.ejecutarLectura();
 
-                while (DB.Lector.Read())
+                Usuario Usuario = new Usuario();
+
+                if (DB.Lector.Read())
                 {
-                    Usuario Usuario = new Usuario();
+                    
                     Usuario.IdUsuario = (int)(Int64)DB.Lector["IDUsuario"];
                     Usuario.Nombre = (string)DB.Lector["Nombre"];
                     Usuario.Apellido = (string)DB.Lector["Apellido"];
@@ -143,8 +145,9 @@ namespace negocio
                     Usuario.Rol.IdRol = (Int16)DB.Lector["IDRol"];
                     Usuario.Rol.Descripcion = (string)DB.Lector["Rol"];
 
-                    Usuarios.Add(Usuario);
+                    
                 }
+
                 return Usuario;
             }
             catch (Exception ex)
