@@ -34,17 +34,13 @@ namespace negocio
 				}
 
 				return listaDisciplina;
-
 			}
 			catch (Exception ex)
 			{
-
 				throw ex;
 			}
 
 			finally { Datos.cerrarConexion(); }
 		}
-
-		
 	}
 }
