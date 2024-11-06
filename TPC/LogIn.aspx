@@ -17,6 +17,7 @@
         </div>
         <div>
             <asp:Button ID="btnAceptar" runat="server" Text="Iniciar sesión" OnClick="btnAceptar_Click"/>
+            <asp:Label ID="lblAvisoLogin" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
         </div>
         <div>
             <a href="#">Olvidaste tu contraseña?</a>            

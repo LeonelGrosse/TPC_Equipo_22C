@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -145,6 +146,51 @@ namespace negocio
             finally { datos.cerrarConexion(); }
 
             return true;
+        }
+
+        public bool checkLogin(string email, string pass)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setConsulta("select dni from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
+                datos.setParametro("@email", email);
+                datos.ejecutarLectura();
+
+                if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("dni")))
+                {
+
+                    try
+                    {
+                        datos.cerrarConexion();
+                        datos.abrirConexion();
+
+                        datos.setConsulta("select dni from usuario where contrasena = @pass"); /*comparar @pass con contraseña de DB*/
+                        datos.setParametro("@pass", pass);
+                        datos.ejecutarLectura();
+
+                        if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("dni")))
+                        {
+                            return true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine("Error al verificar el Email: " + ex.Message);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error al verificar el Email: " + ex.Message);
+            }
+
+            finally { datos.cerrarConexion(); }
+
+            return false;
         }
     }
 }
