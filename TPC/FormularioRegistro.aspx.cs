@@ -95,10 +95,8 @@ namespace TPC
 
             // se agrega usuario validado (sin rol)
             negocio.agregar(usuario);
-
-
-            Session.Add("dni", dni);
-            Response.Redirect("Default.aspx");
+            
+            Response.Redirect("Login.aspx");
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

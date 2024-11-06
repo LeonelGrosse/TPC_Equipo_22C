@@ -154,31 +154,40 @@ namespace negocio
 
             try
             {
-                datos.setConsulta("select dni from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
+                datos.setConsulta("select CorreoElectronico from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
                 datos.setParametro("@email", email);
                 datos.ejecutarLectura();
 
-                if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("dni")))
+                if (datos.Lector.Read())
                 {
 
-                    try
+                    if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("CorreoElectronico")))
+
                     {
-                        datos.cerrarConexion();
-                        datos.abrirConexion();
 
-                        datos.setConsulta("select dni from usuario where contrasena = @pass"); /*comparar @pass con contraseña de DB*/
-                        datos.setParametro("@pass", pass);
-                        datos.ejecutarLectura();
-
-                        if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("dni")))
+                        try
                         {
-                            return true;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
+                            datos.cerrarConexion();
+                            datos.abrirConexion();
 
-                        Console.WriteLine("Error al verificar el Email: " + ex.Message);
+                            datos.setConsulta("select contrasena from usuario where contrasena = @pass"); /*comparar @pass con contraseña de DB*/
+                            datos.setParametro("@pass", pass);
+                            datos.ejecutarLectura();
+
+                            if (datos.Lector.Read())
+                            {
+
+                                if (!datos.Lector.IsDBNull(datos.Lector.GetOrdinal("contrasena")))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Console.WriteLine("Error al verificar el Email: " + ex.Message);
+                        }
                     }
                 }
             }
