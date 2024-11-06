@@ -114,31 +114,139 @@ namespace TPC
         protected global::System.Web.UI.WebControls.TextBox EdadMaxEvento;
 
         /// <summary>
-        /// Disciplina1 control.
+        /// containerDisciplina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Disciplina1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl containerDisciplina;
 
         /// <summary>
-        /// Disciplina2 control.
+        /// DropDownDisciplina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Disciplina2;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownDisciplina;
 
         /// <summary>
-        /// Disciplina3 control.
+        /// DistanciaDisciplina1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Disciplina3;
+        protected global::System.Web.UI.WebControls.TextBox DistanciaDisciplina1;
+
+        /// <summary>
+        /// BtnAgregarDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton BtnAgregarDisciplina;
+
+        /// <summary>
+        /// containerDisciplina2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl containerDisciplina2;
+
+        /// <summary>
+        /// DropDownDisciplina2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownDisciplina2;
+
+        /// <summary>
+        /// DistanciaDisciplina2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DistanciaDisciplina2;
+
+        /// <summary>
+        /// btnQuitarDisciplina2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnQuitarDisciplina2;
+
+        /// <summary>
+        /// containerDisciplina3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl containerDisciplina3;
+
+        /// <summary>
+        /// DropDownDisciplina3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownDisciplina3;
+
+        /// <summary>
+        /// DistanciaDisciplina3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DistanciaDisciplina3;
+
+        /// <summary>
+        /// btnQuitarDisciplina3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnQuitarDisciplina3;
+
+        /// <summary>
+        /// TxtImgUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtImgUrl;
+
+        /// <summary>
+        /// ImgEvento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image ImgEvento;
+
+        /// <summary>
+        /// BtnCancelarCarga control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnCancelarCarga;
 
         /// <summary>
         /// BtnCargarEvento control.
