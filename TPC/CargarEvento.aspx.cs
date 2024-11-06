@@ -74,6 +74,11 @@ namespace TPC
         {
             ImgEvento.ImageUrl = TxtImgUrl.Text;
         }
+
+        protected void BtnCancelarCarga_Click(object sender, EventArgs e)
+        {
+            LimpiarCampos();
+        }
         private void CapturarValores()
         {
             try
@@ -153,6 +158,17 @@ namespace TPC
             dropDown.DataValueField = dataValueField;
             dropDown.DataTextField = dataTextField;
             dropDown.DataBind();
+        }
+
+        private void LimpiarCampos()
+        {
+            NombreEvento.Text = "";
+            CalleEvento.Text = "";
+            AlturaEvento.Text = "";
+            CostoEvento.Text = "";
+            CuposDisponibles.Text = "";
+            EdadMinEvento.Text = "";
+            EdadMaxEvento.Text = "";
         }
     }
 }
