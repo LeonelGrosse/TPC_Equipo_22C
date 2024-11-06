@@ -21,12 +21,12 @@ namespace TPC
         static int contadorDisciplina = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-                NuevoEvento = new Evento();
-                EventoNegocio = new EventoNegocio();
-                provinciaNegocio = new ProvinciaNegocio();
-                ciudadNegocio = new CiudadNegocio();
-                provincias = new List<Provincia>();
-                ciudades = new List<Ciudad>();
+            NuevoEvento = new Evento();
+            EventoNegocio = new EventoNegocio();
+            provinciaNegocio = new ProvinciaNegocio();
+            ciudadNegocio = new CiudadNegocio();
+            provincias = new List<Provincia>();
+            ciudades = new List<Ciudad>();
 
             if (!IsPostBack)
             {
@@ -43,8 +43,8 @@ namespace TPC
                 if (!Page.IsValid)
                     return;
 
-            CapturarValores();
-            EventoNegocio.RegistrarEvento(NuevoEvento);
+                CapturarValores();
+                EventoNegocio.RegistrarEvento(NuevoEvento);
                 if (NuevoEvento.IdEvento != 0)
                 {
                     foreach (Disciplina disciplina in NuevoEvento.Disciplina)
