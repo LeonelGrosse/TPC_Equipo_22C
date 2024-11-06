@@ -294,7 +294,7 @@ ON IDProvincia = P.ID
 
 GO
 
-CREATE PROCEDURE SP_INSERTAR_EVENTO(
+CREATE OR ALTER PROCEDURE SP_INSERTAR_EVENTO(
     @CALLE VARCHAR(50),
     @ALTURA VARCHAR(10),
     @ID_CIUDAD BIGINT,
@@ -335,7 +335,7 @@ BEGIN TRY
 
     INSERT INTO EVENTO(Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles)
     VALUES(@NOMBRE, @FECHA, @ID_UBICACION, @COSTO_INSCRIPCION, @ESTADO, @EDAD_MINIMA, @EDAD_MAXIMA, @CUPOS_DISPONIBLES)
-
+    SELECT SCOPE_IDENTITY()
     IF(@@TRANCOUNT > 0)
         COMMIT TRANSACTION
 END TRY
@@ -349,12 +349,16 @@ BEGIN CATCH
 END CATCH
 END
 
-EXEC SP_INSERTAR_EVENTO 'Azcuenaga', '2888', 1 , 'Campeonato acuatico', '2024-10-25', 50.00, 'D', 18, 30, 120
+GO
 
-SELECT * FROM Direccion
-SELECT * FROM Ubicacion
+ALTER TABLE Disciplina_x_Evento
+    ADD CONSTRAINT PK_Evento_x_Disciplina PRIMARY KEY(IDEvento, IDDisciplina)
+
+ALTER TABLE Disciplina_x_Evento
+    ADD Distancia INT NOT NULL CHECK(Distancia > 0)
+
 SELECT * FROM Evento
+SELECT * FROM Disciplina_x_Evento
+SELECT * FROM Imagen
+SELECT * FROM Imagen_x_Evento
 
-DROP PROCEDURE SP_INSERTAR_EVENTO
-
-Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL from Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento Inner join Imagen i On i.ID = ie.IDImagen Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'
