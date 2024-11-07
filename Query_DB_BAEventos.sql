@@ -351,11 +351,5 @@ END
 
 GO
 
-ALTER TABLE Disciplina_x_Evento
-    ADD CONSTRAINT PK_Evento_x_Disciplina PRIMARY KEY(IDEvento, IDDisciplina)
-
-ALTER TABLE Disciplina_x_Evento
-    ADD Distancia INT NOT NULL CHECK(Distancia > 0)
-
 ALTER TABLE Usuario
     ADD CONSTRAINT PK_Unique_Email UNIQUE(CorreoElectronico)
