@@ -64,12 +64,6 @@
                         <a class="navbar-brand" runat="server" href="~/">BAEventos</a>
                     </div>
                     <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                        <!--<ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/LogIn.aspx">Log In</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/FormularioRegistro.aspx">Registro</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Eventos.aspx">Eventos</a></li>
-                            <li class="nav-item"><a class="nav-link" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
-                        </ul>!-->
                         <ul id="navbar_ul_default" class="default-nav navbar-nav flex-grow-1 justify-content-end gap-4" runat="server">
                             <li class="nav-item"><a class="" runat="server" href="~/LogIn.aspx">Iniciar Sesión</a></li>
                             <li class="nav-item"><a class="" runat="server" href="~/FormularioRegistro.aspx">Registrarse</a></li>
@@ -84,6 +78,7 @@
 
                         <ul id="nav_ul_organizador" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
                             <li class="nav-item"><a class="" runat="server" href="~/MisEventos.aspx">Mis Eventos</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/CargarResultados.aspx">Cargar Resultados</a></li>
                             <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li> <!--Validar en Perfil segun rol que datos se muestran?!-->
                         </ul>
 
