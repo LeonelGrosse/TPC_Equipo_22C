@@ -1,2 +1,63 @@
-﻿body {
+﻿* {
+    box-sizing: border-box;
+    font-family: "Work Sans";
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #F2F2F0;
+}
+
+.form1 {
+    max-width: 1200px;
+}
+
+.header {
+    background: #1e2326;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+nav {
+    max-width: 1200px;
+    margin-top: .5rem;
+    color: white;
+}
+
+.container-nav-content {
+    padding: 0;
+}
+
+.navbar-brand {
+    font-family: Roboto;
+    font-size: 30px;
+    color: #0B0F06;
+}
+
+ul .nav-link {
+    padding: 0;
+}
+
+ul li a {
+    font-weight: 600;
+    text-decoration: none;
+    color: #242424;
+    padding: .5rem 1rem;
+    border-radius: 100vw;
+}
+
+.default-nav .nav-item a {
+    border: 3px solid #023373;
+}
+
+ul .nav-item a:hover {
+    background-color: #0233735e;
 }

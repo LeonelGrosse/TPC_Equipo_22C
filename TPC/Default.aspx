@@ -53,7 +53,7 @@
             <p>Es tu oportunidad de <a href="~/FormularioRegistro.aspx" class="">registrarte</a> y comenzar a vivir tu experiencia deportiva al maximo nivel! </p>
         </div>
         <div class="section-buttons d-flex flex-row justify-content-center g-4">
-            <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" runat="server" />
+            <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" OnClick="BtnSerOrganizador_Click" runat="server" />
             <asp:Button Text="Quiero ser participante" type="submit" ID="BtnSerParticipante" CssClass="btn btn-participante" runat="server" />
         </div>
     </section>

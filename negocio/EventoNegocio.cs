@@ -48,8 +48,8 @@ namespace negocio
                     aux.EdadMinima = (int)(byte)Datos.Lector["EdadMinima"];
                     aux.CuposDisponibles = (int)Datos.Lector["CuposDisponibles"];
 
-                    aux.Disciplina = new List<Disciplina>();
-                    aux.Disciplina[0].Descripcion= (string)Datos.Lector["Disciplina"];
+                    aux.Disciplina.Add(new Disciplina { Descripcion = (string)Datos.Lector["Disciplina"] });
+                    //aux.Disciplina[0].Descripcion= (string)Datos.Lector["Disciplina"];
 
                     aux.Imagen = new Imagen();
                     if (!(Datos.Lector["ImgURL"] is DBNull))

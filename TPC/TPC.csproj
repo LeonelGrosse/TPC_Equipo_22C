@@ -108,6 +108,7 @@
     <Content Include="obj\Debug\TPC.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC.dll" />
     <Content Include="obj\Debug\TPC.pdb" />
+    <Content Include="OrganizadorFormulario.aspx" />
     <Content Include="PerfilUsuario.aspx" />
     <Content Include="StyleSheet.css" />
     <Content Include="Web.config" />
@@ -201,6 +202,13 @@
       <DependentUpon>MisResultados.aspx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="OrganizadorFormulario.aspx.cs">
+      <DependentUpon>OrganizadorFormulario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrganizadorFormulario.aspx.designer.cs">
+      <DependentUpon>OrganizadorFormulario.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PerfilUsuario.aspx.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -23,5 +23,10 @@ namespace TPC
                 repRepetidor.DataBind();
             }
         }
+
+        public string ObtenerDescripciones(List<Disciplina> disciplinas)
+        {
+            return string.Join(", ", disciplinas.Select(d => d.Descripcion));
+        }
     }
 }

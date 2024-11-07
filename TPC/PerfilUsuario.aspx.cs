@@ -14,8 +14,9 @@ namespace TPC
         protected void Page_Load(object sender, EventArgs e)
         {
             //si no es nulo
+            
 
-            if (Session["Email"].ToString() == null)
+            if (Session["Email"] == null)
             {
                 Response.Redirect("LogIn.aspx");
             }
