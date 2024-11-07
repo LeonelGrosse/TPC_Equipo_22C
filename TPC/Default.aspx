@@ -50,7 +50,7 @@
             <p>No solo podras participar de los eventos sino tambien, registrarte como organizador y ser el creador de tu propia aventura.</p>
         </div>
         <div>
-            <p>Es tu oportunidad de <a href="~/FormularioRegistro.aspx" class="">registrarte</a> y comenzar a vivir tu experiencia deportiva al maximo nivel! </p>
+            <p>Es tu oportunidad de <a href="FormularioRegistro.aspx" class="">registrarte</a> y comenzar a vivir tu experiencia deportiva al maximo nivel! </p>
         </div>
         <div class="section-buttons d-flex flex-row justify-content-center g-4">
             <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" OnClick="BtnSerOrganizador_Click" runat="server" />

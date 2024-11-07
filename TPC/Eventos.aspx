@@ -31,7 +31,7 @@
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
                                 <p class="card-text">Cupos: <%#Eval("CuposDisponibles") %></p>
-                                <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" CssClass="btn btn-primary align-self-end" />
+                                <asp:Button ID="btnInscribirse" runat="server" Text="Ver Detalles" Onclick="btnInscribirse_Click" CssClass="btn btn-primary align-self-end" />
                             </div>
                         </div>
                     </div>
