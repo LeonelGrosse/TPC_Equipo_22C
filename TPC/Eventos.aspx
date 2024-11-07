@@ -25,7 +25,7 @@
                                     <h5 class="card-title"><%#Eval("Nombre") %></h5>
                                     <p class="card-text">Fecha: <%#Eval("FechaEvento") %></p>
                                     <p class="card-text">Costo: <%#Eval("CostoInscripcion") %></p>
-                                    <p class="card-text">Disciplina: <%#Eval("Disciplina.Descripcion") %></p>
+                                    <p class="card-text">Disciplina: <%# ObtenerDescripciones((List<dominio.Disciplina>)Eval("Disciplina")) %></p>
                                     <p class="card-text">Edad Minima: <%#Eval("EdadMinima") %></p>
                                 </div>
                             </div>
