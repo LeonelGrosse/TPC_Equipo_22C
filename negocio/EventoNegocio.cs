@@ -120,6 +120,33 @@ namespace negocio
                 Datos.cerrarConexion();
             }
         }
+        public void modificar(Evento evento)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setConsulta("Update Evento set Nombre = @nom, FechaEvento = @fecha, Ubicacion = @ubi, Costo= @costo, Estado = @estado, EdadMinima = @edadMinima, EdadMaxima =  @edadMaxima, CuposDisponibles = @cupos where IDEvento = @id");
+                datos.setParametro("@nom", evento.Nombre);
+                datos.setParametro("@fecha", evento.FechaEvento);
+                datos.setParametro("@ubi", evento.Ubicacion.IDUbicacion);
+                datos.setParametro("@costo", evento.CostoInscripcion);
+                datos.setParametro("@estado", evento.Estado);
+                datos.setParametro("@edadMinima", evento.EdadMinima);
+                datos.setParametro("@edadMaxima", evento.EdadMaxima);
+                datos.setParametro("@cupos", evento.CuposDisponibles);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         // Puedo actualizar cualquier tipo de valor, incluyendo el estado y hacer una baja lógica.
         public bool ModificarEscalar<T>(string columna, int idEvento, T valor )
@@ -137,6 +164,39 @@ namespace negocio
             finally
             {
                 Datos.cerrarConexion();
+            }
+        }
+
+        public void EliminarEvento(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("Delete from Evento where IDEvento = @id");
+                datos.setParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void DarBajaEvento(int id)
+        {
+            try
+            {
+                AccesoDatos datos = new AccesoDatos();
+                datos.setConsulta("Update Evento Set Estado = 'F' Where IDEvento = @id");
+                datos.setParametro("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
             }
         }
     }
