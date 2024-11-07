@@ -94,6 +94,7 @@
     <Content Include="bin\TPC.pdb" />
     <Content Include="CargarEvento.aspx" />
     <Content Include="CargarResultados.aspx" />
+    <Content Include="Content\StyleSheet.css" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesEvento.aspx" />
     <Content Include="Eventos.aspx" />
@@ -110,7 +111,6 @@
     <Content Include="obj\Debug\TPC.pdb" />
     <Content Include="OrganizadorFormulario.aspx" />
     <Content Include="PerfilUsuario.aspx" />
-    <Content Include="StyleSheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

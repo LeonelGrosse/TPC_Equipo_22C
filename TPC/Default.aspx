@@ -54,7 +54,7 @@
         </div>
         <div class="section-buttons d-flex flex-row justify-content-center g-4">
             <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" OnClick="BtnSerOrganizador_Click" runat="server" />
-            <asp:Button Text="Quiero ser participante" type="submit" ID="BtnSerParticipante" CssClass="btn btn-participante" runat="server" />
+            <asp:Button Text="Quiero ser participante" type="submit" ID="BtnSerParticipante" CssClass="btn btn-participante" OnClick="BtnSerParticipante_Click" runat="server" />
         </div>
     </section>
 

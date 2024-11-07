@@ -11,64 +11,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Righteous&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
     </style>
-    <link href="/StyleSheet.css" rel="stylesheet" />
+    <link href="Content/StyleSheet.css" rel="stylesheet" />
 </head>
-<style>
-    * {
-        box-sizing: border-box;
-        font-family: "Work Sans";
-        margin: 0;
-        padding: 0;
-    }
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-    body {
-        background: #F2F2F0;
-    }
-
-    .form1 {
-        max-width: 1200px;
-    }
-
-    nav {
-        max-width: 1200px;
-        margin-top: .5rem;
-        color: white;
-    }
-
-    .container-nav-content {
-        padding: 0;
-    }
-
-    .navbar-brand {
-        font-family: Roboto;
-        font-size: 30px;
-        color: #0B0F06;
-    }
-
-    ul .nav-link {
-        padding: 0;
-    }
-
-    ul li a {
-        font-weight: 600;
-        text-decoration: none;
-        color: #242424;
-        padding: .5rem 1rem;
-        border-radius: 100vw;
-    }
-
-    .default-nav .nav-item a {
-        border: 3px solid #023373;
-    }
-
-    ul .nav-item a:hover {
-        background-color: #0233735e;
-    }
-</style>
 <body>
     <form id="form1" runat="server">
         <div class="container max-vh-100">
