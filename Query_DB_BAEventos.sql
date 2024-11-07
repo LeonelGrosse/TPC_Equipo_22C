@@ -223,11 +223,11 @@ INSERT INTO Rol (Rol) VALUES ('Usuario');
 INSERT INTO Rol (Rol) VALUES ('Organizador');
 
 -- Inserciones para la tabla Imagen
-INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen1.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen2.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen3.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen4.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('http://example.com/imagen5.jpg');
+INSERT INTO Imagen (ImgURL) VALUES ('https://saltograndeextra.com/wp-content/uploads/2024/02/1-2.jpg');
+INSERT INTO Imagen (ImgURL) VALUES ('https://i0.wp.com/diariolujan.ar/wp-content/uploads/2021/12/POTRERILLOS-2019-largada-7.jpg?ssl=1');
+INSERT INTO Imagen (ImgURL) VALUES ('https://superiorcads.edu.ar/imgd/certificacion-running-maraton-fondo-medio-fondo-trail-2-019334.jpg');
+INSERT INTO Imagen (ImgURL) VALUES ('https://upload.wikimedia.org/wikipedia/commons/0/05/Military_cyclists_in_pace_line.jpg');
+INSERT INTO Imagen (ImgURL) VALUES ('https://cdn.shopify.com/s/files/1/0512/7641/5146/files/nadadores-competencia-lanzandose_1.jpg?v=1717258328');
 
 -- Inserciones para la tabla Usuario
 INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
@@ -272,7 +272,7 @@ INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (5, 4);
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (1, 1); -- Circuito MDQ Aguas abiertas - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (2, 3); -- Maratón de la Ciudad - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Ciclismo Juvenil - Basketball
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 3); -- Competencia de Natación - Natación
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 1); -- Competencia de Natación - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 2); -- Campeonato de Ciclismo - Ciclismo
 GO
 
@@ -294,7 +294,7 @@ ON IDProvincia = P.ID
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_INSERTAR_EVENTO(
+CREATE PROCEDURE SP_INSERTAR_EVENTO(
     @CALLE VARCHAR(50),
     @ALTURA VARCHAR(10),
     @ID_CIUDAD BIGINT,
