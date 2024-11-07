@@ -120,5 +120,24 @@ namespace negocio
                 Datos.cerrarConexion();
             }
         }
+
+        // Puedo actualizar cualquier tipo de valor, incluyendo el estado y hacer una baja lógica.
+        public bool ModificarEscalar<T>(string columna, int idEvento, T valor )
+        {
+            try
+            {
+                Datos.setConsulta($"UPDATE Evento SET {columna} = {valor} WHERE IDEvento = @idEvento");
+                Datos.setParametro("@idEvento", idEvento);
+                return Datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
     }
 }
