@@ -93,6 +93,7 @@
     <Content Include="bin\TPC.dll" />
     <Content Include="bin\TPC.pdb" />
     <Content Include="CargarEvento.aspx" />
+    <Content Include="CargarResultados.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DetallesEvento.aspx" />
     <Content Include="Eventos.aspx" />
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="CargarEvento.aspx.designer.cs">
       <DependentUpon>CargarEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CargarResultados.aspx.cs">
+      <DependentUpon>CargarResultados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CargarResultados.aspx.designer.cs">
+      <DependentUpon>CargarResultados.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

@@ -238,6 +238,61 @@ namespace negocio
 
             return false;
         }
+
+        public bool checkRecuperacion(string email, string dni)
+        {
+
+            try
+            {
+                DB.setConsulta("select CorreoElectronico from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
+                DB.setParametro("@email", email);
+                DB.ejecutarLectura();
+
+                if (DB.Lector.Read())
+                {
+
+                    if (!DB.Lector.IsDBNull(DB.Lector.GetOrdinal("CorreoElectronico")))
+
+                    {
+
+                        try
+                        {
+                            DB.cerrarConexion();
+                            DB.abrirConexion();
+
+                            DB.setConsulta("select DNI from usuario where DNI = @dni"); /*comparar @dni con DNI de DB*/
+                            DB.setParametro("@dni", dni);
+                            DB.ejecutarLectura();
+
+                            if (DB.Lector.Read())
+                            {
+
+                                if (!DB.Lector.IsDBNull(DB.Lector.GetOrdinal("DNI")))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Console.WriteLine("Error al verificar el Email: " + ex.Message);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine("Error al verificar el Email: " + ex.Message);
+            }
+
+            finally { DB.cerrarConexion(); }
+
+            return false;
+        }
     }
 }
+
+
 
