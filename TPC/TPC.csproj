@@ -97,7 +97,11 @@
     <Content Include="Eventos.aspx" />
     <Content Include="FormularioRegistro.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="ListadoEventos.aspx" />
+    <Content Include="ListadoUsuarios.aspx" />
     <Content Include="LogIn.aspx" />
+    <Content Include="MisEventos.aspx" />
+    <Content Include="MisInscripciones.aspx" />
     <Content Include="MisResultados.aspx" />
     <Content Include="obj\Debug\TPC.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC.dll" />
@@ -138,6 +142,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ListadoEventos.aspx.cs">
+      <DependentUpon>ListadoEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListadoEventos.aspx.designer.cs">
+      <DependentUpon>ListadoEventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoUsuarios.aspx.cs">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListadoUsuarios.aspx.designer.cs">
+      <DependentUpon>ListadoUsuarios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -151,6 +169,20 @@
     </Compile>
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="MisEventos.aspx.cs">
+      <DependentUpon>MisEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisEventos.aspx.designer.cs">
+      <DependentUpon>MisEventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MisInscripciones.aspx.cs">
+      <DependentUpon>MisInscripciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MisInscripciones.aspx.designer.cs">
+      <DependentUpon>MisInscripciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="MisResultados.aspx.cs">
       <DependentUpon>MisResultados.aspx</DependentUpon>
