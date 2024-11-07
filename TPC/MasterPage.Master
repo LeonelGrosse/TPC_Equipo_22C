@@ -15,7 +15,7 @@
         background: #F2F2F0;
     }
 
-    .form1{
+    .form1 {
         max-width: 1200px;
     }
 
@@ -25,7 +25,7 @@
         color: white;
     }
 
-    .container-nav-content{
+    .container-nav-content {
         padding: 0;
     }
 
@@ -39,13 +39,16 @@
         padding: 0;
     }
 
-    ul .nav-item a {
+    ul li a {
         font-weight: 600;
         text-decoration: none;
         color: #242424;
         padding: .5rem 1rem;
-        border: 3px solid #023373;
         border-radius: 100vw;
+    }
+
+    .default-nav .nav-item a {
+        border: 3px solid #023373;
     }
 
     ul .nav-item a:hover {
@@ -67,14 +70,31 @@
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/Eventos.aspx">Eventos</a></li>
                             <li class="nav-item"><a class="nav-link" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
                         </ul>!-->
-                        <ul class="navbar-nav flex-grow-1 justify-content-end gap-4">
+                        <ul id="navbar_ul_default" class="default-nav navbar-nav flex-grow-1 justify-content-end gap-4" runat="server">
                             <li class="nav-item"><a class="" runat="server" href="~/LogIn.aspx">Iniciar Sesión</a></li>
                             <li class="nav-item"><a class="" runat="server" href="~/FormularioRegistro.aspx">Registrarse</a></li>
+                        </ul>
+
+                        <ul id="nav_ul_participante" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
+                            <li class="nav-item"><a class="" runat="server" href="~/Eventos.aspx">Eventos</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/MisResultados.aspx">Mis resultados</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/MisInscripciones.aspx">Mis Inscripciones</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
+                        </ul>
+
+                        <ul id="nav_ul_organizador" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
+                            <li class="nav-item"><a class="" runat="server" href="~/MisEventos.aspx">Mis Eventos</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li> <!--Validar en Perfil segun rol que datos se muestran?!-->
+                        </ul>
+
+                        <ul id="nav_ul_admin" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
+                            <li class="nav-item"><a class="" runat="server" href="~/ListadoUsuarios.aspx">Usuarios</a></li>
+                            <li class="nav-item"><a class="" runat="server" href="~/ListadoEventos.aspx">Eventos</a></li>
                         </ul>
                     </div>
                 </div>
             </nav>
-          
+
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
             <footer>
