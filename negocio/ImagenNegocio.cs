@@ -43,5 +43,24 @@ namespace negocio
                 throw ex;
             }
         }
+
+        public bool Modificar(int IDImagen, string URL)
+        {
+            try
+            {
+                Datos.setConsulta("UPDATE Imagen SET ImgUrl = @URL WHERE ID = @IDImagen");
+                Datos.setParametro("@IDImagen", URL);
+                Datos.setParametro("@URL", URL);
+                return Datos.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
     }
 }
