@@ -93,7 +93,7 @@ namespace TPC
 
             usuario.Rol.IdRol = 3;
 
-            // se agrega usuario validado (sin rol)
+            // se agrega usuario validado (rol de usuario)
             negocio.agregar(usuario);
             
             Response.Redirect("Login.aspx");

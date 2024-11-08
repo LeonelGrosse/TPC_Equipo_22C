@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace negocio
 {
@@ -288,6 +289,29 @@ namespace negocio
             }
 
             finally { DB.cerrarConexion(); }
+
+            return false;
+        }
+
+        public bool RecuperarContrasenia(string pass, string email)
+        {                 
+            
+                try
+                {
+                    DB.setConsulta("UPDATE usuario SET contrasena = @pass WHERE CorreoElectronico = @email ");
+                    DB.setParametro("@pass", pass);
+                    DB.setParametro("@email", email);
+                    DB.ejecutarAccion();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine("Error al reestablecer contraseña: " + ex.Message);
+                }
+                
+            
+
 
             return false;
         }
