@@ -20,7 +20,7 @@
             <asp:Label ID="lblAvisoLogin" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
         </div>
         <div>
-            <a href="#">Olvidaste tu contraseña?</a>            
+            <a href="#">Olvidaste tu contraseña?</a>
         </div>
     </section>
 
