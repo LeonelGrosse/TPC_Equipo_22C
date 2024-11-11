@@ -6,6 +6,8 @@ using System.Net;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using accesorio;
 
 namespace TPC
 {
@@ -22,20 +24,30 @@ namespace TPC
 
             bool LoginOK = negocio.checkLogin(txtUsuario.Text, txtContrasenia.Text);
 
-            if (LoginOK == true)
+            if (!(LoginOK == true))
             {
-                Session.Add("Email", txtUsuario.Text);
-                Response.Redirect("Default.aspx", false);
-            }
-            else
-            {
-
                 lblAvisoLogin.Text = "El usuario o la contraseña no es válido";
                 lblAvisoLogin.ForeColor = System.Drawing.Color.Red;
                 lblAvisoLogin.Visible = true;
+                return;
             }
 
-            
+            Usuario usuarioActivo = new Usuario();
+            negocio.Login(usuarioActivo, txtUsuario.Text, txtContrasenia.Text);
+            Session.Add("UsuarioActivo", usuarioActivo);
+
+            if (usuarioActivo.EsAdministrador())
+            {
+                Response.Redirect("ListadoEventos.aspx", false);
+            }
+            if (usuarioActivo.EsParticipante())
+            {
+                Response.Redirect("Eventos.aspx", false);
+            }
+            if (usuarioActivo.EsOrganizador())
+            {
+                Response.Redirect("CargarEvento.aspx", false);
+            }
         }
     }
 }
