@@ -54,7 +54,6 @@ namespace negocio
         }
         public void agregar(Usuario nuevo)
         {
-
             DB.LimpiarComando();
             try
             {
@@ -70,7 +69,6 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -78,10 +76,8 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
-
         public void modificar(Usuario usuario)
         {
-           
             try
             {
                 DB.setConsulta("update Usuario set Apellido = @apellido, Nombre = @nombre, DNI = @dni, CorreoElectronico = @correo, FechaNacimiento = @fechaNacimiento where IDUsuario = @id");
@@ -109,7 +105,6 @@ namespace negocio
         {
             try
             {
-
                 DB.setConsulta("delete from Usuario where IDUsuario = @id");
                 DB.setParametro("@id", id);
                 DB.ejecutarAccion();
@@ -117,11 +112,9 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
-
         public Usuario cargar(string email)
         {
             try
@@ -134,7 +127,7 @@ namespace negocio
 
                 if (DB.Lector.Read())
                 {
-                    
+
                     Usuario.IdUsuario = (int)(Int64)DB.Lector["IDUsuario"];
                     Usuario.Nombre = (string)DB.Lector["Nombre"];
                     Usuario.Apellido = (string)DB.Lector["Apellido"];
@@ -144,8 +137,6 @@ namespace negocio
                     Usuario.Contrasenia = (string)DB.Lector["Contrasena"];
                     Usuario.Rol.IdRol = (Int16)DB.Lector["IDRol"];
                     Usuario.Rol.Descripcion = (string)DB.Lector["Rol"];
-
-                    
                 }
 
                 return Usuario;
@@ -159,11 +150,9 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
-    
 
         public bool checkUsuario(int dni)
         {
-            
             try
             {
                 DB.setConsulta("select dni from Usuario where dni = @dni"); /*comparar @dni con dni de DB*/
@@ -180,15 +169,16 @@ namespace negocio
 
                 Console.WriteLine("Error al verificar el DNI: " + ex.Message);
             }
-
-            finally { DB.cerrarConexion(); }
+            finally
+            {
+                DB.cerrarConexion();
+            }
 
             return true;
         }
 
         public bool checkLogin(string email, string pass)
         {
-
             try
             {
                 DB.setConsulta("select CorreoElectronico from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
@@ -197,7 +187,6 @@ namespace negocio
 
                 if (DB.Lector.Read())
                 {
-
                     if (!DB.Lector.IsDBNull(DB.Lector.GetOrdinal("CorreoElectronico")))
 
                     {
@@ -213,7 +202,6 @@ namespace negocio
 
                             if (DB.Lector.Read())
                             {
-
                                 if (!DB.Lector.IsDBNull(DB.Lector.GetOrdinal("contrasena")))
                                 {
                                     return true;
@@ -222,7 +210,6 @@ namespace negocio
                         }
                         catch (Exception ex)
                         {
-
                             Console.WriteLine("Error al verificar el Email: " + ex.Message);
                         }
                     }
@@ -230,13 +217,45 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine("Error al verificar el Email: " + ex.Message);
             }
 
             finally { DB.cerrarConexion(); }
 
             return false;
+        }
+
+        public bool Login(Usuario usuario, string correo, string password)
+        {
+            try
+            {
+                DB.setConsulta("SELECT IDUsuario, IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado FROM USUARIO WHERE CorreoElectronico = @correo AND Contrasena = @password");
+                DB.setParametro("@correo", correo);
+                DB.setParametro("@password", password);
+                DB.ejecutarLectura();
+
+                if (DB.Lector.Read())
+                {
+                    usuario.IdUsuario = (int)(Int64)DB.Lector["IDUsuario"];
+                    usuario.Nombre = (string)DB.Lector["Nombre"];
+                    usuario.Apellido = (string)DB.Lector["Apellido"];
+                    usuario.Dni = (string)DB.Lector["DNI"];
+                    usuario.CorreoElectronico = correo;
+                    usuario.FechaNacimiento = (DateTime)DB.Lector["FechaNacimiento"];
+                    usuario.Contrasenia = password;
+                    usuario.Rol.IdRol = (int)(Int16)DB.Lector["IDRol"];
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
         }
     }
 }
