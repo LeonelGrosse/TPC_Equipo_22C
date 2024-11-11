@@ -6,11 +6,36 @@ using System.Threading.Tasks;
 
 namespace dominio
 {
+    public enum Roles
+    {
+        Administrador = 1,
+        Participante = 2,
+        Organizador = 3
+    }
     public class Usuario
     {
         public Usuario()
         {
             this.Rol = new Rol();
+        }
+
+        public bool EsAdministrador()
+        {
+            if (this.Rol.IdRol == (int)Roles.Administrador)
+                return true;
+            return false;
+        }
+        public bool EsParticipante()
+        {
+            if (this.Rol.IdRol == (int)Roles.Participante)
+                return true;
+            return false;
+        }
+        public bool EsOrganizador()
+        {
+            if (this.Rol.IdRol == (int)Roles.Organizador)
+                return true;
+            return false;
         }
         public int IdUsuario { get; set; }
         public Rol Rol { get; set; }
@@ -20,7 +45,7 @@ namespace dominio
         public string CorreoElectronico { get; set; }
         public string Contrasenia { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public Imagen Imagen {get; set;}
-        public bool Estado { get; set; } 
+        public Imagen Imagen { get; set; }
+        public bool Estado { get; set; }
     }
 }
