@@ -1,4 +1,6 @@
-﻿using System;
+﻿using accesorio;
+using dominio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +13,8 @@ namespace TPC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Administrador))
+                Response.Redirect("Default.aspx", false);
         }
     }
 }

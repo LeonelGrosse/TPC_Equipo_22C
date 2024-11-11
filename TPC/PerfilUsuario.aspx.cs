@@ -13,18 +13,6 @@ namespace TPC
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //si no es nulo
-            
-
-            if (Session["Email"] == null)
-            {
-                Response.Redirect("LogIn.aspx");
-            }
-            else {
-                string email = (Session["Email"].ToString());
-                CargarDatosUsuario(email);
-            }
-            //sino cargar login
         }
 
         public void CargarDatosUsuario(string email)

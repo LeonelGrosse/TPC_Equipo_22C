@@ -1,4 +1,5 @@
-﻿using dominio;
+﻿using accesorio;
+using dominio;
 using negocio;
 using System;
 using System.Collections.Generic;
@@ -15,18 +16,22 @@ namespace TPC
         private Evento NuevoEvento;
         private EventoNegocio EventoNegocio;
         private ProvinciaNegocio provinciaNegocio;
-        private CiudadNegocio ciudadNegocio;
-        List<Provincia> provincias;
-        List<Ciudad> ciudades;
+        private CiudadNegocio CiudadNegocio;
+        List<Provincia> Pronvicias;
+        List<Ciudad> Ciudades;
         static int contadorDisciplina = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Organizador))
+                Response.Redirect("Default.aspx", false);
+
             NuevoEvento = new Evento();
             EventoNegocio = new EventoNegocio();
             provinciaNegocio = new ProvinciaNegocio();
-            ciudadNegocio = new CiudadNegocio();
-            provincias = new List<Provincia>();
-            ciudades = new List<Ciudad>();
+            CiudadNegocio = new CiudadNegocio();
+            Pronvicias = new List<Provincia>();
+            Ciudades = new List<Ciudad>();
 
             if (!IsPostBack)
             {
@@ -52,7 +57,7 @@ namespace TPC
                         EventoNegocio.RegistrarDisciplina(NuevoEvento.IdEvento, disciplina);
                     }
 
-                    if(NuevoEvento.Imagen.URL != null)
+                    if (NuevoEvento.Imagen.URL != null)
                     {
                         ImagenNegocio imagenNegocio = new ImagenNegocio();
                         NuevoEvento.Imagen.ID = imagenNegocio.Insertar(NuevoEvento.Imagen.URL);
@@ -123,7 +128,7 @@ namespace TPC
                 NuevoEvento.CuposDisponibles = int.Parse(CuposDisponibles.Text);
 
                 NuevoEvento.EdadMinima = EdadMinEvento.Text == "" ? 0 : int.Parse(EdadMinEvento.Text);
-                NuevoEvento.EdadMaxima = EdadMaxEvento.Text  == "" ? 0 : int.Parse(EdadMaxEvento.Text);
+                NuevoEvento.EdadMaxima = EdadMaxEvento.Text == "" ? 0 : int.Parse(EdadMaxEvento.Text);
 
                 AgregarDisciplina(NuevoEvento, containerDisciplina, DistanciaDisciplina1, DropDownDisciplina);
                 AgregarDisciplina(NuevoEvento, containerDisciplina2, DistanciaDisciplina2, DropDownDisciplina2);
@@ -161,7 +166,7 @@ namespace TPC
         private void CargarDesplegables()
         {
             List<Provincia> provincias = provinciaNegocio.ObtenerProvincias();
-            List<Ciudad> ciudades = ciudadNegocio.ObtenerConStoredProcedure();
+            List<Ciudad> ciudades = CiudadNegocio.ObtenerConStoredProcedure();
             List<Disciplina> discplina = new DisciplinaNegocio().Listar();
 
             CargarDropDown(DropDownDisciplina, "IdDisciplina", "Descripcion", discplina);
