@@ -1,4 +1,6 @@
-﻿using System;
+﻿using dominio;
+using accesorio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,32 +11,48 @@ namespace TPC
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        private Usuario UsuarioActual;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Page is Default))
+            if (Seguridad.SesionActiva(Session["UsuarioActivo"]))
             {
-                nav_ul_admin.Visible = false;
-                nav_ul_organizador.Visible = false;
-                nav_ul_participante.Visible = false;
+                if (Seguridad.UsuarioLogueado.EsAdministrador())
+                    CargarVistaAministrador();
+
+                if (Seguridad.UsuarioLogueado.EsOrganizador())
+                    CargarVistaOrganizador();
+
+                if (Seguridad.UsuarioLogueado.EsParticipante())
+                    CargarVistaParticipante();
+
+                navbar_ul_accesos.Visible = false;
             }
             else
             {
-                navbar_ul_default.Visible = false;
+                CargarVistaDefault();
             }
+        }
 
-            /*if (UserControl == admin) oculto las pages que no necesite el admin
-            { 
-            }*
-            
-            //*if (UserControl == participante) oculto las pages que no necesite el participante
-            { 
-            }*
-            
-            //*if (UserControl == organizador) oculto las pages que no necesite el organizador
-            { 
-            }*/
-
-
+        private void CargarVistaDefault()
+        {
+            nav_ul_admin.Visible = false;
+            nav_ul_participante.Visible = false;
+            nav_ul_organizador.Visible = false;
+        }
+        private void CargarVistaOrganizador()
+        {
+            nav_ul_admin.Visible = false;
+            nav_ul_participante.Visible = false;
+        }
+        private void CargarVistaAministrador()
+        {
+            nav_ul_organizador.Visible = false;
+            nav_ul_participante.Visible = false;
+        }
+        private void CargarVistaParticipante()
+        {
+            nav_ul_admin.Visible = false;
+            nav_ul_organizador.Visible = false;
         }
     }
 }
