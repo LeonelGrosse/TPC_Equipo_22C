@@ -28,5 +28,10 @@ namespace TPC
         {
             return string.Join(", ", disciplinas.Select(d => d.Descripcion));
         }
+
+        protected void btnInscribirse_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DetallesEvento.aspx", false);
+        }
     }
 }

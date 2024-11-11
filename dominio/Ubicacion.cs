@@ -13,6 +13,7 @@ namespace dominio
             Ciudad = new Ciudad();
             Direccion = new Direccion();
         }
+        public int IDUbicacion { get; set; }
         public Ciudad Ciudad { get; set; }
         public Direccion Direccion { get; set; }
     }

@@ -107,7 +107,7 @@ namespace TPC
         }
 
         protected void BtnCancelarCarga_Click(object sender, EventArgs e)
-        {
+        {   
             LimpiarCampos();
         }
 

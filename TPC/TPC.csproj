@@ -94,7 +94,10 @@
     <Content Include="bin\TPC.pdb" />
     <Content Include="CargarEvento.aspx" />
     <Content Include="CargarResultados.aspx" />
+    <Content Include="Content\StyleSheet.css" />
+    <Content Include="CargarResultados.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="DetallesEvento.aspx" />
     <Content Include="Eventos.aspx" />
     <Content Include="FormularioRegistro.aspx" />
     <Content Include="Global.asax" />
@@ -110,7 +113,6 @@
     <Content Include="obj\Debug\TPC.pdb" />
     <Content Include="OrganizadorFormulario.aspx" />
     <Content Include="PerfilUsuario.aspx" />
-    <Content Include="StyleSheet.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +136,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DetallesEvento.aspx.cs">
+      <DependentUpon>DetallesEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DetallesEvento.aspx.designer.cs">
+      <DependentUpon>DetallesEvento.aspx</DependentUpon>
     </Compile>
     <Compile Include="Eventos.aspx.cs">
       <DependentUpon>Eventos.aspx</DependentUpon>

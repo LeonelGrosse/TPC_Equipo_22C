@@ -18,5 +18,10 @@ namespace TPC
         {
             Response.Redirect("OrganizadorFormulario.aspx", false);
         }
+
+        protected void BtnSerParticipante_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioRegistro.aspx", false);
+        }
     }
 }
