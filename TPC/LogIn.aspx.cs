@@ -129,6 +129,7 @@ namespace TPC
                     txtNuevaContrasenia.Visible = false;
                     txtRepeNuevaContrasenia.Visible = false;
                     btnRecuperar.Visible = false;
+
                 }
                 else { lblAvisoRecuperar.Text = "No se pudo actualizar la contraseña. Intente nuevamente"; }
             }
