@@ -43,7 +43,7 @@ Contrasena varchar(50) not null,
 Apellido varchar(50) not null,
 Nombre varchar(50) not null,
 DNI varchar(10) not null,
-CorreoElectronico varchar(50) not null,
+CorreoElectronico varchar(50) not null UNIQUE,
 FechaNacimiento date not null,
 Estado bit not null,
 )
@@ -79,7 +79,8 @@ Create Table Imagen_x_Evento(
 
 Create Table Disciplina_x_Evento(
 IDEvento bigint not null foreign key references Evento(IDEvento),
-IDDisciplina bigint not null foreign key references Disciplina(IDDisciplina)
+IDDisciplina bigint not null foreign key references Disciplina(IDDisciplina),
+Distancia DECIMAL NOT NULL CHECK(Distancia > 0)
 )
 
 Create Table Resultado_x_Evento(
@@ -269,16 +270,12 @@ INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (4, 3);
 INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (5, 4);
 
 -- Inserciones para la tabla Disciplina_x_Evento
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (1, 1); -- Circuito MDQ Aguas abiertas - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (2, 3); -- Maratón de la Ciudad - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (3, 2); -- Ciclismo Juvenil - Basketball
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (4, 1); -- Competencia de Natación - Natación
-INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina) VALUES (5, 2); -- Campeonato de Ciclismo - Ciclismo
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (1, 1, 10); -- Circuito MDQ Aguas abiertas - Natación
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (2, 3, 10); -- Maratón de la Ciudad - Natación
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (3, 2, 10); -- Ciclismo Juvenil - Basketball
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (4, 1, 10); -- Competencia de Natación - Natación
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (5, 2, 10); -- Campeonato de Ciclismo - Ciclismo
 GO
-
-CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
-AS
-SELECT * FROM Provincia
 
 GO
 CREATE PROCEDURE SP_OBTENER_CIUDADES
@@ -349,7 +346,3 @@ BEGIN CATCH
 END CATCH
 END
 
-GO
-
-ALTER TABLE Usuario
-    ADD CONSTRAINT PK_Unique_Email UNIQUE(CorreoElectronico)
