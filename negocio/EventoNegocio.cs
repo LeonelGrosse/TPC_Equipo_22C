@@ -18,9 +18,9 @@ namespace negocio
 
         public List<Evento> Listar()
         {
-            string select = "Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado, p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, i.ID, i.ImgURL ";
-            string from = "from Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ie On ie.IDEvento = e.IDEvento Inner join Imagen i On i.ID = ie.IDImagen Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'";
-            
+            string select = "Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado,p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, ixe.IDImagen, ixe.ImgURL";
+            string from = " FROM Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ixe On ixe.IDEvento = e.IDEvento Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'";
+
             try
             {
                 Datos.setConsulta(select + from);
@@ -40,7 +40,6 @@ namespace negocio
                     aux.Ubicacion.Direccion.ID = (short)Datos.Lector["ID"];
                     aux.Ubicacion.Direccion.Calle = (string)Datos.Lector["Calle"];
                     aux.Ubicacion.Direccion.Altura = (string)Datos.Lector["Altura"];
-                    //aux.Ubicacion.Ciudad.CodigoPostal = (string)Datos.Lector["CodigoPostal"];
 
                     aux.CostoInscripcion = (decimal)Datos.Lector["CostoInscripcion"];
 
@@ -49,9 +48,7 @@ namespace negocio
                     aux.CuposDisponibles = (int)Datos.Lector["CuposDisponibles"];
 
                     aux.Disciplina.Add(new Disciplina { Descripcion = (string)Datos.Lector["Disciplina"] });
-                    //aux.Disciplina[0].Descripcion= (string)Datos.Lector["Disciplina"];
 
-                    aux.Imagen = new Imagen();
                     if (!(Datos.Lector["ImgURL"] is DBNull))
                     {
                         aux.Imagen.URL = (string)Datos.Lector["ImgURL"];
@@ -63,7 +60,6 @@ namespace negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -149,7 +145,7 @@ namespace negocio
         }
 
         // Puedo actualizar cualquier tipo de valor, incluyendo el estado y hacer una baja lógica.
-        public bool ModificarEscalar<T>(string columna, int idEvento, T valor )
+        public bool ModificarEscalar<T>(string columna, int idEvento, T valor)
         {
             try
             {
