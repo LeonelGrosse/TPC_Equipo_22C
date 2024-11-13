@@ -5,56 +5,68 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <style>
-        .seccion-principal {
-            max-width: 1200px;
-            min-height: 100%;
-            font: 600 1.6rem Roboto;
+        /* body {
+            background: #262626;
+        }*/
+
+        .seccion-container {
+            padding-top: 8rem;
         }
 
-            .seccion-principal a {
-                text-decoration: none;
-                cursor: pointer;
+        .seccion-container-descripcion p {
+            padding: 0 2rem;
+            text-align: center;
+            font: 600 3rem Roboto;
+            color: #242424;
+        }
+
+        .section-buttons {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+            .section-buttons .container-button {
+                padding: 1.2rem;
             }
 
-        .section-buttons .btn {
-            padding: 1rem;
-            border-radius: 100vw;
-            color: white;
-        }
+            .section-buttons .btn {
+                padding: 1.5rem 1rem;
+                border-radius: 100vw;
+                font: 600 1rem Roboto;
+                color: white;
+            }
 
         .btn-organizador {
             background-color: #023373;
         }
 
+            .btn-organizador:hover {
+                background-color: #023373;
+                color: white !important;
+            }
+
         .btn-participante {
             background-color: #F23D3D;
         }
-        picture{
-            border-radius: 100vw;
-        }
 
-        picture img{
-            min-width: 1200px;
-            max-width: 100%;
-        }
+            .btn-participante:hover {
+                background-color: #F23D3D;
+                color: white !important;
+            }
     </style>
-
-    <section class="seccion-principal row mt-5">
-        <picture>
-            <img src="https://as1.ftcdn.net/v2/jpg/02/46/08/54/1000_F_246085469_hIVhuF98NapUOGaAniSAmpS5TQFqFybn.jpg" alt="" class="img-fluid" />
-        </picture>
-        <div>
-            <p>BAEventos es un sitio que busca conectar a las personas con todas las competencias deportivas en la Argentina.</p>
-        </div>
-        <div>
-            <p>No solo podras participar de los eventos sino tambien, registrarte como organizador y ser el creador de tu propia aventura.</p>
-        </div>
-        <div>
-            <p>Es tu oportunidad de <a href="FormularioRegistro.aspx" class="">registrarte</a> y comenzar a vivir tu experiencia deportiva al maximo nivel! </p>
+    <section class="seccion-container container d-flex flex-column">
+        <div class="seccion-container-descripcion">
+            <p>Encontra todos los eventos deportivos de resistencia en un solo lugar.</p>
         </div>
         <div class="section-buttons d-flex flex-row justify-content-center g-4">
-            <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" OnClick="BtnSerOrganizador_Click" runat="server" />
-            <asp:Button Text="Quiero ser participante" type="submit" ID="BtnSerParticipante" CssClass="btn btn-participante" OnClick="BtnSerParticipante_Click" runat="server" />
+            <div class="container-button">
+                <asp:Button Text="Quiero ser organizador" type="submit" ID="BtnSerOrganizador" CssClass="btn btn-organizador" OnClick="BtnSerOrganizador_Click" runat="server" />
+            </div>
+            <div class="container-button">
+                <asp:Button Text="Quiero ser participante" type="submit" ID="BtnSerParticipante" CssClass="btn btn-participante" OnClick="BtnSerParticipante_Click" runat="server" />
+            </div>
         </div>
     </section>
 
