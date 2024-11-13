@@ -31,11 +31,6 @@ IDRol smallint not null primary key identity(1,1),
 Rol varchar(50) not null
 )
 
-Create Table Imagen(
-ID smallint not null primary key identity(1,1),
-ImgURL nvarchar(999) not null
-)
-
 Create Table Usuario(
 IDUsuario bigint not null primary key identity(1,1),
 IDRol smallint not null foreign key references Rol(IDRol),
@@ -49,9 +44,9 @@ Estado bit not null,
 )
 
 Create Table Imagen_x_Usuario(
-    IDImagen smallint not null foreign key references Imagen(ID),
+    IDImagen smallint not null primary key identity(1,1),
     IDUsuario bigint not null foreign key references Usuario(IDUsuario),
-    primary key (IDImagen, IDUsuario)
+    ImgUrl nvarchar(max) not null,
 )
 
 Create Table Disciplina(
@@ -72,9 +67,9 @@ CuposDisponibles int not null,
 )
 
 Create Table Imagen_x_Evento(
-    IDImagen smallint not null foreign key references Imagen(ID),
-    IDEvento bigint not null foreign key references Evento(IDEvento)
-    primary key (IDImagen, IDEvento)
+    IDImagen smallint not null primary key identity(1,1),
+    IDEvento bigint not null foreign key references Evento(IDEvento),
+    ImgUrl nvarchar(max) not null,
 )
 
 Create Table Disciplina_x_Evento(
@@ -215,22 +210,12 @@ INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES
 INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES 
 (23, 'Río Grande', '9420');
 
--- Inserciones para la tabla Direccion
 INSERT INTO Direccion (Calle, Altura) VALUES ('Av. Libertador', '1000');
 
--- Inserciones para la tabla Rol
 INSERT INTO Rol (Rol) VALUES ('Administrador');
 INSERT INTO Rol (Rol) VALUES ('Usuario');
 INSERT INTO Rol (Rol) VALUES ('Organizador');
 
--- Inserciones para la tabla Imagen
-INSERT INTO Imagen (ImgURL) VALUES ('https://saltograndeextra.com/wp-content/uploads/2024/02/1-2.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('https://i0.wp.com/diariolujan.ar/wp-content/uploads/2021/12/POTRERILLOS-2019-largada-7.jpg?ssl=1');
-INSERT INTO Imagen (ImgURL) VALUES ('https://superiorcads.edu.ar/imgd/certificacion-running-maraton-fondo-medio-fondo-trail-2-019334.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('https://upload.wikimedia.org/wikipedia/commons/0/05/Military_cyclists_in_pace_line.jpg');
-INSERT INTO Imagen (ImgURL) VALUES ('https://cdn.shopify.com/s/files/1/0512/7641/5146/files/nadadores-competencia-lanzandose_1.jpg?v=1717258328');
-
--- Inserciones para la tabla Usuario
 INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
 VALUES (1, 'contrasena123', 'García', 'Juan', '12345678', 'juan@example.com', '1990-01-01', 1);
 INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
@@ -238,19 +223,16 @@ VALUES (2, 'password456', 'Pérez', 'Ana', '87654321', 'ana@example.com', '1992-
 INSERT INTO Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) 
 VALUES (3, 'password891', 'Rodriguez', 'Ana', '87333321', 'anarodriguez@example.com', '1992-06-02', 1);
 
--- Inserciones para la tabla Disciplina
 INSERT INTO Disciplina (Disciplina) VALUES ('Natación');
 INSERT INTO Disciplina (Disciplina) VALUES ('Ciclismo');
 INSERT INTO Disciplina (Disciplina) VALUES ('Atletismo');
 
--- Inserciones para la tabla Ubicacion
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
 
--- Inserciones para la tabla Evento
 INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
 VALUES ('Circuito MDQ Aguas abiertas', '2024-12-01', 1, 100.00, 'D', 16 , 30, 50);
 INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
@@ -262,20 +244,24 @@ VALUES ('Competencia de Natación', '2024-11-20', 1, 30.00, 'D', 10 , 30, 150);
 INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
 VALUES ('Campeonato de Ciclismo', '2024-10-30', 1, 40.00, 'D', 15 , 30, 120);
 
--- Inserciones para la tabla Imagen_x_Evento
-INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (1, 1);
-INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (2, 1);
-INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (3, 2);
-INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (4, 3);
-INSERT INTO Imagen_x_Evento (IDImagen, IDEvento) VALUES (5, 4);
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES (1,'https://saltograndeextra.com/wp-content/uploads/2024/02/1-2.jpg');
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES (2,'https://i0.wp.com/diariolujan.ar/wp-content/uploads/2021/12/POTRERILLOS-2019-largada-7.jpg?ssl=1');
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES (3,'https://superiorcads.edu.ar/imgd/certificacion-running-maraton-fondo-medio-fondo-trail-2-019334.jpg');
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES (4,'https://upload.wikimedia.org/wikipedia/commons/0/05/Military_cyclists_in_pace_line.jpg');
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES (5,'https://cdn.shopify.com/s/files/1/0512/7641/5146/files/nadadores-competencia-lanzandose_1.jpg?v=1717258328');
 
--- Inserciones para la tabla Disciplina_x_Evento
+INSERT INTO Imagen_x_Usuario(IDUsuario, ImgUrl)VALUES(5, 'https://imgs.search.brave.com/yrfIQwgHOwPGYdSdJGOk8vkuc49ghPKsdasBwCYk8aw/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wbHVz/LnVuc3BsYXNoLmNv/bS9wcmVtaXVtX3Bo/b3RvLTE2NjQyOTk5/NzE1ODItMTVjYTVk/MTUxZjQ2P2ZtPWpw/ZyZxPTYwJnc9MzAw/MCZpeGxpYj1yYi00/LjAuMyZpeGlkPU0z/d3hNakEzZkRCOE1I/eHpaV0Z5WTJoOE1Y/eDhkMjl0WVc0bE1q/QnlkVzV1YVc1bmZH/VnVmREI4ZkRCOGZI/d3c.jpeg')
+
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (1, 1, 10); -- Circuito MDQ Aguas abiertas - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (2, 3, 10); -- Maratón de la Ciudad - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (3, 2, 10); -- Ciclismo Juvenil - Basketball
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (4, 1, 10); -- Competencia de Natación - Natación
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (5, 2, 10); -- Campeonato de Ciclismo - Ciclismo
 GO
+
+CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
+AS
+SELECT * FROM Provincia
 
 GO
 CREATE PROCEDURE SP_OBTENER_CIUDADES
@@ -346,3 +332,50 @@ BEGIN CATCH
 END CATCH
 END
 
+GO
+
+CREATE OR ALTER PROCEDURE SP_OBTENER_REGISTRO_USUARIO(
+    @EMAIL VARCHAR(50), 
+    @PASSWORD VARCHAR(50)
+)
+AS BEGIN
+    BEGIN TRY
+        SELECT 
+            U.IDUsuario, 
+            U.IDRol, 
+            U.Contrasena, 
+            U.Apellido, 
+            U.Nombre, 
+            U.DNI, 
+            U.CorreoElectronico, 
+            U.FechaNacimiento, 
+            U.Estado,
+            IxU.IDImagen,
+            IxU.ImgURL
+            FROM Usuario AS U
+            LEFT JOIN Imagen_x_Usuario AS IxU
+            ON U.IDUsuario = IxU.IDUsuario
+            WHERE U.CorreoElectronico = @EMAIL AND U.Contrasena = @PASSWORD
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+    END CATCH
+END
+
+GO
+
+CREATE PROCEDURE SP_ACTUALIZAR_USUARIO(@NOMBRE VARCHAR(50), @APELLIDO VARCHAR(50), @EMAIL VARCHAR(50), @PASSWORD VARCHAR(50))
+AS BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION
+
+        IF(@@TRANCOUNT > 0) BEGIN
+            COMMIT TRANSACTION
+        END
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+        IF(@@TRANCOUNT > 0)
+            ROLLBACK TRANSACTION
+    END CATCH
+END 
