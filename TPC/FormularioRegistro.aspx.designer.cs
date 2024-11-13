@@ -177,6 +177,42 @@ namespace TPC
         protected global::System.Web.UI.WebControls.Label lblAvisoContrasenias;
 
         /// <summary>
+        /// Control lblImagenRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblImagenRegistro;
+
+        /// <summary>
+        /// Control inputGroupFile.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload inputGroupFile;
+
+        /// <summary>
+        /// Control btnCargarImagen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCargarImagen;
+
+        /// <summary>
+        /// Control imgRegistro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgRegistro;
+
+        /// <summary>
         /// Control btnEnviar.
         /// </summary>
         /// <remarks>

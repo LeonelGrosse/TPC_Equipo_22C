@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -91,6 +92,8 @@ namespace TPC
             }
             else {lblAvisoContrasenias.Visible = false; usuario.Contrasenia = txtContraseniaRegistro.Text;}
 
+            ///FALTA CARGAR IMAGEN A DB
+
             usuario.Rol.IdRol = 3;
 
             // se agrega usuario validado (rol de usuario)
@@ -102,6 +105,29 @@ namespace TPC
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Default.aspx");
+        }
+
+        protected void btnCargarImagen_Click(object sender, EventArgs e)
+        {
+            if (inputGroupFile.HasFile)
+            {
+               
+                string fileName = Path.GetFileName(inputGroupFile.PostedFile.FileName);
+                string filePath = Server.MapPath("~/temp/") + fileName;
+
+               
+                if (!Directory.Exists(Server.MapPath("~/temp/")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/temp/"));
+                }
+
+                
+                inputGroupFile.SaveAs(filePath);
+
+                
+                imgRegistro.ImageUrl = "~/temp/" + fileName;
+            }
+            
         }
     }
 }
