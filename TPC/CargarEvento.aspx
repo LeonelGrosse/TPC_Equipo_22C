@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <style>
-        .row {
+        .container-page {
             padding-left: 0;
             padding-right: 0;
             margin-left: 0;
@@ -31,33 +31,24 @@
         label {
             font-weight: 600;
         }
-
-        .RequiredMessage {
-            font-style: italic;
-            padding: 0;
-            margin: 0;
-            margin: 0;
-            font-size: 14px;
-            color: red;
-        }
     </style>
 
-    <div class="d-flex flex-column container container-page m-4">
+    <div class="d-flex flex-column container-page m-4">
         <h1 class="w-100">Registrar nuevo evento</h1>
-        <div class="row d-flex w-100 container-form p-4 col-6 border border-dark border-opacity-75  border-4 rounded-4">
+        <div class="container-form row d-flex w-100 p-4 border border-dark border-opacity-75 border-4 rounded-4">
 
-            <div class="col-6">
+            <div class="col-8">
                 <div class="row">
                     <div class="col-6">
                         <label for="NombreEvento" class="form-label">Nombre</label>
-                        <asp:TextBox type="text" ID="NombreEvento" CssClass="form-control" placeholder="Ingrese el nombre" runat="server"/>
+                        <asp:TextBox type="text" ID="NombreEvento" CssClass="form-control" placeholder="Ingrese el nombre" runat="server" />
                         <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="NombreEvento" Display="Dynamic" runat="server" />
                         <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^(?=.*[A-Za-z])[A-Za-z0-9]+$" ErrorMessage="*Solo letras y números." ControlToValidate="NombreEvento" Display="Dynamic" runat="server" />
                     </div>
                     <div class="col-6">
                         <label for="FechaEvento" class="form-label">Fecha</label>
                         <asp:TextBox type="Date" ID="FechaEvento" CssClass="form-control" placeholder="Ingres la fecha" runat="server" />
-                        <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="FechaEvento" runat="server" />
+                        <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="FechaEvento" Display="Dynamic" runat="server" />
                     </div>
                 </div>
 
@@ -104,7 +95,7 @@
                         <label for="CuposDisponibles" class="form-label">Cupos disponibles</label>
                         <asp:TextBox type="Text" ID="CuposDisponibles" CssClass="form-control" placeholder="Ingrese los cupos disponibles" runat="server" />
                         <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="CuposDisponibles" Display="Dynamic" runat="server" />
-                         <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="CuposDisponibles" Display="Dynamic" runat="server" />
+                        <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="CuposDisponibles" Display="Dynamic" runat="server" />
                     </div>
                 </div>
 
@@ -124,7 +115,7 @@
                 <div class="row">
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <div id="containerDisciplina" class="row" runat="server">
+                            <div id="containerDisciplina" class="row container-disciplina d-flex align-items-center" runat="server">
                                 <div class="col-6">
                                     <label for="Disciplina1" class="form-label">Disciplinas</label>
                                     <asp:DropDownList ID="DropDownDisciplina" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
@@ -133,48 +124,49 @@
                                 <div class="col-5">
                                     <label for="DistanciaDisciplina1" class="form-label">Distancia</label>
                                     <asp:TextBox type="Text" ID="DistanciaDisciplina1" CssClass="form-control" placeholder="Distancia" runat="server" />
-                                    <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina1" Display="Dynamic" runat="server" />
-                                    <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina1" Display="Dynamic" runat="server" />
                                 </div>
-                                <div class="col-1 d-flex justify-content-center align-items-center">
+                                <div class="col-1 d-flex flex-column justify-content-center align-items-center">
+                                    <label for="BtnAgregarDisciplina" class="form-label">Agregar</label>
                                     <asp:LinkButton Text="text" ID="BtnAgregarDisciplina" CssClass="text-dark" OnClick="BtnAgregarDisciplina_Click" runat="server">
                                         <i class="bi bi-plus-circle fs-3"></i>
                                     </asp:LinkButton>
                                 </div>
+                                <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina1" Display="Dynamic" runat="server" />
+                                <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina1" Display="Dynamic" runat="server" />
                             </div>
 
-                            <div id="containerDisciplina2" class="row" visible="false" runat="server">
+                            <div id="containerDisciplina2" class="row container-disciplina d-flex align-items-center" visible="false" runat="server">
                                 <div class="col-6">
                                     <asp:DropDownList ID="DropDownDisciplina2" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-5">
                                     <asp:TextBox type="Text" ID="DistanciaDisciplina2" CssClass="form-control" placeholder="Distancia" runat="server" />
-                                    <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina2" Display="Dynamic" runat="server" />
-                                     <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina2" Display="Dynamic" runat="server" />
                                 </div>
-                                <div class="col-1 d-flex justify-content-center align-items-start">
+                                <div class="col-1 d-flex flex-column justify-content-center align-items-center">
                                     <asp:LinkButton Text="text" ID="btnQuitarDisciplina2" CssClass="text-danger" OnClick="btnQuitarDisciplina2_Click" runat="server">
                                           <i class="bi bi-dash-circle fs-3"></i>
                                     </asp:LinkButton>
                                 </div>
+                                <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina2" Display="Dynamic" runat="server" />
+                                <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina2" Display="Dynamic" runat="server" />
                             </div>
 
-                            <div id="containerDisciplina3" class="row" visible="false" runat="server">
+                            <div id="containerDisciplina3" class="row container-disciplina d-flex align-items-center" visible="false" runat="server">
                                 <div class="col-6">
                                     <asp:DropDownList ID="DropDownDisciplina3" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col-5">
                                     <asp:TextBox type="Text" ID="DistanciaDisciplina3" CssClass="form-control" placeholder="Distancia" runat="server" />
-                                    <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina3" Display="Dynamic" runat="server" />
-                                    <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina3" Display="Dynamic" runat="server" />
                                 </div>
-                                <div class="col-1 d-flex justify-content-center align-items-start">
+                                <div class="col-1 d-flex flex-column justify-content-center align-items-center">
                                     <asp:LinkButton Text="text" ID="btnQuitarDisciplina3" CssClass="text-danger" OnClick="btnQuitarDisciplina3_Click" runat="server">
                                         <i class="bi bi-dash-circle fs-3"></i>
                                     </asp:LinkButton>
                                 </div>
+                                <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="DistanciaDisciplina3" Display="Dynamic" runat="server" />
+                                <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^\d+$" ErrorMessage="*Solo valores númericos." ControlToValidate="DistanciaDisciplina3" Display="Dynamic" runat="server" />
                             </div>
                         </ContentTemplate>
                     </asp:UpdatePanel>
@@ -182,7 +174,7 @@
 
             </div>
 
-            <div class="col-6 d-flex flex-column">
+            <div class="col-4 d-flex flex-column">
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
                         <div class="col-12 d-flex flex-column">
