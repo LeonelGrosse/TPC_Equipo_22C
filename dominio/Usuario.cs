@@ -17,6 +17,7 @@ namespace dominio
         public Usuario()
         {
             this.Rol = new Rol();
+            this.Imagen = new Imagen();
         }
 
         public bool EsAdministrador()
