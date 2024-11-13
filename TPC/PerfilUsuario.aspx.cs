@@ -1,11 +1,13 @@
 ﻿using dominio;
 using negocio;
+using accesorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TPC
 {
@@ -86,12 +88,16 @@ namespace TPC
             txtPassword.ReadOnly = estado;
         }
 
-            txtNombreUsuario.Text = " " + usuario.Nombre + " " +usuario.Apellido;
-            txtDniUsuario.Text = " " + usuario.Dni;
-            txtEmailUsuario.Text = " " + usuario.CorreoElectronico;
-            txtFechaNacimiento.Text = " " + usuario.FechaNacimiento.ToString("d"); // Fecha corta
-            txtRolUsuario.Text = " " + usuario.Rol.Descripcion;
-            txtPasswordUsuario.Text = " " + usuario.Contrasenia;
+        private void AgregarValidacionesInputs()
+        {
+            Validator.CampoVacio("txtNombre", "*El campo requiere un valor.", containerControlNombre);
+            Validator.CampoVacio("txtApellido", "*El campo requiere un valor.", containerControlApellido);
+            Validator.CampoVacio("txtEmail", "*El campo requiere un valor.", containerControlEmail);
+            Validator.CampoVacio("txtPassword", "*El campo requiere un valor.", containerControlPassword);
+            Validator.ExpresionRegular("txtNombre", "*Solo letras.", containerControlNombre, @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,254}$");
+            Validator.ExpresionRegular("txtApellido", "*Solo letras.", containerControlApellido, @"^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,254}$");
+            Validator.ExpresionRegular("txtEmail", "*Formato de email incorrecto. Ejemplo: usuario@proveedor.com.", containerControlEmail, @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$");
+            Validator.ExpresionRegular("txtPassword", "*Al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.", containerControlPassword, @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$");
         }
     }
 }
