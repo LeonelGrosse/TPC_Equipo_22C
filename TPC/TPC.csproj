@@ -104,7 +104,6 @@
     <Content Include="ListadoEventos.aspx" />
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="LogIn.aspx" />
-    <Content Include="Media\12204020-hd_1920_1080_25fps.mp4" />
     <Content Include="MisEventos.aspx" />
     <Content Include="MisInscripciones.aspx" />
     <Content Include="MisResultados.aspx" />
