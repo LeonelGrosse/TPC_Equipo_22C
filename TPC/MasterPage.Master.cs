@@ -11,7 +11,6 @@ namespace TPC
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
-        private Usuario UsuarioActual;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Seguridad.SesionActiva(Session["UsuarioActivo"]))
