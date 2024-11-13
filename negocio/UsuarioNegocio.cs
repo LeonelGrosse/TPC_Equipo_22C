@@ -101,6 +101,24 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
+        public bool ModificarEscalar<T>(string columna, int idUsuario, T valor)
+        {
+            try
+            {
+                DB.LimpiarComando();
+                DB.setConsulta($"UPDATE Usuario SET {columna} = '{valor}' WHERE IDUsuario = @idUsuario");
+                DB.setParametro("@idUsuario", idUsuario);
+                return DB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
 
         public void eliminar(int id)
         {
@@ -230,9 +248,10 @@ namespace negocio
         {
             try
             {
-                DB.setConsulta("SELECT IDUsuario, IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado FROM USUARIO WHERE CorreoElectronico = @correo AND Contrasena = @password");
-                DB.setParametro("@correo", correo);
-                DB.setParametro("@password", password);
+                DB.LimpiarComando();
+                DB.SetStoredProcedure("SP_OBTENER_REGISTRO_USUARIO");
+                DB.setParametro("@EMAIL", correo);
+                DB.setParametro("@PASSWORD", password);
                 DB.ejecutarLectura();
 
                 if (DB.Lector.Read())
@@ -245,6 +264,8 @@ namespace negocio
                     usuario.FechaNacimiento = (DateTime)DB.Lector["FechaNacimiento"];
                     usuario.Contrasenia = password;
                     usuario.Rol.IdRol = (int)(Int16)DB.Lector["IDRol"];
+                    usuario.Imagen.ID = !DB.Lector.IsDBNull(DB.Lector.GetOrdinal("IDImagen")) ? (int)(Int16)DB.Lector["IDImagen"] : 0;
+                    usuario.Imagen.URL = usuario.Imagen.ID != 0 ? (string)DB.Lector["ImgURL"] : "";
                     return true;
                 }
                 return false;
@@ -261,7 +282,6 @@ namespace negocio
 
         public bool checkRecuperacion(string email, string dni)
         {
-
             try
             {
                 DB.setConsulta("select CorreoElectronico from Usuario where CorreoElectronico = @email"); /*comparar @email con email de DB*/
@@ -270,11 +290,8 @@ namespace negocio
 
                 if (DB.Lector.Read())
                 {
-
                     if (!DB.Lector.IsDBNull(DB.Lector.GetOrdinal("CorreoElectronico")))
-
                     {
-
                         try
                         {
                             DB.cerrarConexion();
@@ -295,7 +312,6 @@ namespace negocio
                         }
                         catch (Exception ex)
                         {
-
                             Console.WriteLine("Error al verificar el Email: " + ex.Message);
                         }
                     }
@@ -314,7 +330,6 @@ namespace negocio
 
         public bool RecuperarContrasenia(string pass, string email)
         {
-
             try
             {
                 DB.setConsulta("UPDATE usuario SET contrasena = @pass WHERE CorreoElectronico = @email ");
