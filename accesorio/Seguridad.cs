@@ -23,7 +23,7 @@ namespace accesorio
         {
             UsuarioLogueado = (usuario != null ? (Usuario)usuario : null);
 
-            if (UsuarioLogueado != null && UsuarioLogueado.Rol.IdRol != (int)rol)
+            if (UsuarioLogueado == null || UsuarioLogueado.Rol.IdRol != (int)rol)
                 return true;
 
             return false;
