@@ -14,29 +14,14 @@ namespace negocio
         {
             Datos = new AccesoDatos();
         }
-
-        public int Insertar(string URL)
+        public int AsociarEvento(int IDEvento, string url)
         {
             try
             {
-                Datos.setConsulta("INSERT INTO Imagen(ImgUrl)VALUES(@URL)SELECT SCOPE_IDENTITY()");
-                Datos.setParametro("@URL", URL);
-                return Datos.ejecutarEscalar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        public bool AsociarEvento(int IDImagen, int IDEvento)
-        {
-            try
-            {
-                Datos.setConsulta("INSERT INTO Imagen_x_Evento(IDImagen, IDEvento)values(@IDImagen, @IDEvento)");
-                Datos.setParametro("@IDImagen", IDImagen);
+                Datos.setConsulta("INSERT INTO Imagen_x_Evento(IDEvento, ImgUrl)values(@IDEvento, @ImgUrl)");
                 Datos.setParametro("@IDEvento", IDEvento);
-                return Datos.EjecutarAccion();
+                Datos.setParametro("@ImgUrl", url);
+                return Datos.ejecutarEscalar();
             }
             catch (Exception ex)
             {
