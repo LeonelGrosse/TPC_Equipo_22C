@@ -57,12 +57,10 @@ namespace TPC
                         EventoNegocio.RegistrarDisciplina(NuevoEvento.IdEvento, disciplina);
                     }
 
-                    if (NuevoEvento.Imagen.URL != null)
+                    if (NuevoEvento.Imagen.URL != null && NuevoEvento.Imagen.URL != "")
                     {
                         ImagenNegocio imagenNegocio = new ImagenNegocio();
-                        NuevoEvento.Imagen.ID = imagenNegocio.Insertar(NuevoEvento.Imagen.URL);
-
-                        imagenNegocio.AsociarEvento(NuevoEvento.Imagen.ID, NuevoEvento.IdEvento);
+                        NuevoEvento.Imagen.ID = imagenNegocio.AsociarEvento(NuevoEvento.IdEvento,NuevoEvento.Imagen.URL);
                     }
                 }
             }
