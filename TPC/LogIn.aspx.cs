@@ -24,7 +24,9 @@ namespace TPC
         {
             UsuarioNegocio negocio = new UsuarioNegocio();
 
-            bool LoginOK = negocio.checkLogin(txtUsuario.Text, txtContrasenia.Text);
+            string passwordHashed = Encrypt.GetSHA256(txtContrasenia.Text);
+
+            bool LoginOK = negocio.checkLogin(txtUsuario.Text, passwordHashed);
 
             if (!(LoginOK == true))
             {
@@ -35,7 +37,7 @@ namespace TPC
             }
 
             Usuario usuarioActivo = new Usuario();
-            negocio.Login(usuarioActivo, txtUsuario.Text, txtContrasenia.Text);
+            negocio.Login(usuarioActivo, txtUsuario.Text, passwordHashed);
             Session.Add("UsuarioActivo", usuarioActivo);
 
             if (usuarioActivo.EsAdministrador())
