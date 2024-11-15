@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -8,6 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using dominio;
 using negocio;
+using accesorio;
 
 namespace TPC
 {
@@ -90,7 +92,11 @@ namespace TPC
                 lblAvisoContrasenias.Visible = true;
                 return;
             }
-            else {lblAvisoContrasenias.Visible = false; usuario.Contrasenia = txtContraseniaRegistro.Text;}
+            else 
+            {
+                lblAvisoContrasenias.Visible = false; 
+                usuario.Contrasenia = Encrypt.GetSHA256(txtContraseniaRegistro.Text);
+            }
 
             ///FALTA CARGAR IMAGEN A DB
 
