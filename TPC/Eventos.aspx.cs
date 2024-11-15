@@ -31,7 +31,8 @@ namespace TPC
 
         protected void btnInscribirse_Click(object sender, EventArgs e)
         {
-            Response.Redirect("DetallesEvento.aspx", false);
+            string idEvento = ((Button)sender).CommandArgument;
+            Response.Redirect("DetallesEvento.aspx?IdEvento=" + idEvento, false);
         }
     }
 }

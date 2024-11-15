@@ -24,6 +24,9 @@
                                 <div class="card-body">
                                     <h5 class="card-title"><%#Eval("Nombre") %></h5>
                                     <p class="card-text">Fecha: <%#Eval("FechaEvento") %></p>
+                                    <p class="card-text">Provincia: <%#Eval("Ubicacion.Ciudad.Provincia.Nombre") %></p>
+                                    <p class="card-text">Ciudad: <%#Eval("Ubicacion.Ciudad.Nombre") %></p>
+                                    <p class="card-text">Direccion: <%#Eval("Ubicacion.Direccion.Calle") %></p>
                                     <p class="card-text">Costo: <%#Eval("CostoInscripcion") %></p>
                                     <p class="card-text">Disciplina: <%# ObtenerDescripciones((List<dominio.Disciplina>)Eval("Disciplina")) %></p>
                                     <p class="card-text">Edad Minima: <%#Eval("EdadMinima") %></p>
@@ -31,7 +34,7 @@
                             </div>
                             <div class="col-md-4 d-flex justify-content-end">
                                 <p class="card-text">Cupos: <%#Eval("CuposDisponibles") %></p>
-                                <asp:Button ID="btnInscribirse" runat="server" Text="Ver Detalles" Onclick="btnInscribirse_Click" CssClass="btn btn-primary align-self-end" />
+                                <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" Onclick="btnInscribirse_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-primary align-self-end" />
                             </div>
                         </div>
                     </div>

@@ -211,6 +211,15 @@ INSERT INTO Ciudad (IDProvincia, Nombre, CodigoPostal) VALUES
 (23, 'Río Grande', '9420');
 
 INSERT INTO Direccion (Calle, Altura) VALUES ('Av. Libertador', '1000');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Calle 9 de Julio', '4567');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Calle Falsa', '1010');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Boulevard Constitución', '789');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Avenida Santa Fe', '345');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Calle San Martín', '222');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Avenida Corrientes', '100');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Calle Florida', '555');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Calle Moreno', '6789');
+INSERT INTO Direccion (Calle, Altura) VALUES ('Avenida de Mayo', '321');
 
 INSERT INTO Rol (Rol) VALUES ('Administrador');
 INSERT INTO Rol (Rol) VALUES ('Usuario');
@@ -228,10 +237,10 @@ INSERT INTO Disciplina (Disciplina) VALUES ('Ciclismo');
 INSERT INTO Disciplina (Disciplina) VALUES ('Atletismo');
 
 INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1);  
-INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (1, 1); 
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (2, 2);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (3, 3);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (4, 4);  
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES (5, 5); 
 
 INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
 VALUES ('Circuito MDQ Aguas abiertas', '2024-12-01', 1, 100.00, 'D', 16 , 30, 50);
