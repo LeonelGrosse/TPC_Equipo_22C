@@ -78,6 +78,12 @@ IDDisciplina bigint not null foreign key references Disciplina(IDDisciplina),
 Distancia DECIMAL NOT NULL CHECK(Distancia > 0)
 )
 
+Create Table Usuario_x_Evento(
+    IDEvento bigint not null foreign key references Evento(IDEvento),
+    IDUsuario bigint not null foreign key references Usuario(IDUsuario),
+    primary key (IDEvento, IDUsuario)
+)
+
 Create Table Resultado_x_Evento(
 IDEvento bigint not null foreign key references Evento(IDEvento),
 IDDisciplina bigint not null foreign key references Disciplina(IDDisciplina),
@@ -368,5 +374,20 @@ AS BEGIN
     END TRY
     BEGIN CATCH
         PRINT ERROR_MESSAGE();
+    END CATCH
+END
+GO
+
+Create TRIGGER tr_InscripcionEvento ON Usuario_x_Evento
+AFTER INSERT
+AS BEGIN
+    BEGIN TRY
+        BEGIN TRANSACTION
+            UPDATE Evento SET CuposDisponibles = CuposDisponibles - 1 WHERE IDEvento = (Select IDEvento from inserted)
+        COMMIT TRANSACTION
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE();
+        ROLLBACK TRANSACTION
     END CATCH
 END

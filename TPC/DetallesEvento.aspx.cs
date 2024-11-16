@@ -16,10 +16,11 @@ namespace TPC
         EventoNegocio eventoNegocio = new EventoNegocio();
         Evento evento = new Evento();
         DisciplinaNegocio disciplinaNegocio = new DisciplinaNegocio();
+        Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
-            //    Response.Redirect("Default.aspx", false);
+            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
+                Response.Redirect("Default.aspx", false);
 
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
             evento=eventoNegocio.BuscarPorID(idEvento);
@@ -48,7 +49,11 @@ namespace TPC
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-
+            int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
+            usuario = (Usuario)Session["UsuarioActivo"];
+            int idUsuario = usuario.IdUsuario;
+            eventoNegocio.InscribirseEvento(idEvento, idUsuario);
+            Response.Redirect("InscripcionExitosa.aspx", false);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

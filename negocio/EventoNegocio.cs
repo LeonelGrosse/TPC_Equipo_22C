@@ -252,5 +252,25 @@ namespace negocio
                 Datos.cerrarConexion();
             }
         }
+
+        public void InscribirseEvento(int idEvento, int idUsuario)
+        {
+            try
+            {
+                Datos.setConsulta("INSERT INTO Usuario_x_Evento (IDEvento, IDUsuario) VALUES (@idEvento, @idUsuario)");
+                Datos.setParametro("@idEvento", idEvento);
+                Datos.setParametro("@idUsuario", idUsuario);
+                Datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
     }
 }
