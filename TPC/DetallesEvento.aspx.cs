@@ -16,6 +16,7 @@ namespace TPC
         EventoNegocio eventoNegocio = new EventoNegocio();
         Evento evento = new Evento();
         DisciplinaNegocio disciplinaNegocio = new DisciplinaNegocio();
+        List<Disciplina> disciplinas = new List<Disciplina>();
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,16 +25,13 @@ namespace TPC
 
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
             evento=eventoNegocio.BuscarPorID(idEvento);
-            disciplinaNegocio.Listar();
+            disciplinas=disciplinaNegocio.ListarPorEvento(idEvento);
             if (!IsPostBack)
             {
                 CargarDatosEvento();
             }
         }
-        public string ObtenerDescripciones(List<Disciplina> disciplinas)
-        {
-            return string.Join(", ", disciplinas.Select(d => d.Descripcion));
-        }
+
         public void CargarDatosEvento()
         {
             txtNombre.Text = evento.Nombre;
@@ -45,6 +43,7 @@ namespace TPC
             txtCosto.Text = evento.CostoInscripcion.ToString();
             txtCupos.Text = evento.CuposDisponibles.ToString();
             txtEdadMinima.Text = evento.EdadMinima.ToString();
+            txtDisciplina.Text = disciplinas[0].Descripcion.ToString();
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
