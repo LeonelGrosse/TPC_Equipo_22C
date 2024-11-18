@@ -1,7 +1,7 @@
 Create Database BAEventos
-
+GO
 Use BAEventos
-
+GO
 Create Table Provincia(
 ID bigint not null primary key identity(1,1),
 Nombre varchar(50) not null
@@ -349,7 +349,7 @@ END
 
 GO
 
-CREATE OR ALTER PROCEDURE SP_OBTENER_REGISTRO_USUARIO(
+CREATE PROCEDURE SP_OBTENER_REGISTRO_USUARIO(
     @EMAIL VARCHAR(50), 
     @PASSWORD VARCHAR(256)
 )
@@ -391,7 +391,6 @@ AS BEGIN
         ROLLBACK TRANSACTION
     END CATCH
 END
-END
 
 GO
 
@@ -432,11 +431,11 @@ AS BEGIN
     INNER JOIN 
         Direccion AS D
         ON D.ID = U.IDDireccion
-    INNER JOIN 
+    LEFT JOIN 
         Imagen_x_Evento AS IxE
         ON IxE.IDEvento = E.IDEvento
 
-    WHERE UxE.IDUsuario = 14
+    WHERE UxE.IDUsuario = @IDUSUARIO
 
     END TRY
 
@@ -453,10 +452,11 @@ AS BEGIN
     BEGIN TRY
         DECLARE @IDEVENTO BIGINT
         DECLARE @ESTADO CHAR(1)
-        SELECT @IDEVENTO = D.IDEvento, @ESTADO = E.Estado FROM DELETED AS D INNER JOIN Evento AS E ON E.IDEvento = D.IDEvento
+        DECLARE @CUPOS INT
+        SELECT @IDEVENTO = D.IDEvento, @ESTADO = E.Estado, @CUPOS = E.CuposDisponibles FROM DELETED AS D INNER JOIN Evento AS E ON E.IDEvento = D.IDEvento
 
         -- FALTA UN ESTADO PARA UN EVENTO SIN CUPOS
-        IF @ESTADO = 'C' 
+        IF @ESTADO = 'C' AND @CUPOS = 0
         BEGIN
             UPDATE Evento SET Estado = 'D' WHERE IDEvento = @IDEVENTO
         END
@@ -467,6 +467,67 @@ AS BEGIN
         PRINT ERROR_MESSAGE()
         IF(@@TRANCOUNT > 0)
             ROLLBACK TRANSACTION
+    END CATCH
+END
+
+GO
+
+CREATE PROCEDURE SP_LISTA_EVENTO
+AS BEGIN
+    BEGIN TRY
+        Select 
+            E.IDEvento, 
+            E.Nombre, 
+            E.FechaEvento, 
+            E.CostoInscripcion, 
+            E.EdadMinima, 
+            E.EdadMaxima, 
+            E.CuposDisponibles, 
+            E.Estado,
+            P.ID as IDProvincia, 
+            P.Nombre as Provincia, 
+            C.IDCiudad, 
+            C.Nombre as Ciudad, 
+            Dir.ID, 
+            Dir.Calle, 
+            Dir.Altura,  
+            IxE.IDImagen, 
+            IxE.ImgURL
+        FROM 
+            Evento AS E
+        left join 
+            Imagen_x_Evento AS IxE On IxE.IDEvento = E.IDEvento 
+        Inner join 
+            Ubicacion AS U On U.IDUbicacion = E.Ubicacion 
+        Inner join 
+            Ciudad AS C On C.IDCiudad = u.IDCiudad 
+        Inner join 
+        Provincia AS P On P.ID = C.IDProvincia 
+        Inner join
+            Direccion AS Dir On Dir.ID = U.IDDireccion 
+        Where E.Estado = 'D'
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+
+GO
+
+CREATE PROCEDURE SP_DISCPLINAS_X_EVENTO(@IDEVENTO BIGINT)
+AS BEGIN
+    BEGIN TRY
+        SELECT 
+            DxE.IDDisciplina, 
+            D.Disciplina, 
+            DxE.Distancia 
+        FROM Disciplina_x_Evento AS DxE
+        INNER JOIN Disciplina AS D
+        ON D.IDDisciplina = DxE.IDDisciplina
+        WHERE IDEvento = @IDEVENTO 
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
     END CATCH
 END
 
