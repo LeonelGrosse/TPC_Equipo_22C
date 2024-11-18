@@ -349,6 +349,26 @@ namespace negocio
             return false;
         }
 
+        public void cargarImagen(Usuario usuario)
+        {
+            try
+            {
+                DB.setConsulta("update Imagen_x_Usuario set ImgUrl = @urlimagen where IDUsuario = @id");
+                DB.setParametro("@urlimagen", usuario.Imagen.URL);
+                DB.setParametro("@id", usuario.IdUsuario);
+                DB.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
+
         public List<Evento> ListarEventos(int idUsuario)
         {
             try
