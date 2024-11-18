@@ -15,6 +15,42 @@ namespace TPC
     {
 
         /// <summary>
+        /// DropDownFiltroFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroFecha;
+
+        /// <summary>
+        /// DropDownFiltroProvincias control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroProvincias;
+
+        /// <summary>
+        /// DropDownFiltroCosto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroCosto;
+
+        /// <summary>
+        /// DropDownFiltroDisciplina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroDisciplina;
+
+        /// <summary>
         /// repRepetidor control.
         /// </summary>
         /// <remarks>

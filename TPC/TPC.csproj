@@ -135,6 +135,9 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="temp\cara portadas.png" />
+    <Content Include="temp\matiPITO.jpg" />
+    <Content Include="temp\yodafernet.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

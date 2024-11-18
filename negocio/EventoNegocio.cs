@@ -51,6 +51,7 @@ namespace negocio
                     {
                         aux.Imagen.URL = (string)Datos.Lector["ImgURL"];
                     }
+                    else aux.Imagen.URL = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png";
 
                     Lista.Add(aux);
                 }

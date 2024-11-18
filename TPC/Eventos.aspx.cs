@@ -31,8 +31,18 @@ namespace TPC
 
         protected void btnInscribirse_Click(object sender, EventArgs e)
         {
+            if (Session["UsuarioActivo"] != null)
+            {
+                string idEvento = ((Button)sender).CommandArgument;
+                Response.Redirect("DetallesEvento.aspx?IdEvento=" + idEvento, false);
+            }
+            else Response.Redirect("Login.aspx", false);
+        }
+
+        protected void btnModificar_Click(object sender, EventArgs e)
+        {
             string idEvento = ((Button)sender).CommandArgument;
-            Response.Redirect("DetallesEvento.aspx?IdEvento=" + idEvento, false);
+            Response.Redirect("ModificarEvento.aspx?IdEvento=" + idEvento, false);
         }
     }
 }
