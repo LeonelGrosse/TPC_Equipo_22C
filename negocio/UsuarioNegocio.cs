@@ -348,5 +348,72 @@ namespace negocio
             }
             return false;
         }
+
+        public List<Evento> ListarEventos(int idUsuario)
+        {
+            try
+            {
+                List<Evento> listaEventos = new List<Evento>();
+
+                DB.SetStoredProcedure("OBTENER_EVENTOS_USUARIO");
+                DB.setParametro("@IDUSUARIO", idUsuario);
+
+                DB.ejecutarLectura();
+                while(DB.Lector.Read())
+                {
+                    Evento aux = new Evento();
+                    aux.IdEvento = (int)(Int64)DB.Lector["IDEvento"];
+                    aux.Nombre = (string)DB.Lector["Nombre"];
+                    aux.FechaEvento = (DateTime)DB.Lector["FechaEvento"];
+
+                    aux.Ubicacion = new Ubicacion();
+                    aux.Ubicacion.Ciudad.Nombre = (string)DB.Lector["NombreCiudad"];
+                    aux.Ubicacion.Ciudad.Provincia.Nombre = (string)DB.Lector["NombreProvincia"];
+                    aux.Ubicacion.Direccion.Calle = (string)DB.Lector["Calle"];
+                    aux.Ubicacion.Direccion.Altura = (string)DB.Lector["Altura"];
+                    aux.CostoInscripcion = Decimal.Round((decimal)DB.Lector["CostoInscripcion"]);
+                    aux.Estado = char.Parse(DB.Lector["Estado"].ToString());
+                    aux.EdadMinima = (int)(byte)DB.Lector["EdadMinima"];
+                    aux.EdadMaxima = (int)(byte)DB.Lector["EdadMaxima"];
+                    aux.CuposDisponibles = (int)DB.Lector["CuposDisponibles"];
+                    // Obtenerlas por separado
+                    // aux.Disciplina.Add(new Disciplina { Descripcion = (string)DB.Lector["Disciplina"] });
+
+                    if (!(DB.Lector["ImgUrl"] is DBNull))
+                        aux.Imagen.URL = (string)DB.Lector["ImgUrl"];
+
+                    listaEventos.Add(aux);
+                }
+
+                return listaEventos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
+
+        public bool CancelarInscripcion(int idEvento, int idUsuario)
+        {
+            try
+            {
+                DB.setConsulta($"DELETE FROM Usuario_x_Evento WHERE IDEvento = {idEvento} AND IDUsuario = {idUsuario}");
+                return DB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
     }
 }
