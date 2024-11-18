@@ -18,12 +18,9 @@ namespace negocio
 
         public List<Evento> Listar()
         {
-            string select = "Select e.IDEvento, e.Nombre, e.FechaEvento, e.CostoInscripcion, e.EdadMinima, e.CuposDisponibles, e.Estado,p.ID as IDProvincia, p.Nombre as Provincia, c.IDCiudad, c.Nombre as Ciudad, dire.ID, dire.Calle, dire.Altura,  d.IDDisciplina, d.Disciplina, ixe.IDImagen, ixe.ImgURL";
-            string from = " FROM Evento e Inner join Disciplina_x_Evento de On de.IDEvento = e.IDEvento Inner join Disciplina d On d.IDDisciplina = de.IDDisciplina Inner join Imagen_x_Evento ixe On ixe.IDEvento = e.IDEvento Inner join Ubicacion u On u.IDUbicacion = e.Ubicacion Inner join Ciudad c On c.IDCiudad = u.IDCiudad Inner join Provincia p On p.ID = c.IDProvincia Inner join Direccion dire On dire.ID = u.IDDireccion Where e.Estado = 'D'";
-
             try
             {
-                Datos.setConsulta(select + from);
+                Datos.SetStoredProcedure("SP_LISTA_EVENTO");
                 Datos.ejecutarLectura();
 
                 while (Datos.Lector.Read())
@@ -45,9 +42,10 @@ namespace negocio
 
                     aux.Estado = char.Parse(Datos.Lector["Estado"].ToString());
                     aux.EdadMinima = (int)(byte)Datos.Lector["EdadMinima"];
+                    aux.EdadMaxima = (int)(byte)Datos.Lector["EdadMaxima"];
                     aux.CuposDisponibles = (int)Datos.Lector["CuposDisponibles"];
 
-                    aux.Disciplina.Add(new Disciplina { Descripcion = (string)Datos.Lector["Disciplina"] });
+                    CargarDisciplinasDeEvento(aux);
 
                     if (!(Datos.Lector["ImgURL"] is DBNull))
                     {
@@ -65,6 +63,34 @@ namespace negocio
             finally
             {
                 Datos.cerrarConexion();
+            }
+        }
+
+        private void CargarDisciplinasDeEvento(Evento evento)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetStoredProcedure("SP_DISCPLINAS_X_EVENTO");
+                datos.setParametro("@IDEVENTO", evento.IdEvento);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Disciplina auxiliarDisciplina = new Disciplina();
+                    auxiliarDisciplina.IdDisciplina = (int)(Int64)datos.Lector["IDDisciplina"];
+                    auxiliarDisciplina.Descripcion = (string)datos.Lector["Disciplina"];
+                    auxiliarDisciplina.Distancia = (decimal)datos.Lector["Distancia"];
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
             }
         }
         public Evento BuscarPorID(int id)
