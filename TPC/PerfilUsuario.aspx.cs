@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace TPC
 {
@@ -38,7 +39,6 @@ namespace TPC
             txtDni.Text = usuario.Dni;
             txtEmail.Text = usuario.CorreoElectronico;
             txtFechaNacimiento.Text = usuario.FechaNacimiento.ToString("d"); // Fecha corta
-            txtPassword.Text = usuario.Contrasenia;
             if (usuario.Imagen.ID != 0)
                 UrlImagen.ImageUrl = usuario.Imagen.URL;
         }
@@ -67,8 +67,11 @@ namespace TPC
             if (txtEmail.Text != Seguridad.UsuarioLogueado.CorreoElectronico)
                 usuarioNegocio.ModificarEscalar("CorreoElectronico", Seguridad.UsuarioLogueado.IdUsuario, txtEmail.Text);
 
-            if (txtPassword.Text != Seguridad.UsuarioLogueado.Contrasenia)
+            if (Encrypt.GetSHA256(txtPassword.Text) != Seguridad.UsuarioLogueado.Contrasenia)
+            {
+                txtPassword.Text = Encrypt.GetSHA256(txtPassword.Text);
                 usuarioNegocio.ModificarEscalar("Contrasena", Seguridad.UsuarioLogueado.IdUsuario, txtPassword.Text);
+            }
         }
 
         protected void btn_cancelar_Click(object sender, EventArgs e)
