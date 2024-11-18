@@ -122,7 +122,7 @@ namespace TPC
                 NuevoEvento.Ubicacion.Direccion.Calle = CalleEvento.Text;
                 NuevoEvento.Ubicacion.Direccion.Altura = AlturaEvento.Text;
 
-                NuevoEvento.CostoInscripcion = CostoEvento.Text == "" ? 0 : decimal.Parse(CostoEvento.Text);
+                NuevoEvento.CostoInscripcion = CostoEvento.Text == "" ? 0 : Decimal.Round(decimal.Parse(CostoEvento.Text));
                 NuevoEvento.CuposDisponibles = int.Parse(CuposDisponibles.Text);
 
                 NuevoEvento.EdadMinima = EdadMinEvento.Text == "" ? 0 : int.Parse(EdadMinEvento.Text);
