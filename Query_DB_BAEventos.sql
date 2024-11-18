@@ -391,3 +391,82 @@ AS BEGIN
         ROLLBACK TRANSACTION
     END CATCH
 END
+
+GO
+
+CREATE OR ALTER PROCEDURE OBTENER_EVENTOS_USUARIO(@IDUSUARIO BIGINT)
+AS BEGIN
+    BEGIN TRY
+        IF @IDUSUARIO IS NULL
+        RETURN
+        
+    SELECT 
+        E.IDEvento,
+        E.Nombre,
+        E.FechaEvento,
+        E.CostoInscripcion,
+        E.CuposDisponibles,
+        E.EdadMinima,
+        E.EdadMaxima,
+        E.Estado,
+        C.Nombre AS NombreCiudad,
+        P.Nombre AS NombreProvincia,
+        D.Calle, 
+        D.Altura,
+        IxE.ImgUrl
+    FROM 
+        Evento AS E 
+    INNER JOIN 
+        Usuario_x_Evento AS UxE 
+        ON E.IDEvento = UxE.IDEvento
+    INNER JOIN 
+        Ubicacion AS U
+        ON E.Ubicacion = U.IDUbicacion
+    INNER JOIN 
+        Ciudad AS C
+        ON C.IDCiudad = U.IDCiudad
+    INNER JOIN
+        Provincia AS P
+        ON P.ID = U.IDCiudad
+    INNER JOIN 
+        Direccion AS D
+        ON D.ID = U.IDDireccion
+    INNER JOIN 
+        Imagen_x_Evento AS IxE
+        ON IxE.IDEvento = E.IDEvento
+
+    WHERE UxE.IDUsuario = 14
+
+    END TRY
+
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+
+GO
+
+CREATE TRIGGER TR_DEVOLVER_CUPO ON Usuario_x_Evento
+AFTER DELETE
+AS BEGIN
+    BEGIN TRY
+        DECLARE @IDEVENTO BIGINT
+        DECLARE @ESTADO CHAR(1)
+        SELECT @IDEVENTO = D.IDEvento, @ESTADO = E.Estado FROM DELETED AS D INNER JOIN Evento AS E ON E.IDEvento = D.IDEvento
+
+        -- FALTA UN ESTADO PARA UN EVENTO SIN CUPOS
+        IF @ESTADO = 'C' 
+        BEGIN
+            UPDATE Evento SET Estado = 'D' WHERE IDEvento = @IDEVENTO
+        END
+
+        UPDATE Evento SET CuposDisponibles += 1 WHERE IDEvento = @IDEVENTO
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+        IF(@@TRANCOUNT > 0)
+            ROLLBACK TRANSACTION
+    END CATCH
+END
+
+
