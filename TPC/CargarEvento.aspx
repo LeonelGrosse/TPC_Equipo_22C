@@ -43,7 +43,7 @@
                         <label for="NombreEvento" class="form-label">Nombre</label>
                         <asp:TextBox type="text" ID="NombreEvento" CssClass="form-control" placeholder="Ingrese el nombre" runat="server" />
                         <asp:RequiredFieldValidator CssClass="RequiredMessage" ErrorMessage="*El campo requiere un valor." ControlToValidate="NombreEvento" Display="Dynamic" runat="server" />
-                        <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^(?=.*[A-Za-z])[A-Za-z0-9]+$" ErrorMessage="*Solo letras y números." ControlToValidate="NombreEvento" Display="Dynamic" runat="server" />
+                        <asp:RegularExpressionValidator CssClass="RequiredMessage" ValidationExpression="^(?=.*[A-Za-z])[A-Za-z0-9\s]+$" ErrorMessage="*Solo letras y números." ControlToValidate="NombreEvento" Display="Dynamic" runat="server" />
                     </div>
                     <div class="col-6">
                         <label for="FechaEvento" class="form-label">Fecha</label>
