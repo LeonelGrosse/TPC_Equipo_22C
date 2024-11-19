@@ -28,6 +28,8 @@ namespace TPC
 
             if (!IsPostBack)
                 CargarDatosUsuario();
+
+            
         }
 
         public void CargarDatosUsuario()
@@ -39,8 +41,9 @@ namespace TPC
             txtDni.Text = usuario.Dni;
             txtEmail.Text = usuario.CorreoElectronico;
             txtFechaNacimiento.Text = usuario.FechaNacimiento.ToString("d"); // Fecha corta
-            if (usuario.Imagen.ID != 0)
-                UrlImagen.ImageUrl = usuario.Imagen.URL;
+            //if (usuario.Imagen.ID != 0)
+                
+                UrlImagen.ImageUrl = "~/Imagenes/" + usuario.Imagen.URL;
         }
         protected void btn_modificar_Click(object sender, EventArgs e)
         {

@@ -53,12 +53,12 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
-        public void agregar(Usuario nuevo)
+        public int agregar(Usuario nuevo)
         {
             DB.LimpiarComando();
             try
             {
-                DB.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, " + 1 + ")");
+                DB.setConsulta("Insert into Usuario (IDRol, Contrasena, Apellido, Nombre, DNI, CorreoElectronico, FechaNacimiento, Estado) Values (@idRol, @contra, @apellido, @nombre, @dni, @correo, @fechaNacimiento, " + 1 + ");SELECT CAST(SCOPE_IDENTITY() AS INT);");
                 DB.setParametro("@idRol", nuevo.Rol.IdRol);
                 DB.setParametro("@contra", nuevo.Contrasenia);
                 DB.setParametro("@apellido", nuevo.Apellido);
@@ -66,7 +66,12 @@ namespace negocio
                 DB.setParametro("@dni", nuevo.Dni);
                 DB.setParametro("@correo", nuevo.CorreoElectronico);
                 DB.setParametro("@fechaNacimiento", nuevo.FechaNacimiento);
-                DB.ejecutarAccion();
+                //DB.ejecutarAccion();
+
+                int idGenerado = (int)DB.ejecutarEscalar();
+                return idGenerado;
+
+
             }
             catch (Exception ex)
             {
@@ -349,13 +354,15 @@ namespace negocio
             return false;
         }
 
-        public void cargarImagen(Usuario usuario)
+        public void cargarImagen(Usuario usuario,  int id)
         {
+
+
             try
             {
-                DB.setConsulta("update Imagen_x_Usuario set ImgUrl = @urlimagen where IDUsuario = @id");
+                DB.setConsulta("INSERT INTO Imagen_x_Usuario (IDUsuario, ImgUrl)\r\nVALUES (@id, @urlimagen);");
+                DB.setParametro("@id", id);
                 DB.setParametro("@urlimagen", usuario.Imagen.URL);
-                DB.setParametro("@id", usuario.IdUsuario);
                 DB.ejecutarAccion();
             }
             catch (Exception ex)
@@ -363,10 +370,13 @@ namespace negocio
 
                 throw ex;
             }
+
             finally
             {
                 DB.cerrarConexion();
             }
+
+
         }
 
         public List<Evento> ListarEventos(int idUsuario)
@@ -379,7 +389,7 @@ namespace negocio
                 DB.setParametro("@IDUSUARIO", idUsuario);
 
                 DB.ejecutarLectura();
-                while(DB.Lector.Read())
+                while (DB.Lector.Read())
                 {
                     Evento aux = new Evento();
                     aux.IdEvento = (int)(Int64)DB.Lector["IDEvento"];
@@ -434,6 +444,44 @@ namespace negocio
             {
                 DB.cerrarConexion();
             }
+        }
+
+        public int tomarId(string dni)
+        {
+            try
+            {
+                DB.setConsulta("select IDUsuario from Usuario where DNI = @identificacion");
+                DB.setParametro("@identificacion", dni);
+                DB.ejecutarLectura();
+
+                if (DB.Lector.Read())
+                {
+
+                    try
+                    {
+                        int idTomado = (int)DB.Lector["IDUsuario"];
+                        return idTomado;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error al verificar el Email: " + ex.Message);
+                    }
+                    finally
+                    {
+                        DB.cerrarConexion();
+                    }
+
+
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            finally { DB.cerrarConexion(); }
+
         }
     }
 }

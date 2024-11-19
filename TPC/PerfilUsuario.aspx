@@ -55,7 +55,7 @@
         <div class="container-profile-body card-body m-3">
             <div class="profile-container-image row">
                 <picture>
-                    <asp:Image ID="UrlImagen" ImageUrl="https://imgs.search.brave.com/kdxUh1UbYBaqf0QViEa5oF5RwtIcTQKI8XXgRBeIYJc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9zbWFs/bGltZy5wbmdrZXku/Y29tL3BuZy9zbWFs/bC8yMzMtMjMzMjY3/N19pbWFnZS01MDA1/ODAtcGxhY2Vob2xk/ZXItdHJhbnNwYXJl/bnQucG5n" CssClass="img img-fluid" runat="server" />
+                    <asp:Image ID="UrlImagen" CssClass="img img-fluid" runat="server" />
                 </picture>
             </div>
             <div class="container-info">
