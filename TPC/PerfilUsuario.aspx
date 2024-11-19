@@ -90,7 +90,7 @@
                         <div class="container-info-password row">
                             <div id="containerControlPassword" class="info-controls" runat="server">
                                 <label for="txtPassword" class="form-label">Contraseña</label>
-                                <asp:TextBox ID="txtPassword" type="password" CssClass="form-control" ReadOnly="true" runat="server" />
+                                <asp:TextBox ID="txtPassword"  CssClass="form-control" ReadOnly="true" runat="server" />
                             </div>
                         </div>
                     </ContentTemplate>

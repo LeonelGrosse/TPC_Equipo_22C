@@ -41,6 +41,7 @@ namespace TPC
             txtDni.Text = usuario.Dni;
             txtEmail.Text = usuario.CorreoElectronico;
             txtFechaNacimiento.Text = usuario.FechaNacimiento.ToString("d"); // Fecha corta
+            txtPassword.Text = usuario.Contrasenia;
             //if (usuario.Imagen.ID != 0)
                 
                 UrlImagen.ImageUrl = "~/Imagenes/" + usuario.Imagen.URL;
