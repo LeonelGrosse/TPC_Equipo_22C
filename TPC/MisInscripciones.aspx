@@ -6,7 +6,8 @@
 
     <style>
         .card {
-            width: 19rem;
+            width: 20rem;
+            min-width: 350px;
             max-width: 100%;
         }
 
@@ -46,6 +47,11 @@
             .btn:hover {
                 background-color: #F23D3D50;
             }
+
+        .container-dropdowns p {
+            margin: 0;
+            padding: 0;
+        }
     </style>
 
     <div class="container-cards d-flex flex-wrap gap-5 mt-5">
@@ -53,21 +59,24 @@
             <h1>Historial de inscripciones</h1>
         </div>
         <div class="d-flex justify-content-end w-100 p-2">
-            <div class="d-flex">
+            <div class="d-flex container-dropdowns">
                 <div>
+                    <p>Fecha</p>
                     <asp:DropDownList ID="DropDownFiltroFecha" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server">
                     </asp:DropDownList>
                 </div>
                 <div>
+                    <p>Provincia</p>
                     <asp:DropDownList ID="DropDownFiltroProvincias" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server">
                     </asp:DropDownList>
                 </div>
-
-                <div class="">
+                <div>
+                    <p>Precio</p>
                     <asp:DropDownList ID="DropDownFiltroCosto" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
                     </asp:DropDownList>
                 </div>
-                <div class="">
+                <div>
+                    <p>Disciplina</p>
                     <asp:DropDownList ID="DropDownFiltroDisciplina" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
                     </asp:DropDownList>
                 </div>
@@ -80,7 +89,7 @@
                 <div class="card d-flex g-3">
                     <div class="row d-flex flex-column">
                         <picture class="">
-                            <img src="<%#Eval("Imagen.URL") %>" class="card-img-top" alt="...">
+                            <img src="<%#Eval("Imagen.URL") != null ? Eval("Imagen.URL") : "https://shorturl.at/aGjXG"  %>" class="card-img-top" alt="...">
                         </picture>
                         <div class="d-flex flex-column">
                             <div class="card-body">
