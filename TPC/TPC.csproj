@@ -117,6 +117,10 @@
     <Content Include="Eventos.aspx" />
     <Content Include="FormularioRegistro.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\perfil-1111.jpg" />
+    <Content Include="Imagenes\perfil-11111111.jpg" />
+    <Content Include="Imagenes\perfil-123.jpg" />
+    <Content Include="Imagenes\perfil-42878669.jpg" />
     <Content Include="InscripcionExitosa.aspx" />
     <Content Include="ListadoEventos.aspx" />
     <Content Include="ListadoUsuarios.aspx" />
@@ -124,6 +128,7 @@
     <Content Include="MisEventos.aspx" />
     <Content Include="MisInscripciones.aspx" />
     <Content Include="MisResultados.aspx" />
+    <Content Include="ModificarEvento.aspx" />
     <Content Include="obj\Debug\TPC.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC.dll" />
     <Content Include="obj\Debug\TPC.pdb" />
@@ -242,6 +247,13 @@
     <Compile Include="MisResultados.aspx.designer.cs">
       <DependentUpon>MisResultados.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ModificarEvento.aspx.cs">
+      <DependentUpon>ModificarEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarEvento.aspx.designer.cs">
+      <DependentUpon>ModificarEvento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="OrganizadorFormulario.aspx.cs">
       <DependentUpon>OrganizadorFormulario.aspx</DependentUpon>
@@ -310,7 +322,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Imagenes\" />
     <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
