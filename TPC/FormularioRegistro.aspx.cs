@@ -10,6 +10,7 @@ using System.Web.UI.WebControls;
 using dominio;
 using negocio;
 using accesorio;
+using System.Data.SqlClient;
 
 namespace TPC
 {
@@ -98,7 +99,23 @@ namespace TPC
                 usuario.Contrasenia = Encrypt.GetSHA256(txtContraseniaRegistro.Text);
             }
 
-            ///FALTA CARGAR IMAGEN A DB
+            ///CARGAR IMAGEN
+            try
+            {
+                UsuarioNegocio negocio1 = new UsuarioNegocio();
+                string ruta = Server.MapPath("./Imagenes/");
+                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Dni + ".jpg");
+
+                usuario.Imagen.URL = "perfil-" + usuario.Dni + ".jpg";
+
+                negocio1.cargarImagen(usuario);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
 
             usuario.Rol.IdRol = 3;
 
@@ -115,25 +132,33 @@ namespace TPC
 
         protected void btnCargarImagen_Click(object sender, EventArgs e)
         {
-            if (inputGroupFile.HasFile)
+
+            if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
             {
                
-                string fileName = Path.GetFileName(inputGroupFile.PostedFile.FileName);
-                string filePath = Server.MapPath("~/temp/") + fileName;
+                var file = txtImagen.PostedFile;
 
-               
-                if (!Directory.Exists(Server.MapPath("~/temp/")))
+                
+                byte[] imageBytes;
+                using (System.IO.Stream stream = file.InputStream)
                 {
-                    Directory.CreateDirectory(Server.MapPath("~/temp/"));
+                    imageBytes = new byte[file.ContentLength];
+                    stream.Read(imageBytes, 0, file.ContentLength);
                 }
 
                 
-                inputGroupFile.SaveAs(filePath);
+                string base64Image = Convert.ToBase64String(imageBytes);
+                string imageUrl = $"data:{file.ContentType};base64,{base64Image}";
 
-                
-                imgRegistro.ImageUrl = "~/temp/" + fileName;
+               
+                imgRegistro.ImageUrl = imageUrl;
             }
-            
+            else
+            {
+                
+                imgRegistro.ImageUrl = "https://img.freepik.com/vector-premium/icono-marco-fotos-foto-vacia-blanco-vector-sobre-fondo-transparente-aislado-eps-10_399089-1290.jpg";
+            }
+
         }
     }
 }

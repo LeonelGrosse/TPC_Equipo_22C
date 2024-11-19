@@ -30,7 +30,7 @@
         </div>
         <div class="w-25">
             <asp:Label ID="lblFechaNacimiento" runat="server" Text="Ingrese su fecha de nacimiento: "></asp:Label>
-            <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="DateTime" class="form-control"></asp:TextBox>
+            <asp:TextBox ID="txtFechaNacimiento" runat="server" TextMode="Date" class="form-control"></asp:TextBox>
             <asp:Label ID="lblAvisoFechaNacimiento" runat="server" Text="" ForeColor="Red" Visible="false"></asp:Label>
         </div>
         <div class="w-25">
@@ -47,7 +47,7 @@
 
         <div class="form-group row">
             <div class="col-auto">
-                <asp:FileUpload ID="inputGroupFile" runat="server" CssClass="form-control" />
+                <input type="file" id="txtImagen" runat="server" class="form-conrtrol" />
             </div>
             <div class="col-auto">
                 <asp:Button ID="btnCargarImagen" runat="server" Text="Cargar Imagen" OnClick="btnCargarImagen_Click" CssClass="btn btn-primary" />
@@ -56,7 +56,7 @@
         <br />
         <div class="form-group row">
             <div class="col-auto">
-                <asp:Image ID="imgRegistro" runat="server" Width="200px" Height="200px" />
+                <asp:Image ID="imgRegistro" ImageURL="https://img.freepik.com/vector-premium/icono-marco-fotos-foto-vacia-blanco-vector-sobre-fondo-transparente-aislado-eps-10_399089-1290.jpg" runat="server" Width="200px" Height="200px" />
             </div>
         </div>
         <div>
