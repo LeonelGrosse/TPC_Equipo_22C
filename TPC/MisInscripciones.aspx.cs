@@ -13,8 +13,11 @@ namespace TPC
 {
     public partial class MisInscripciones : System.Web.UI.Page
     {
-        private UsuarioNegocio usuarioNegocio = new UsuarioNegocio();
-        private List<Evento> eventosInscripto = new List<Evento>();
+        private UsuarioNegocio UsuarioNegocio = new UsuarioNegocio();
+        private List<Evento> EventosInscripto = new List<Evento>();
+        private List<Provincia> Provincias = new List<Provincia>();
+        private List<Disciplina> Disciplinas = new List<Disciplina>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
@@ -26,9 +29,9 @@ namespace TPC
             if (!IsPostBack)
             {
                 CargarRepeater();
-                ColorEstado();
+                SetearColorSegunEstado();
+                CargarDesplegables();
             }
-
         }
 
         protected void btnVerEvento_Click(object sender, EventArgs e)
@@ -38,10 +41,10 @@ namespace TPC
 
         public bool ExistenInscripciones()
         {
-            return eventosInscripto.Count > 0 && eventosInscripto != null;
+            return EventosInscripto.Count > 0 && EventosInscripto != null;
         }
 
-        private void ColorEstado()
+        private void SetearColorSegunEstado()
         {
             foreach (RepeaterItem repeater in RepeaterEventosUsuario.Items)
             {
@@ -49,13 +52,13 @@ namespace TPC
 
                 if (labelEstado != null)
                 {
-                    foreach (Evento evento in eventosInscripto)
+                    foreach (Evento evento in EventosInscripto)
                     {
                         switch (evento.Estado)
                         {
                             case 'D':
                                 labelEstado.Text = "Disponible";
-                                labelEstado.CssClass = "evento-disponible card-text"; 
+                                labelEstado.CssClass = "evento-disponible card-text";
                                 break;
                             case 'C':
                                 labelEstado.Text = "Cancelado";
@@ -77,7 +80,7 @@ namespace TPC
             Button btn = (Button)sender;
             int btnCommandArgument = int.Parse(btn.CommandArgument);
 
-            if (!usuarioNegocio.CancelarInscripcion(btnCommandArgument, Seguridad.UsuarioLogueado.IdUsuario))
+            if (!UsuarioNegocio.CancelarInscripcion(btnCommandArgument, Seguridad.UsuarioLogueado.IdUsuario))
             {
                 Console.WriteLine("No es posible cancelar la inscripción.");
                 return;
@@ -85,14 +88,28 @@ namespace TPC
             
             Console.WriteLine("Se ha dado de baja correctamente");
             CargarRepeater();
-            ColorEstado();
+            SetearColorSegunEstado();
         }
 
         private void CargarRepeater()
         {
-            eventosInscripto = usuarioNegocio.ListarEventos(Seguridad.UsuarioLogueado.IdUsuario);
-            RepeaterEventosUsuario.DataSource = eventosInscripto;
+            EventosInscripto = UsuarioNegocio.ListarEventos(Seguridad.UsuarioLogueado.IdUsuario);
+            RepeaterEventosUsuario.DataSource = EventosInscripto;
             RepeaterEventosUsuario.DataBind();
+        }
+
+        private void CargarDesplegables()
+        {
+            Provincias = new ProvinciaNegocio().ObtenerProvincias();
+            Disciplinas = new DisciplinaNegocio().Listar();
+
+            Helper.CargarDropDown(DropDownFiltroProvincias, "ID", "Nombre", Provincias);
+            Helper.CargarDropDown(DropDownFiltroDisciplina, "IdDisciplina", "Descripcion", Disciplinas);
+
+            DropDownFiltroCosto.Items.Add("Mayor precio");
+            DropDownFiltroCosto.Items.Add("Menor precio");
+            DropDownFiltroFecha.Items.Add("Más recientes");
+            DropDownFiltroFecha.Items.Add("Más antiguos");
         }
     }
 }
