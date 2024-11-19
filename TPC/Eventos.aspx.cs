@@ -44,5 +44,16 @@ namespace TPC
             string idEvento = ((Button)sender).CommandArgument;
             Response.Redirect("ModificarEvento.aspx?IdEvento=" + idEvento, false);
         }
+
+        protected void repRepetidor_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                Evento evento = (Evento)e.Item.DataItem;
+                Repeater repeaterDisciplinas = (Repeater)e.Item.FindControl("RepeaterDisciplinas");
+                repeaterDisciplinas.DataSource = evento.Disciplina;
+                repeaterDisciplinas.DataBind();
+            }
+        }
     }
 }

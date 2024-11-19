@@ -72,7 +72,7 @@
         </div>
     </div>
 
-    <asp:Repeater ID="repRepetidor" runat="server">
+    <asp:Repeater ID="repRepetidor" OnItemDataBound="repRepetidor_ItemDataBound" runat="server">
         <ItemTemplate>
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="card mb-3 shadow-sm border-light" style="width: 100%;">
@@ -88,22 +88,29 @@
                                 <p class="card-text"><strong>Ciudad:</strong> <%#Eval("Ubicacion.Ciudad.Nombre") %></p>
                                 <p class="card-text"><strong>Direccion:</strong> <%#Eval("Ubicacion.Direccion.Calle") %></p>
                                 <p class="card-text"><strong>Costo: </strong><%#Eval("CostoInscripcion") %></p>
-                                <p class="card-text"><strong>Disciplina: </strong><%# ObtenerDescripciones((List<dominio.Disciplina>)Eval("Disciplina")) %></p>
+                                <asp:Repeater ID="RepeaterDisciplinas" runat="server">
+                                    <ItemTemplate>
+                                            <p class="card-text">
+                                                <strong>Disciplina:</strong> <%# Eval("Descripcion") %> - <strong>Distancia:</strong> <%# Eval("Distancia") %> km
+                                            </p>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                                 <p class="card-text"><strong>Edad Minima: </strong><%#Eval("EdadMinima") %></p>
                             </div>
                         </div>
                         <div class="col-md-4 d-flex flex-column justify-content-between p-3">
                             <p class="card-text"><strong>Cupos: </strong><%#Eval("CuposDisponibles") %></p>
-                            <%if (accesorio.Seguridad.SesionActiva(Session["UsuarioActivo"])){
+                            <%if (accesorio.Seguridad.SesionActiva(Session["UsuarioActivo"]))
+                                {
                                     if (accesorio.Seguridad.UsuarioLogueado.EsParticipante())
                                     {%>
-                                    <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" OnClick="btnInscribirse_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
-                                    <%}
-                                        else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador())
-                                        {%>
-                                    <asp:Button ID = "btnModificar" runat = "server" Text = "Modificar" OnClick="btnModificar_Click" CommandArgument = '<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
-                                    <%}
-                            }
+                            <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" OnClick="btnInscribirse_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
+                            <%}
+                                else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador())
+                                {%>
+                            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
+                            <%}
+                                }
                             %>
                         </div>
                     </div>
@@ -111,5 +118,4 @@
             </div>
         </ItemTemplate>
     </asp:Repeater>
-
 </asp:Content>
