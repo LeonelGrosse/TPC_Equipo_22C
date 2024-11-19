@@ -9,7 +9,7 @@ namespace accesorio
 {
     static public class Helper
     {
-        static void CargarDropDown<T>(DropDownList dropDown, string dataValueField, string dataTextField, IEnumerable<T> lista)
+        public static void CargarDropDown<T>(DropDownList dropDown, string dataValueField, string dataTextField, IEnumerable<T> lista)
         {
             dropDown.DataSource = lista;
             dropDown.DataValueField = dataValueField;
