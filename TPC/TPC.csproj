@@ -133,6 +133,7 @@
     <Content Include="obj\Debug\TPC.dll" />
     <Content Include="obj\Debug\TPC.pdb" />
     <Content Include="OrganizadorFormulario.aspx" />
+    <Content Include="Participantes.aspx" />
     <Content Include="PerfilUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -261,6 +262,13 @@
     </Compile>
     <Compile Include="OrganizadorFormulario.aspx.designer.cs">
       <DependentUpon>OrganizadorFormulario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Participantes.aspx.cs">
+      <DependentUpon>Participantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Participantes.aspx.designer.cs">
+      <DependentUpon>Participantes.aspx</DependentUpon>
     </Compile>
     <Compile Include="PerfilUsuario.aspx.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>

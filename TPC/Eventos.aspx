@@ -101,6 +101,7 @@
                                     <%}
                                         else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador())
                                         {%>
+                                    <asp:Button ID="btnParticipantes" runat="server" Text="Ver participantes" OnClick="btnParticipantes_Click" CommandArgument = '<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
                                     <asp:Button ID = "btnModificar" runat = "server" Text = "Modificar" OnClick="btnModificar_Click" CommandArgument = '<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-success" />
                                     <%}
                             }

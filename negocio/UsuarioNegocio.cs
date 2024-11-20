@@ -53,6 +53,40 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
+        public List<Usuario> ListarPorEvento(int evento)
+        {
+            try
+            {
+                DB.setConsulta("Select u.IDUsuario, u.IDRol, r.Rol, u.Contrasena, u.Apellido, u.Nombre, u.DNI, u.CorreoElectronico, u.FechaNacimiento, u.Estado From Usuario_x_Evento ue Inner join Usuario u ON u.IDUsuario = ue.IDUsuario Join Rol r On r.IDRol = u.IDRol Where ue.IDEvento = @idEvento");
+                DB.setParametro("idEvento", evento);
+                DB.ejecutarLectura();
+
+                while (DB.Lector.Read())
+                {
+                    Usuario Usuario = new Usuario();
+                    Usuario.IdUsuario = (int)(Int64)DB.Lector["IDUsuario"];
+                    Usuario.Nombre = (string)DB.Lector["Nombre"];
+                    Usuario.Apellido = (string)DB.Lector["Apellido"];
+                    Usuario.Dni = (string)DB.Lector["DNI"];
+                    Usuario.CorreoElectronico = (string)DB.Lector["CorreoElectronico"];
+                    Usuario.FechaNacimiento = (DateTime)DB.Lector["FechaNacimiento"];
+                    Usuario.Contrasenia = (string)DB.Lector["Contrasena"];
+                    Usuario.Rol.IdRol = (Int16)DB.Lector["IDRol"];
+                    Usuario.Rol.Descripcion = (string)DB.Lector["Rol"];
+
+                    Usuarios.Add(Usuario);
+                }
+                return Usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
         public int agregar(Usuario nuevo)
         {
             DB.LimpiarComando();
@@ -483,5 +517,7 @@ namespace negocio
             finally { DB.cerrarConexion(); }
 
         }
+
+
     }
 }

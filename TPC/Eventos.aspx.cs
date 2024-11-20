@@ -44,5 +44,11 @@ namespace TPC
             string idEvento = ((Button)sender).CommandArgument;
             Response.Redirect("ModificarEvento.aspx?IdEvento=" + idEvento, false);
         }
+
+        protected void btnParticipantes_Click(object sender, EventArgs e)
+        {
+            string idEvento = ((Button)sender).CommandArgument;
+            Response.Redirect("Participantes.aspx?IdEvento=" + idEvento, false);
+        }
     }
 }
