@@ -121,10 +121,14 @@
             <asp:TextBox ID="txtEdadMinima" runat="server" Enabled="false" CssClass="text"></asp:TextBox>
         </div>
 
-        <div>
-            <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
-            <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false" CssClass="text"></asp:TextBox>
-        </div>
+        <asp:Repeater ID="repRepetidor" runat="server">
+            <ItemTemplate>
+                <div>
+                    <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
+                    <input id="txtDisciplina" type="text" value="<%#Eval("Descripcion")%>" Enabled="false"></input>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
 
         <div class="button-container">
             <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" CssClass=" btn btn-primary" />

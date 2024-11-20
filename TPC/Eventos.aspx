@@ -83,11 +83,11 @@
                         <div class="col-md-4">
                             <div class="card-body">
                                 <h5 class="card-title text-primary"><%#Eval("Nombre") %></h5>
-                                <p class="card-text"><strong>Fecha: </strong><%#Eval("FechaEvento") %></p>
+                                <p class="card-text"><strong>Fecha: </strong><%#Eval("FechaEvento")%></p>
                                 <p class="card-text"><strong>Provincia: </strong><%#Eval("Ubicacion.Ciudad.Provincia.Nombre") %></p>
                                 <p class="card-text"><strong>Ciudad:</strong> <%#Eval("Ubicacion.Ciudad.Nombre") %></p>
                                 <p class="card-text"><strong>Direccion:</strong> <%#Eval("Ubicacion.Direccion.Calle") %></p>
-                                <p class="card-text"><strong>Costo: </strong><%#Eval("CostoInscripcion") %></p>
+                                <p class="card-text"><strong>Costo: </strong><%#Eval("CostoInscripcion")%></p>
                                 <p class="card-text"><strong>Disciplina: </strong><%# ObtenerDescripciones((List<dominio.Disciplina>)Eval("Disciplina")) %></p>
                                 <p class="card-text"><strong>Edad Minima: </strong><%#Eval("EdadMinima") %></p>
                             </div>

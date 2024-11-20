@@ -28,6 +28,8 @@ namespace TPC
             disciplinas=disciplinaNegocio.ListarPorEvento(idEvento);
             if (!IsPostBack)
             {
+                repRepetidor.DataSource = disciplinas;
+                repRepetidor.DataBind();
                 CargarDatosEvento();
             }
         }
@@ -35,15 +37,14 @@ namespace TPC
         public void CargarDatosEvento()
         {
             txtNombre.Text = evento.Nombre;
-            txtFecha.Text = evento.FechaEvento.ToString();
+            txtFecha.Text = evento.FechaEvento.ToString("dd-MM-yyyy");
             txtProvincia.Text = evento.Ubicacion.Ciudad.Provincia.Nombre;
             txtCiudad.Text = evento.Ubicacion.Ciudad.Nombre;
             txtCalle.Text = evento.Ubicacion.Direccion.Calle;
             txtAltura.Text = evento.Ubicacion.Direccion.Altura.ToString();
-            txtCosto.Text = evento.CostoInscripcion.ToString();
+            txtCosto.Text = ((int)evento.CostoInscripcion).ToString();
             txtCupos.Text = evento.CuposDisponibles.ToString();
             txtEdadMinima.Text = evento.EdadMinima.ToString();
-            txtDisciplina.Text = disciplinas[0].Descripcion.ToString();
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)

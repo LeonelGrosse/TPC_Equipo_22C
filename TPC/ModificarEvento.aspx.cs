@@ -3,6 +3,7 @@ using dominio;
 using negocio;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -35,7 +36,7 @@ namespace TPC
         public void CargarDatosEvento()
         {
             txtNombre.Text = evento.Nombre;
-            txtFecha.Text = evento.FechaEvento.ToString();
+            txtFecha.Text = String.Format("{0:yyyy-MM-dd}", evento.FechaEvento);
             txtProvincia.Text = evento.Ubicacion.Ciudad.Provincia.Nombre;
             txtCiudad.Text = evento.Ubicacion.Ciudad.Nombre;
             txtCalle.Text = evento.Ubicacion.Direccion.Calle;
@@ -54,12 +55,13 @@ namespace TPC
             aux.Ubicacion.IDUbicacion = evento.Ubicacion.IDUbicacion;
             aux.Ubicacion.Direccion.Calle = txtCalle.Text;
             aux.Ubicacion.Direccion.Altura = txtAltura.Text;
-            aux.CostoInscripcion = int.Parse(txtCosto.Text);
+            aux.CostoInscripcion = Decimal.Parse(txtCosto.Text);
             aux.CuposDisponibles = int.Parse(txtCupos.Text);
             aux.EdadMinima = int.Parse(txtEdadMinima.Text);
             aux.EdadMaxima = int.Parse(txtEdadMaxima.Text);
             aux.Estado = evento.Estado;
             eventoNegocio.modificar(aux);
+            Response.Redirect("Eventos.aspx", false);
         }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {

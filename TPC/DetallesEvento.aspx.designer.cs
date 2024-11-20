@@ -177,22 +177,13 @@ namespace TPC
         protected global::System.Web.UI.WebControls.TextBox txtEdadMinima;
 
         /// <summary>
-        /// lblDisciplina control.
+        /// repRepetidor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDisciplina;
-
-        /// <summary>
-        /// txtDisciplina control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDisciplina;
+        protected global::System.Web.UI.WebControls.Repeater repRepetidor;
 
         /// <summary>
         /// btnAceptar control.

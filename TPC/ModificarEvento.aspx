@@ -30,6 +30,15 @@
             background-color: #f9f9f9;
         }
 
+        input[type="date"], textarea {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+        }
+
         .Disciplina {
             padding: 10px;
             border: 1px solid #ccc;
@@ -143,8 +152,6 @@
             <ItemTemplate>
                 <div>
                     <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
-                    <asp:DropDownList ID="DropDownDisciplina" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
-                    </asp:DropDownList>
                     <input id="txtDisciplina" type="text" value="<%#Eval("Descripcion")%>" enabled="false"></input>
                 </div>
             </ItemTemplate>
