@@ -15,40 +15,40 @@ namespace TPC
     {
 
         /// <summary>
-        /// DropDownFiltroFecha control.
+        /// DropDownOpcionesFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroFecha;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownOpcionesFiltro;
 
         /// <summary>
-        /// DropDownFiltroProvincias control.
+        /// DropDownListCriterio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroProvincias;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownListCriterio;
 
         /// <summary>
-        /// DropDownFiltroCosto control.
+        /// BtnFiltrar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroCosto;
+        protected global::System.Web.UI.WebControls.Button BtnFiltrar;
 
         /// <summary>
-        /// DropDownFiltroDisciplina control.
+        /// BtnLimpiarFiltro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownFiltroDisciplina;
+        protected global::System.Web.UI.WebControls.Button BtnLimpiarFiltro;
 
         /// <summary>
         /// RepeaterEventosUsuario control.
@@ -60,6 +60,15 @@ namespace TPC
         protected global::System.Web.UI.WebControls.Repeater RepeaterEventosUsuario;
 
         /// <summary>
+        /// MsjInscripciones control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MsjInscripciones;
+
+        /// <summary>
         /// btnVerEvento control.
         /// </summary>
         /// <remarks>
@@ -67,5 +76,32 @@ namespace TPC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVerEvento;
+
+        /// <summary>
+        /// ContainerCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContainerCard;
+
+        /// <summary>
+        /// CardMsj control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CardMsj;
+
+        /// <summary>
+        /// BtnVolverInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnVolverInicio;
     }
 }
