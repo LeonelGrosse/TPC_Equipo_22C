@@ -14,7 +14,7 @@
         <h2>Participantes</h2>
     </div>
     <div>
-        <asp:ScriptManager runat="server" ID="ScripManager1"/></asp:ScriptManager>   
+        <asp:ScriptManager runat="server" ID="ScripManager1"/>
         <asp:UpdatePanel runat="server" ID="UpdatePanel1" UpdateMode="Conditional">
             <ContentTemplate>
                 <asp:GridView ID="gvParticipantes" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" CssClass="table table-bordered table-hover table-responsive">
@@ -27,7 +27,7 @@
                         <asp:TemplateField>
                             <HeaderTemplate>Eliminar de evento</HeaderTemplate>
                             <ItemTemplate>
-                                <asp:Button ID="btnEliminarDeEvento" runat="server" Text="Eliminar" Onclick="btnEliminarDeEvento_Click" CssClass="btn btn-primary"/>
+                                <asp:Button ID="btnEliminarDeEvento" runat="server" Text="Eliminar" OnClick="btnEliminarDeEvento_Click" CssClass="btn btn-primary" CommandArgument='<%#Eval("Dni")%>'/>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>

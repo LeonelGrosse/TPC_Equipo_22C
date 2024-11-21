@@ -173,6 +173,28 @@ namespace negocio
             {
                 throw ex;
             }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
+        public void eliminarDeEvento(string dni, int idEvento)
+        {
+            try
+            {
+                DB.SetStoredProcedure("SP_Eliminar_Participante_De_Evento");
+                DB.setParametro("@DNI", dni);
+                DB.setParametro("@IDEVENTO", idEvento);
+                DB.ejecutarLectura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
         }
         public Usuario cargar(string email)
         {

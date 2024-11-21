@@ -545,3 +545,19 @@ AS BEGIN
     END CATCH
 END
 GO
+
+CREATE PROCEDURE SP_Eliminar_Participante_De_Evento(
+    @DNI VARCHAR(10),
+    @IDEVENTO BIGINT
+)
+AS BEGIN
+    BEGIN TRY
+        DECLARE @idUsuario BIGINT
+        SELECT @idUsuario = IDUsuario FROM Usuario Where DNI = @DNI
+        DELETE FROM Usuario_x_Evento WHERE IDUsuario = @idUsuario AND IDEvento = @IDEVENTO
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+GO

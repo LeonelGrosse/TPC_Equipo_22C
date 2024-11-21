@@ -53,7 +53,7 @@ namespace TPC
             usuario = (Usuario)Session["UsuarioActivo"];
             int idUsuario = usuario.IdUsuario;
             eventoNegocio.InscribirseEvento(idEvento, idUsuario);
-            Response.Redirect("InscripcionExitosa.aspx", false);
+            Response.Redirect("Eventos.aspx", false);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
