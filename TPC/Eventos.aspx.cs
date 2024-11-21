@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using accesorio;
@@ -15,6 +16,7 @@ namespace TPC
         public List<Evento> ListaEvento { get; set; }
         private EventoNegocio EventoNegocio = new EventoNegocio();
         private Filtro filtro = new Filtro();
+        public Evento EventoSeleccionado = new Evento();
         protected void Page_Load(object sender, EventArgs e)
         {
             EventoNegocio negocio = new EventoNegocio();
@@ -168,6 +170,78 @@ namespace TPC
         {
             string idEvento = ((Button)sender).CommandArgument;
             Response.Redirect("Participantes.aspx?IdEvento=" + idEvento, false);
+        }
+        protected void btnCargarResultados_Click(object sender, EventArgs e)
+        {
+            OcultarCamposDisciplina();
+            DropDownDNI.ClearSelection();
+            DropDownDNI.Items.Clear();
+
+            string argumment = ((Button)sender).CommandArgument;
+            int idEvento = int.Parse(argumment);
+            EventoSeleccionado = EventoNegocio.Listar(idEvento)[0];
+
+            if (EventoNegocio.ObtenerUsuariosInscriptos(idEvento) != null || EventoNegocio.ObtenerUsuariosInscriptos(idEvento).Count() == 0)
+            {
+                DropDownDNI.DataSource = EventoNegocio.ObtenerUsuariosInscriptos(idEvento);
+                DropDownDNI.DataBind();
+            }
+
+            MostrarCamposDisciplina();
+            Div1.Visible = true;
+        }
+        protected void BtnCargar_Click(object sender, EventArgs e)
+        {
+            foreach (Disciplina disciplina in EventoSeleccionado.Disciplina)
+            {
+                TiempoPorDisciplina tiempo = new TiempoPorDisciplina();
+
+                if (disciplina.Nombre == "Natación")
+                {
+
+                }
+
+                if (disciplina.Nombre == "Ciclismo")
+                {
+
+                }
+
+                if (disciplina.Nombre == "Atltetismo")
+                {
+
+                }
+
+                //tiempo.IDDisciplina = ;
+                //EventoSeleccionado.Resultado.Tiempo.Add();
+            }
+        }
+
+        protected void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Div1.Visible = false;
+        }
+
+        private void MostrarCamposDisciplina()
+        {
+            Evento evento = new Evento();
+            foreach (Disciplina disciplina in EventoSeleccionado.Disciplina)
+            {
+                if (disciplina.ID == (int)Evento.DISCIPLINAS.Natacion)
+                    ContainerNatacion.Visible = true;
+
+                if (disciplina.ID == (int)Evento.DISCIPLINAS.Ciclismo)
+                    ContainerCiclismo.Visible = true;
+
+                if (disciplina.ID == (int)Evento.DISCIPLINAS.Running)
+                    ContainerRunning.Visible = true;
+            }
+        }
+
+        private void OcultarCamposDisciplina()
+        {
+            ContainerNatacion.Visible = false;
+            ContainerCiclismo.Visible = false;
+            ContainerRunning.Visible = false;
         }
     }
 }
