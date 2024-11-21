@@ -14,18 +14,20 @@ namespace TPC
     public partial class DetallesEvento : System.Web.UI.Page
     {
         EventoNegocio eventoNegocio = new EventoNegocio();
-        Evento evento = new Evento();
+        public Evento evento = new Evento();
         DisciplinaNegocio disciplinaNegocio = new DisciplinaNegocio();
-        List<Disciplina> disciplinas = new List<Disciplina>();
+        public List<Disciplina> disciplinas = new List<Disciplina>();
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
+            {
                 Response.Redirect("Default.aspx", false);
+                return;
+            }
 
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
-            evento=eventoNegocio.BuscarPorID(idEvento);
-            disciplinas=disciplinaNegocio.ListarPorEvento(idEvento);
+            evento = eventoNegocio.Listar(idEvento)[0];
             if (!IsPostBack)
             {
                 CargarDatosEvento();
@@ -43,7 +45,6 @@ namespace TPC
             txtCosto.Text = evento.CostoInscripcion.ToString();
             txtCupos.Text = evento.CuposDisponibles.ToString();
             txtEdadMinima.Text = evento.EdadMinima.ToString();
-            txtDisciplina.Text = disciplinas[0].Descripcion.ToString();
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
