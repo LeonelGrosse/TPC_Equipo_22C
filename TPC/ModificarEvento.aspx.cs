@@ -21,7 +21,10 @@ namespace TPC
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Organizador))
+            {
                 Response.Redirect("Eventos.aspx", false);
+                return;
+            }
 
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
             evento = eventoNegocio.Listar(idEvento)[0];

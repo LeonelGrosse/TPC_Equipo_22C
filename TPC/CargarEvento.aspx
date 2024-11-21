@@ -28,9 +28,48 @@
             height: auto;
         }
 
+        .form-control {
+            border-radius: 100vw;
+            background-color: #E0E4EF;
+        }
+
+        .dropdown-toggle {
+            background-color: #E0E4EF;
+        }
+
         label {
             font-weight: 600;
         }
+
+        .btn {
+            padding: .6rem .6rem;
+            border-radius: 100vw;
+            border-color: #dee2e6;
+            font: 600 1rem Roboto;
+            font-weight: 200;
+        }
+
+        .btn-filtros {
+            background-color: #F23D3D;
+            color: white;
+        }
+
+            .btn-filtros:hover {
+                color: white;
+                background-color: #F23D3D;
+                transform: scale(1.05);
+            }
+
+        .btn-card {
+            color: white;
+            background-color: #023373;
+        }
+
+            .btn-card:hover {
+                color: white;
+                background-color: #023373;
+                transform: scale(1.05)
+            }
     </style>
 
     <div class="d-flex flex-column container-page m-4">
@@ -188,7 +227,7 @@
 
             <div class="d-flex justify-content-end">
                 <div class="p-1">
-                    <asp:Button Text="Cancelar" type="submit" ID="BtnCancelarCarga" CssClass="btn btn-danger" OnClick="BtnCancelarCarga_Click" runat="server" />
+                    <asp:Button Text="Cancelar" type="submit" ID="BtnCancelarCarga" CssClass="btn btn-filtros btn-danger" OnClick="BtnCancelarCarga_Click" runat="server" />
                 </div>
                 <div class="p-1">
                     <asp:Button Text="Registrar" type="submit" ID="BtnCargarEvento" CssClass="btn btn-success" OnClick="BtnCargarEvento_Click" runat="server" />
@@ -196,4 +235,16 @@
             </div>
         </div>
     </div>
+
+    <div id="ContainerCard" class="d-flex flex-column justify-content-center align-items-center container-card-msj position-fixed top-0 start-0 w-100 h-100" style="min-height: 80vh;" visible="false" runat="server">
+        <div class="card col-12 " style="width: 26rem; height: 10rem">
+            <div class="card-body d-flex flex-column justify-content-between align-items-center bg-danger bg-opacity-25">
+                <asp:Label ID="CardMsj" Text="" class="card-text fs-6" runat="server" />
+                <div class="d-flex justify-content-center align-items-center text-center">
+                    <asp:Button Text="Volver" ID="BtnVolverInicio" type="button" CssClass="btn btn-card" OnClick="BtnVolverInicio_Click" runat="server" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </asp:Content>

@@ -413,11 +413,9 @@ namespace negocio
 
         public void cargarImagen(Usuario usuario,  int id)
         {
-
-
             try
             {
-                DB.setConsulta("INSERT INTO Imagen_x_Usuario (IDUsuario, ImgUrl)\r\nVALUES (@id, @urlimagen);");
+                DB.setConsulta("INSERT INTO Imagen_x_Usuario (IDUsuario, ImgUrl) VALUES (@id, @urlimagen);");
                 DB.setParametro("@id", id);
                 DB.setParametro("@urlimagen", usuario.Imagen.URL);
                 DB.ejecutarAccion();
@@ -432,8 +430,6 @@ namespace negocio
             {
                 DB.cerrarConexion();
             }
-
-
         }
 
         public List<Evento> ListarEventos(int idUsuario)
@@ -557,8 +553,6 @@ namespace negocio
                     {
                         DB.cerrarConexion();
                     }
-
-
                 }
                 return 0;
             }
@@ -570,8 +564,6 @@ namespace negocio
             finally { DB.cerrarConexion(); }
 
         }
-
-
 
         public List<Evento> Filtrar(string campo, int criterio, int idUsuario)
         {

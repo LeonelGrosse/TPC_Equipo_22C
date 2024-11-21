@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
     <style>
         h1 {
@@ -63,6 +64,11 @@
                 background-color: #023373;
                 transform: scale(1.05)
             }
+
+        .form-control {
+            border-radius: 100vw;
+            background-color: #E0E4EF;
+        }
     </style>
 
     <h1>Eventos</h1>
@@ -98,11 +104,11 @@
                         <div class="col-md-4">
                             <div class="card-body">
                                 <h5 class="card-title text-primary"><%#Eval("Nombre") %></h5>
-                                <p class="card-text"><strong>Fecha: </strong><%#Eval("FechaEvento")%></p>
+                                <p class="card-text"><strong>Fecha: </strong><%# Eval("FechaEvento", "{0:dd/MM/yyyy}") %></p>
                                 <p class="card-text"><strong>Provincia: </strong><%#Eval("Ubicacion.Ciudad.Provincia.Nombre") %></p>
                                 <p class="card-text"><strong>Ciudad:</strong> <%#Eval("Ubicacion.Ciudad.Nombre") %></p>
                                 <p class="card-text"><strong>Direccion:</strong> <%#Eval("Ubicacion.Direccion.Calle") %></p>
-                                <p class="card-text"><strong>Costo: </strong><%#Eval("CostoInscripcion") %></p>
+                                <p class="card-text"><strong>Costo: </strong><%# Eval("CostoInscripcion", "{0:$#,0}") %></p>
                                 <asp:Repeater ID="RepeaterDisciplinas" runat="server">
                                     <ItemTemplate>
                                         <p class="card-text">
@@ -123,8 +129,11 @@
                             <%}
                                 else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador() || accesorio.Seguridad.UsuarioLogueado.EsAdministrador())
                                 {%>
-                            <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
                             <asp:Button ID="btnParticipantes" runat="server" Text="Ver Participantes" OnClick="btnParticipantes_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
+                            <div class="d-flex justify-content-end gap-3">
+                                <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
+                                <asp:Button ID="btnCargarResultados" Text="Cargar Resultados" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" OnClick="btnCargarResultados_Click" runat="server" />
+                            </div>
                             <%}
                                 }
                             %>
@@ -145,6 +154,52 @@
                 <div class="d-flex justify-content-center align-items-center text-center">
                     <asp:Button Text="Volver" ID="BtnVolverInicio" type="button" CssClass="btn btn-card" OnClick="BtnVolverInicio_Click" runat="server" />
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="Div1" class="d-flex flex-column justify-content-center align-items-center container-card-msj position-fixed top-0 start-0 w-100 h-100" style="min-height: 80vh;" visible="false" runat="server">
+        <div class="card col-12 " style="width: 40rem; height: 30rem">
+            <div class="card-body d-flex flex-column align-items-start flex-wrap bg-danger bg-opacity-25">
+                <div class="container-dpd-dni d-flex align-self-start">
+                    <label placeholder="Seleccionar DNI">DNI de usuario:</label>
+                    <asp:DropDownList ID="DropDownDNI" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server">
+                    </asp:DropDownList>
+                </div>
+                <div class="container-disciplinas d-flex flex-column align-items-center gap-2">
+
+                    <div id="ContainerNatacion" class="d-flex align-items-center gap-2 pt-2" visible="false" runat="server">
+                        <asp:Label For="" Text="Natación" runat="server" />
+                        <asp:TextBox ID="TextBoxMinutosNatacion" Text="" CssClass="form-control w-25" placeHolder="Minutos" runat="server" />
+                        <asp:TextBox ID="TextBoxSegundosNatación" Text="" CssClass="form-control w-25" placeHolder="Segundos" runat="server" />
+                        <p class="d-flex m-0">totales.</p>
+                    </div>
+
+                    <div id="ContainerCiclismo" class="d-flex align-items-center gap-2 pt-2" visible="false" runat="server">
+                        <asp:Label For="" Text="Ciclismo" runat="server" />
+                        <asp:TextBox ID="TextBoxMinutosCiclismo" Text="" CssClass="form-control w-25" placeHolder="Minutos" runat="server" />
+                        <asp:TextBox ID="TextBoxSegundosCiclismo" Text="" CssClass="form-control w-25" placeHolder="Segundos" runat="server" />
+                        <p class="d-flex m-0">totales.</p>
+                    </div>
+
+                    <div id="ContainerRunning" class="d-flex align-items-center gap-2 pt-2" visible="false" runat="server">
+                        <asp:Label For="" Text="Running" runat="server" />
+                        <asp:TextBox ID="TextBoxMinutosRunning" Text="" CssClass="form-control w-25" placeHolder="Minutos" runat="server" />
+                        <asp:TextBox ID="TextBoxSegundosRunning" Text="" CssClass="form-control w-25" placeHolder="Segundos" runat="server" />
+                        <p class="d-flex m-0">totales.</p>
+                    </div>
+
+                </div>
+
+                <div class="d-flex gap-2 pt-2">
+                    <div class="d-flex justify-content-center align-items-center text-center">
+                        <asp:Button Text="Cargar" ID="BtnCargar" type="button" CssClass="btn btn-card" OnClick="BtnCargar_Click" runat="server" />
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center text-center">
+                        <asp:Button Text="Cancelar" ID="BtnCancelar" type="button" CssClass="btn btn-card" OnClick="BtnCancelar_Click" runat="server" />
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
