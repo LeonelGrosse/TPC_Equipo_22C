@@ -15,6 +15,12 @@ namespace dominio
             Ubicacion = new Ubicacion();
             Imagen = new Imagen();
         }
+        public enum DISCIPLINAS
+        {
+            Natacion = 1,
+            Ciclismo = 2,
+            Running = 3
+        }
         public int IdEvento { get; set; }
         public string Nombre { get; set; }
         public List<Disciplina> Disciplina { get; set; }
@@ -26,6 +32,6 @@ namespace dominio
         public int EdadMaxima { get; set; }
         public int CuposDisponibles { get; set; }
         public Resultado Resultado { get; set; }
-        public Imagen Imagen {get; set;}
+        public Imagen Imagen { get; set; }
     }
 }
