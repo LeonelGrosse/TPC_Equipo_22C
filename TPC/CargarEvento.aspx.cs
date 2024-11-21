@@ -149,8 +149,8 @@ namespace TPC
                 if (container.Visible == true)
                 {
                     Disciplina disciplina = new Disciplina();
-                    disciplina.IdDisciplina = int.Parse(dpdDisciplina.SelectedItem.Value);
-                    disciplina.Descripcion = dpdDisciplina.SelectedItem.Value.ToString();
+                    disciplina.ID = int.Parse(dpdDisciplina.SelectedItem.Value);
+                    disciplina.Nombre = dpdDisciplina.SelectedItem.Value.ToString();
                     disciplina.Distancia = decimal.Parse(txtDistancia.Text);
                     NuevoEvento.Disciplina.Add(disciplina);
                 }

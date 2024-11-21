@@ -55,6 +55,10 @@
     <Compile Include="UsuarioNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\accesorio\accesorio.csproj">
+      <Project>{2e361738-592c-417c-a762-b175ccb2e894}</Project>
+      <Name>accesorio</Name>
+    </ProjectReference>
     <ProjectReference Include="..\dominio\dominio.csproj">
       <Project>{88f37f30-52ca-480c-a650-f16e074eb4c4}</Project>
       <Name>dominio</Name>

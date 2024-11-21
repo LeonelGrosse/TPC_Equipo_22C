@@ -27,8 +27,8 @@ namespace negocio
 				while (Datos.Lector.Read())
 				{
 					Disciplina disciplina = new Disciplina();
-					disciplina.IdDisciplina = (int)(Int64)Datos.Lector["IDDisciplina"];
-					disciplina.Descripcion = (string)Datos.Lector["disciplina"];
+					disciplina.ID = (int)(Int64)Datos.Lector["IDDisciplina"];
+					disciplina.Nombre = (string)Datos.Lector["disciplina"];
 
 					listaDisciplina.Add(disciplina);
 				}
@@ -56,8 +56,8 @@ namespace negocio
                 while (Datos.Lector.Read())
                 {
                     Disciplina disciplina = new Disciplina();
-                    disciplina.IdDisciplina = (int)(Int64)Datos.Lector["IDDisciplina"];
-                    disciplina.Descripcion = (string)Datos.Lector["Disciplina"];
+                    disciplina.ID = (int)(Int64)Datos.Lector["IDDisciplina"];
+                    disciplina.Nombre = (string)Datos.Lector["Disciplina"];
 
                     listDisciplina.Add(disciplina);
                 }
