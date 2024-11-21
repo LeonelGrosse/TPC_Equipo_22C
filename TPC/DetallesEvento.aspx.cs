@@ -61,7 +61,6 @@ namespace TPC
 
             eventoNegocio.InscribirseEvento(idEvento, idUsuario);
             MostrarMensajeError("Inscripcion exitosa!", true);
-            Response.Redirect("Eventos.aspx", false);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
