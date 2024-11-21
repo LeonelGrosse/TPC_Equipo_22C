@@ -24,7 +24,7 @@ namespace TPC
                 Response.Redirect("Eventos.aspx", false);
 
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
-            evento = eventoNegocio.BuscarPorID(idEvento);
+            evento = eventoNegocio.Listar(idEvento)[0];
             disciplinas = disciplinaNegocio.ListarPorEvento(idEvento);
             if (!IsPostBack)
             {

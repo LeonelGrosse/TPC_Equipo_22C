@@ -274,6 +274,70 @@ INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (4, 1
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES (5, 2, 10); -- Campeonato de Ciclismo - Ciclismo
 GO
 
+INSERT INTO Direccion (Calle, Altura) VALUES 
+('Calle Nueva', '1000'),
+('Avenida Libertador', '2000'),
+('Calle 25 de Mayo', '3000'),
+('Avenida del Sol', '4000'),
+('Calle Ficticia', '5000'),
+('Calle Mendoza', '6000'),
+('Avenida San Martín', '7000'),
+('Boulevard Rivadavia', '8000'),
+('Calle Corrientes', '9000'),
+('Calle 7 de Agosto', '10000');
+
+INSERT INTO Ubicacion (IDCiudad, IDDireccion) VALUES 
+(24, 1), 
+(25, 2), 
+(26, 3), 
+(27, 4), 
+(28, 5),
+(29, 6),
+(30, 7),
+(31, 8),
+(32, 9),
+(33, 10);
+
+-- Nuevos Eventos
+INSERT INTO Evento (Nombre, FechaEvento, Ubicacion, CostoInscripcion, Estado, EdadMinima, EdadMaxima, CuposDisponibles) 
+VALUES 
+('Maratón General Pico', '2024-12-01', 1, 80.00, 'D', 18, 40, 300),
+('FestiNatación Villa Mercedes', '2024-12-10', 2, 50.00, 'D', 10, 30, 150),
+('Resistencia Running', '2024-11-20', 3, 60.00, 'D', 16, 35, 200),
+('Ciclismo de Comodoro', '2024-12-05', 4, 75.00, 'D', 18, 35, 120),
+('Crossfit Río Gallegos', '2024-11-25', 5, 90.00, 'D', 20, 40, 100),
+('Competencia Atlética Posadas', '2024-11-29', 6, 40.00, 'D', 14, 30, 150),
+('Campeonato de Ciclismo Cafayate', '2024-12-12', 7, 85.00, 'D', 15, 35, 180),
+('Torneo de Natación Tartagal', '2024-11-30', 8, 45.00, 'D', 12, 30, 250),
+('Maratón de Rawson', '2024-12-07', 9, 70.00, 'D', 18, 40, 200),
+('Triatlón Palpalá', '2024-12-15', 10, 100.00, 'D', 20, 40, 100);
+
+-- Nuevas Imágenes por Evento
+INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES 
+(1, 'https://example.com/maratongeneralpico.jpg'),
+(2, 'https://example.com/festinatsanluis.jpg'),
+(3, 'https://example.com/resistencia_running.jpg'),
+(4, 'https://example.com/ciclismocomodoro.jpg'),
+(5, 'https://example.com/crossfitriogallegos.jpg'),
+(6, 'https://example.com/competencia_posadas.jpg'),
+(7, 'https://example.com/ciclismocafayate.jpg'),
+(8, 'https://example.com/nataciontartagal.jpg'),
+(9, 'https://example.com/maratonrawson.jpg'),
+(10, 'https://example.com/triatlonpalpala.jpg');
+
+-- Nuevas Disciplinas por Evento
+INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES 
+(1, 3, 42),  -- Maratón General Pico
+(2, 1, 5),   -- FestiNatación Villa Mercedes
+(3, 3, 10),  -- Resistencia Running
+(4, 2, 30),  -- Ciclismo de Comodoro
+(5, 3, 10),  -- Crossfit Río Gallegos
+(6, 1, 3),   -- Competencia Atlética Posadas
+(7, 2, 50),  -- Campeonato de Ciclismo Cafayate
+(8, 1, 200), -- Torneo de Natación Tartagal
+(9, 3, 42),  -- Maratón de Rawson
+(10, 2, 40); -- Triatlón Palpalá
+
 CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
 AS
 SELECT * FROM Provincia
