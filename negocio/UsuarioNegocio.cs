@@ -1,4 +1,5 @@
 ﻿using dominio;
+using accesorio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -379,7 +380,7 @@ namespace negocio
                 DB.setParametro("@IDUSUARIO", idUsuario);
 
                 DB.ejecutarLectura();
-                while(DB.Lector.Read())
+                while (DB.Lector.Read())
                 {
                     Evento aux = new Evento();
                     aux.IdEvento = (int)(Int64)DB.Lector["IDEvento"];
@@ -388,6 +389,7 @@ namespace negocio
 
                     aux.Ubicacion = new Ubicacion();
                     aux.Ubicacion.Ciudad.Nombre = (string)DB.Lector["NombreCiudad"];
+                    aux.Ubicacion.Ciudad.Provincia.ID = (int)(Int64)DB.Lector["IDProvincia"];
                     aux.Ubicacion.Ciudad.Provincia.Nombre = (string)DB.Lector["NombreProvincia"];
                     aux.Ubicacion.Direccion.Calle = (string)DB.Lector["Calle"];
                     aux.Ubicacion.Direccion.Altura = (string)DB.Lector["Altura"];
@@ -396,8 +398,7 @@ namespace negocio
                     aux.EdadMinima = (int)(byte)DB.Lector["EdadMinima"];
                     aux.EdadMaxima = (int)(byte)DB.Lector["EdadMaxima"];
                     aux.CuposDisponibles = (int)DB.Lector["CuposDisponibles"];
-                    // Obtenerlas por separado
-                    // aux.Disciplina.Add(new Disciplina { Descripcion = (string)DB.Lector["Disciplina"] });
+                    CargarDisciplinasDeEvento(aux);
 
                     if (!(DB.Lector["ImgUrl"] is DBNull))
                         aux.Imagen.URL = (string)DB.Lector["ImgUrl"];
@@ -418,12 +419,96 @@ namespace negocio
             }
         }
 
+        private void CargarDisciplinasDeEvento(Evento evento)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetStoredProcedure("SP_DISCPLINAS_X_EVENTO");
+                datos.setParametro("@IDEVENTO", evento.IdEvento);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Disciplina auxiliarDisciplina = new Disciplina();
+                    auxiliarDisciplina.ID = (int)(Int64)datos.Lector["IDDisciplina"];
+                    auxiliarDisciplina.Nombre = (string)datos.Lector["Disciplina"];
+                    auxiliarDisciplina.Distancia = (decimal)datos.Lector["Distancia"];
+
+                    evento.Disciplina.Add(auxiliarDisciplina);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public bool CancelarInscripcion(int idEvento, int idUsuario)
         {
             try
             {
                 DB.setConsulta($"DELETE FROM Usuario_x_Evento WHERE IDEvento = {idEvento} AND IDUsuario = {idUsuario}");
                 return DB.EjecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
+
+        public List<Evento> Filtrar(string campo, int criterio, int idUsuario)
+        {
+            List<Evento> listaEventos = new List<Evento>();
+            Filtro filtro = new Filtro();
+            try
+            {
+                string query = " SELECT  E.IDEvento, E.Nombre, E.FechaEvento, E.CostoInscripcion, E.CuposDisponibles, E.EdadMinima, E.EdadMaxima, E.Estado, C.Nombre AS NombreCiudad, P.ID AS IDProvincia, P.Nombre AS NombreProvincia, D.Calle,  D.Altura, IxE.ImgUrl FROM  Evento AS E  INNER JOIN  Usuario_x_Evento AS UxE  ON E.IDEvento = UxE.IDEvento INNER JOIN  Ubicacion AS U ON E.Ubicacion = U.IDUbicacion INNER JOIN  Ciudad AS C ON C.IDCiudad = U.IDCiudad INNER JOIN Provincia AS P ON P.ID = U.IDCiudad INNER JOIN  Direccion AS D ON D.ID = U.IDDireccion LEFT JOIN  Imagen_x_Evento AS IxE ON IxE.IDEvento = E.IDEvento WHERE UxE.IDUsuario = @IDUSUARIO";
+
+                filtro.SetearQueryBase(query);
+                filtro.AplicarCriterioAQuery(campo, criterio);
+
+                DB.setConsulta(filtro.query);
+                DB.setParametro("@IDUSUARIO", idUsuario);
+                DB.ejecutarLectura();
+
+                while (DB.Lector.Read())
+                {
+                    Evento eventoAuxiliar = new Evento();
+                    eventoAuxiliar.IdEvento = (int)(Int64)DB.Lector["IDEvento"];
+                    eventoAuxiliar.Nombre = (string)DB.Lector["Nombre"];
+                    eventoAuxiliar.FechaEvento = (DateTime)DB.Lector["FechaEvento"];
+
+                    eventoAuxiliar.Ubicacion = new Ubicacion();
+                    eventoAuxiliar.Ubicacion.Ciudad.Nombre = (string)DB.Lector["NombreCiudad"];
+                    eventoAuxiliar.Ubicacion.Ciudad.Provincia.ID = (int)(Int64)DB.Lector["IDProvincia"];
+                    eventoAuxiliar.Ubicacion.Ciudad.Provincia.Nombre = (string)DB.Lector["NombreProvincia"];
+                    eventoAuxiliar.Ubicacion.Direccion.Calle = (string)DB.Lector["Calle"];
+                    eventoAuxiliar.Ubicacion.Direccion.Altura = (string)DB.Lector["Altura"];
+                    eventoAuxiliar.CostoInscripcion = Decimal.Round((decimal)DB.Lector["CostoInscripcion"]);
+                    eventoAuxiliar.Estado = char.Parse(DB.Lector["Estado"].ToString());
+                    eventoAuxiliar.EdadMinima = (int)(byte)DB.Lector["EdadMinima"];
+                    eventoAuxiliar.EdadMaxima = (int)(byte)DB.Lector["EdadMaxima"];
+                    eventoAuxiliar.CuposDisponibles = (int)DB.Lector["CuposDisponibles"];
+                    CargarDisciplinasDeEvento(eventoAuxiliar);
+
+                    if (!(DB.Lector["ImgUrl"] is DBNull))
+                        eventoAuxiliar.Imagen.URL = (string)DB.Lector["ImgUrl"];
+
+                    listaEventos.Add(eventoAuxiliar);
+                }
+
+                return listaEventos;
             }
             catch (Exception ex)
             {
