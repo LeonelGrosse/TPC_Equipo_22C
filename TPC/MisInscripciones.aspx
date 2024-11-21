@@ -18,7 +18,7 @@
             object-position: center;
         }
 
-        .card-text {
+        .container-eventos .card-text {
             display: inline-block;
             padding: .4rem;
             border-radius: 100vw;
@@ -41,17 +41,27 @@
             border-radius: 100vw;
             font: 600 .85rem Roboto;
             color: white;
+        }
+
+        .btn-filtros {
             background-color: #F23D3D;
         }
 
-            .btn:hover {
-                background-color: #F23D3D50;
+            .btn-filtros:hover {
+                color: white;
+                background-color: #F23D3D;
+                transform: scale(1.05);
             }
 
-        .container-dropdowns p {
-            margin: 0;
-            padding: 0;
+        .btn-card {
+            background-color: #023373;
         }
+
+            .btn-card:hover {
+                color: white;
+                background-color: #023373;
+                transform: scale(1.05)
+            }
     </style>
 
     <div class="container-cards d-flex flex-wrap gap-5 mt-5">
@@ -59,34 +69,28 @@
             <h1>Historial de inscripciones</h1>
         </div>
         <div class="d-flex justify-content-end w-100 p-2">
-            <div class="d-flex container-dropdowns">
-                <div>
-                    <p>Fecha</p>
-                    <asp:DropDownList ID="DropDownFiltroFecha" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server">
+            <div class="d-flex align-items-end container-dropdowns">
+                <div class="mx-2">
+                    <p class="p-0 m-0">Buscar por:</p>
+                    <asp:DropDownList ID="DropDownOpcionesFiltro" CssClass="btn btn-filtros bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" OnSelectedIndexChanged="DropDownOpcionesFiltro_SelectedIndexChanged" AutoPostBack="true" runat="server">
                     </asp:DropDownList>
                 </div>
-                <div>
-                    <p>Provincia</p>
-                    <asp:DropDownList ID="DropDownFiltroProvincias" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server">
+                <div class="mx-2">
+                    <p class="p-0 m-0">Criterio:</p>
+                    <asp:DropDownList ID="DropDownListCriterio" CssClass="btn btn-filtros bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" OnSelectedIndexChanged="DropDownListCriterio_SelectedIndexChanged" AutoPostBack="true" runat="server">
                     </asp:DropDownList>
                 </div>
-                <div>
-                    <p>Precio</p>
-                    <asp:DropDownList ID="DropDownFiltroCosto" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
-                    </asp:DropDownList>
+                <div class="mx-2">
+                    <asp:Button ID="BtnFiltrar" Text="Filtrar" CssClass="btn btn-filtros" OnClick="BtnFiltrar_Click" runat="server" />
                 </div>
-                <div>
-                    <p>Disciplina</p>
-                    <asp:DropDownList ID="DropDownFiltroDisciplina" CssClass="btn bg-color-white btn-md dropdown-toggle btn-outline-secondary text-start w-100" runat="server" AutoPostBack="true">
-                    </asp:DropDownList>
+                <div class="mx-2">
+                    <asp:Button ID="BtnLimpiarFiltro" Text="Limpiar" CssClass="btn btn-filtros" OnClick="BtnLimpiarFiltro_Click" runat="server" />
                 </div>
             </div>
         </div>
-        <%if (ExistenInscripciones())
-            { %>
         <asp:Repeater ID="RepeaterEventosUsuario" runat="server">
             <ItemTemplate>
-                <div class="card d-flex g-3">
+                <div class="container-eventos card d-flex g-3">
                     <div class="row d-flex flex-column">
                         <picture class="">
                             <img src="<%#Eval("Imagen.URL") != null ? Eval("Imagen.URL") : "https://shorturl.at/aGjXG"  %>" class="card-img-top" alt="...">
@@ -104,7 +108,7 @@
                                 <asp:Label ID="estadoEvento" CssClass="card-text" runat="server" />
                             </div>
                             <div class="d-flex justify-content-center pb-2">
-                                <asp:Button ID="btnCancelarInscripcion" Text="Cancelar inscripcion" CssClass="btn" OnClick="btnCancelarInscripcion_Click" CommandArgument='<%#Eval("IdEvento") %>' CommandName="IDEvento" runat="server" />
+                                <asp:Button ID="btnCancelarInscripcion" Text="Cancelar inscripcion" CssClass="btn btn-card" OnClick="btnCancelarInscripcion_Click" CommandArgument='<%#Eval("IdEvento") %>' CommandName="IDEvento" runat="server" />
                             </div>
                         </div>
                     </div>
@@ -112,16 +116,23 @@
 
             </ItemTemplate>
         </asp:Repeater>
-        <%}
-            else
-            { %>
-        <div class="d-flex flex-column align-items-center w-100">
-            <p class="g-0 mt-5 fst-italic">Aun no se ha inscrito a ningun evento.</p>
+        <div class="d-flex flex-column align-items-center w-100" runat="server">
+            <label id="MsjInscripciones" cssclass="g-0 mt-5 fst-italic" visible="false" runat="server"></label>
             <div>
-                <asp:Button ID="btnVerEvento" Text="Quiero inscribirme" CssClass="btn" OnClick="btnVerEvento_Click" runat="server" />
+                <asp:Button ID="btnVerEvento" Text="Quiero inscribirme" CssClass="btn btn-card" OnClick="btnVerEvento_Click" Visible="false" runat="server" />
             </div>
         </div>
-        <% } %>
+    </div>
+
+    <div id="ContainerCard" class="d-flex flex-column justify-content-center align-items-center container-card-msj position-fixed top-0 start-0 w-100 h-100" style="min-height: 80vh;" visible="false" runat="server">
+        <div class="card col-12 " style="width: 26rem; height: 10rem">
+            <div class="card-body d-flex flex-column justify-content-between align-items-center bg-danger bg-opacity-25">
+                <asp:Label ID="CardMsj" Text="" class="card-text fs-6" runat="server" />
+                <div class="d-flex justify-content-center align-items-center text-center">
+                    <asp:Button Text="Volver" ID="BtnVolverInicio" type="button" CssClass="btn btn-card" OnClick="BtnVolverInicio_Click" runat="server" />
+                </div>
+            </div>
+        </div>
     </div>
 
 </asp:Content>
