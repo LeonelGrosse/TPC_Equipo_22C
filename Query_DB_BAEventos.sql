@@ -314,29 +314,29 @@ VALUES
 
 -- Nuevas Imágenes por Evento
 INSERT INTO Imagen_x_Evento (IDEvento, ImgUrl) VALUES 
-(1, 'https://example.com/maratongeneralpico.jpg'),
-(2, 'https://example.com/festinatsanluis.jpg'),
-(3, 'https://example.com/resistencia_running.jpg'),
-(4, 'https://example.com/ciclismocomodoro.jpg'),
-(5, 'https://example.com/crossfitriogallegos.jpg'),
-(6, 'https://example.com/competencia_posadas.jpg'),
-(7, 'https://example.com/ciclismocafayate.jpg'),
-(8, 'https://example.com/nataciontartagal.jpg'),
-(9, 'https://example.com/maratonrawson.jpg'),
-(10, 'https://example.com/triatlonpalpala.jpg');
+(6, 'https://example.com/maratongeneralpico.jpg'),
+(7, 'https://example.com/festinatsanluis.jpg'),
+(8, 'https://example.com/resistencia_running.jpg'),
+(9, 'https://example.com/ciclismocomodoro.jpg'),
+(10, 'https://example.com/crossfitriogallegos.jpg'),
+(11, 'https://example.com/competencia_posadas.jpg'),
+(12, 'https://example.com/ciclismocafayate.jpg'),
+(13, 'https://example.com/nataciontartagal.jpg'),
+(14, 'https://example.com/maratonrawson.jpg'),
+(15, 'https://example.com/triatlonpalpala.jpg');
 
 -- Nuevas Disciplinas por Evento
 INSERT INTO Disciplina_x_Evento (IDEvento, IDDisciplina, Distancia) VALUES 
-(1, 3, 42),  -- Maratón General Pico
-(2, 1, 5),   -- FestiNatación Villa Mercedes
-(3, 3, 10),  -- Resistencia Running
-(4, 2, 30),  -- Ciclismo de Comodoro
-(5, 3, 10),  -- Crossfit Río Gallegos
-(6, 1, 3),   -- Competencia Atlética Posadas
-(7, 2, 50),  -- Campeonato de Ciclismo Cafayate
-(8, 1, 200), -- Torneo de Natación Tartagal
-(9, 3, 42),  -- Maratón de Rawson
-(10, 2, 40); -- Triatlón Palpalá
+(6, 3, 42),  -- Maratón General Pico
+(7, 1, 5),   -- FestiNatación Villa Mercedes
+(8, 3, 10),  -- Resistencia Running
+(9, 2, 30),  -- Ciclismo de Comodoro
+(10, 3, 10),  -- Crossfit Río Gallegos
+(11, 1, 3),   -- Competencia Atlética Posadas
+(12, 2, 50),  -- Campeonato de Ciclismo Cafayate
+(13, 1, 200), -- Torneo de Natación Tartagal
+(14, 3, 42),  -- Maratón de Rawson
+(15, 2, 40); -- Triatlón Palpalá
 
 CREATE PROCEDURE SP_OBTENER_PROVINCIAS 
 AS
