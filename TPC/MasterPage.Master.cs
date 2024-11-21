@@ -53,5 +53,23 @@ namespace TPC
             nav_ul_admin.Visible = false;
             nav_ul_organizador.Visible = false;
         }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session.Remove("UsuarioActivo");
+            Response.Redirect("Default.aspx", false);
+        }
+
+        protected void btnLogout2_Click(object sender, EventArgs e)
+        {
+            Session.Remove("UsuarioActivo");
+            Response.Redirect("Default.aspx", false);
+        }
+
+        protected void btnLogout3_Click(object sender, EventArgs e)
+        {
+            Session.Remove("UsuarioActivo");
+            Response.Redirect("Default.aspx", false);
+        }
     }
 }

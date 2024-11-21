@@ -99,16 +99,24 @@ namespace TPC
                 usuario.Contrasenia = Encrypt.GetSHA256(txtContraseniaRegistro.Text);
             }
 
+            usuario.Rol.IdRol = 3;
+
+            // se agrega usuario validado (rol de usuario)
+            int idActual = negocio.agregar(usuario);
+
+            //negocio.tomarId(usuario.Dni);
+
             ///CARGAR IMAGEN
             try
-            {
-                UsuarioNegocio negocio1 = new UsuarioNegocio();
+            {               
                 string ruta = Server.MapPath("./Imagenes/");
                 txtImagen.PostedFile.SaveAs(ruta + "perfil-" + usuario.Dni + ".jpg");
 
                 usuario.Imagen.URL = "perfil-" + usuario.Dni + ".jpg";
 
-                negocio1.cargarImagen(usuario);
+                negocio.cargarImagen(usuario, idActual);
+
+                
 
             }
             catch (Exception ex)
@@ -117,10 +125,7 @@ namespace TPC
                 throw ex;
             }
 
-            usuario.Rol.IdRol = 3;
-
-            // se agrega usuario validado (rol de usuario)
-            negocio.agregar(usuario);
+            
             
             Response.Redirect("Login.aspx");
         }

@@ -60,6 +60,42 @@
             background-color: #0233735e;
         }
 
+        .navbar-nav {
+            display: flex; 
+            justify-content: flex-end; 
+            gap: 20px; 
+        }
+
+            .navbar-nav .nav-item {
+                display: flex;
+                align-items: center; 
+            }
+
+        .logout {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+            .logout:hover {
+                background-color: #e60000;
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+
+            .logout:focus {
+                outline: none;
+            }
+
         .RequiredMessage {
             font-style: italic;
             font-size: 14px;
@@ -87,6 +123,7 @@
                                 <li class="nav-item"><a class="" runat="server" href="~/MisResultados.aspx">Mis resultados</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/MisInscripciones.aspx">Mis Inscripciones</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
+                                <asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click" class="logout" />
                             </ul>
 
                             <ul id="nav_ul_organizador" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
@@ -95,12 +132,13 @@
                                 <li class="nav-item"><a class="" runat="server" href="~/CargarEvento.aspx">Cargar Evento</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/CargarResultados.aspx">Cargar Resultados</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
-                                <!--Validar en Perfil segun rol que datos se muestran?!-->
+                                <asp:Button ID="btnLogout2" runat="server" Text="Logout" OnClick="btnLogout2_Click" class="logout" />
                             </ul>
 
                             <ul id="nav_ul_admin" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
                                 <li class="nav-item"><a class="" runat="server" href="~/ListadoUsuarios.aspx">Usuarios</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/ListadoEventos.aspx">Eventos</a></li>
+                                <asp:Button ID="btnLogout3" runat="server" Text="Logout" OnClick="btnLogout3_Click" class="logout" />
                             </ul>
                         </div>
                     </div>
@@ -108,8 +146,6 @@
             </div>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <footer>
-            </footer>
         </div>
     </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

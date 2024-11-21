@@ -136,6 +136,7 @@ namespace negocio
                     {
                         aux.Imagen.URL = (string)Datos.Lector["ImgURL"];
                     }
+                    else aux.Imagen.URL = "https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image-300x225.png";
                 }
                 return aux;
             }
@@ -202,15 +203,14 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setConsulta("Update Evento set Nombre = @nom, FechaEvento = @fecha, Ubicacion = @ubi, Costo= @costo, Estado = @estado, EdadMinima = @edadMinima, EdadMaxima =  @edadMaxima, CuposDisponibles = @cupos where IDEvento = @id");
+                datos.setConsulta("Update Evento set Nombre = @nom, FechaEvento = @fecha, CostoInscripcion= @costo, EdadMinima = @edadMinima, EdadMaxima =  @edadMaxima, CuposDisponibles = @cupos where IDEvento = @id");
                 datos.setParametro("@nom", evento.Nombre);
                 datos.setParametro("@fecha", evento.FechaEvento);
-                datos.setParametro("@ubi", evento.Ubicacion.IDUbicacion);
                 datos.setParametro("@costo", evento.CostoInscripcion);
-                datos.setParametro("@estado", evento.Estado);
                 datos.setParametro("@edadMinima", evento.EdadMinima);
                 datos.setParametro("@edadMaxima", evento.EdadMaxima);
                 datos.setParametro("@cupos", evento.CuposDisponibles);
+                datos.setParametro("@id", evento.IdEvento);
 
                 datos.ejecutarAccion();
             }
@@ -248,10 +248,9 @@ namespace negocio
         {
             try
             {
-                AccesoDatos datos = new AccesoDatos();
-                datos.setConsulta("Delete from Evento where IDEvento = @id");
-                datos.setParametro("@id", id);
-                datos.ejecutarAccion();
+                Datos.setConsulta("SP_ELIMINAR_EVENTO @ID");
+                Datos.setParametro("@ID", id);
+                Datos.ejecutarAccion();
 
             }
             catch (Exception ex)

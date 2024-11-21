@@ -163,5 +163,11 @@ namespace TPC
             ContainerCard.Visible = visible;
             CardMsj.Text = mensaje;
         }
+
+        protected void btnParticipantes_Click(object sender, EventArgs e)
+        {
+            string idEvento = ((Button)sender).CommandArgument;
+            Response.Redirect("Participantes.aspx?IdEvento=" + idEvento, false);
+        }
     }
 }

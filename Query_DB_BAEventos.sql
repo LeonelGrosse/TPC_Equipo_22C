@@ -573,5 +573,18 @@ AS BEGIN
         PRINT ERROR_MESSAGE()
     END CATCH
 END
+GO
 
-
+CREATE PROCEDURE SP_ELIMINAR_EVENTO(@ID BIGINT)
+AS BEGIN
+    BEGIN TRY
+        DELETE FROM Disciplina_x_Evento WHERE IDEvento = @ID
+        DELETE FROM Imagen_x_Evento WHERE IDEvento = @ID
+        DELETE FROM Usuario_x_Evento WHERE IDEvento = @ID
+        DELETE FROM Evento WHERE IDEvento = @ID
+    END TRY
+    BEGIN CATCH
+        PRINT ERROR_MESSAGE()
+    END CATCH
+END
+GO

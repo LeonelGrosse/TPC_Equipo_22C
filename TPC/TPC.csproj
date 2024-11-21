@@ -117,6 +117,10 @@
     <Content Include="Eventos.aspx" />
     <Content Include="FormularioRegistro.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\perfil-1111.jpg" />
+    <Content Include="Imagenes\perfil-11111111.jpg" />
+    <Content Include="Imagenes\perfil-123.jpg" />
+    <Content Include="Imagenes\perfil-42878669.jpg" />
     <Content Include="InscripcionExitosa.aspx" />
     <Content Include="ListadoEventos.aspx" />
     <Content Include="ListadoUsuarios.aspx" />
@@ -129,6 +133,7 @@
     <Content Include="obj\Debug\TPC.dll" />
     <Content Include="obj\Debug\TPC.pdb" />
     <Content Include="OrganizadorFormulario.aspx" />
+    <Content Include="Participantes.aspx" />
     <Content Include="PerfilUsuario.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -258,6 +263,13 @@
     <Compile Include="OrganizadorFormulario.aspx.designer.cs">
       <DependentUpon>OrganizadorFormulario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Participantes.aspx.cs">
+      <DependentUpon>Participantes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Participantes.aspx.designer.cs">
+      <DependentUpon>Participantes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PerfilUsuario.aspx.cs">
       <DependentUpon>PerfilUsuario.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -318,7 +330,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Imagenes\" />
     <Folder Include="Models\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>

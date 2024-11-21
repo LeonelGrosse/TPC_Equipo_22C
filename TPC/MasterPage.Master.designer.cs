@@ -51,6 +51,15 @@ namespace TPC
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl nav_ul_participante;
 
         /// <summary>
+        /// btnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogout;
+
+        /// <summary>
         /// nav_ul_organizador control.
         /// </summary>
         /// <remarks>
@@ -60,6 +69,15 @@ namespace TPC
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl nav_ul_organizador;
 
         /// <summary>
+        /// btnLogout2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogout2;
+
+        /// <summary>
         /// nav_ul_admin control.
         /// </summary>
         /// <remarks>
@@ -67,6 +85,15 @@ namespace TPC
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl nav_ul_admin;
+
+        /// <summary>
+        /// btnLogout3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogout3;
 
         /// <summary>
         /// ContentPlaceHolder1 control.
