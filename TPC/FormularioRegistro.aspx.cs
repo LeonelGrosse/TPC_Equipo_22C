@@ -99,7 +99,7 @@ namespace TPC
                 usuario.Contrasenia = Encrypt.GetSHA256(txtContraseniaRegistro.Text);
             }
 
-            usuario.Rol.IdRol = 3;
+            usuario.Rol.IdRol = 2;
 
             // se agrega usuario validado (rol de usuario)
             int idActual = negocio.agregar(usuario);
