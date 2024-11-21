@@ -61,14 +61,14 @@
         }
 
         .navbar-nav {
-            display: flex; 
-            justify-content: flex-end; 
-            gap: 20px; 
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
         }
 
             .navbar-nav .nav-item {
                 display: flex;
-                align-items: center; 
+                align-items: center;
             }
 
         .logout {
@@ -136,6 +136,8 @@
                             </ul>
 
                             <ul id="nav_ul_admin" class="navbar-nav flex-grow-1 justify-content-end" runat="server">
+                                <li class="nav-item"><a class="" runat="server" href="~/Eventos.aspx">Eventos</a></li>                                
+                                <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/ListadoUsuarios.aspx">Usuarios</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/ListadoEventos.aspx">Eventos</a></li>
                                 <asp:Button ID="btnLogout3" runat="server" Text="Logout" OnClick="btnLogout3_Click" class="logout" />
