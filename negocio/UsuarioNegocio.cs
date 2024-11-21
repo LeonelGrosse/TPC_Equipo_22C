@@ -604,5 +604,30 @@ namespace negocio
                 DB.cerrarConexion();
             }
         }
+
+        public void modificarImagen(Usuario usuario, int id)
+        {
+
+
+            try
+            {
+                DB.setConsulta("UPDATE Imagen_x_Usuario\r\nSET ImgUrl = @urlImagen\r\nWHERE IDUsuario = @idUsuario;");
+                DB.setParametro("@idUsuario", id);
+                DB.setParametro("@urlImagen", usuario.Imagen.URL);
+                DB.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            finally
+            {
+                DB.cerrarConexion();
+            }
+
+
+        }
     }
 }

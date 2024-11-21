@@ -33,6 +33,33 @@ namespace TPC
         protected global::System.Web.UI.WebControls.Image UrlImagen;
 
         /// <summary>
+        /// Control btnModificarImg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnModificarImg;
+
+        /// <summary>
+        /// Control ModificarImg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ModificarImg;
+
+        /// <summary>
+        /// Control txtModificarIMG.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputFile txtModificarIMG;
+
+        /// <summary>
         /// Control containerControlNombre.
         /// </summary>
         /// <remarks>
