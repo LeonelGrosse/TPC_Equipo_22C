@@ -588,3 +588,21 @@ AS BEGIN
     END CATCH
 END
 GO
+
+CREATE OR ALTER PROCEDURE OBTENER_USUARIOS_INSCRIPTOS(@IDEVENTO BIGINT)
+AS BEGIN
+    BEGIN TRY
+        IF @IDEVENTO IS NOT NULL
+        BEGIN
+            SELECT 
+                U.DNI 
+                FROM 
+                    Usuario_x_Evento AS UxE 
+                INNER JOIN 
+                    Usuario AS U ON U.IDUsuario = UxE.IDUsuario 
+                WHERE UxE.IDEvento = 1
+        END
+    END TRY
+    BEGIN CATCH
+    END CATCH
+END
