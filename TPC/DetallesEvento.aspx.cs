@@ -20,7 +20,7 @@ namespace TPC
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
+            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante) || Session["UsuarioActivo"] == null)
             {
                 Response.Redirect("Default.aspx", false);
                 return;

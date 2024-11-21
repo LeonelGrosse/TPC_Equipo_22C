@@ -47,6 +47,11 @@ namespace TPC
             gvParticipantes.DataSource = tabla;
             gvParticipantes.DataBind();
         }
+
+        protected void btnEliminarDeEvento_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

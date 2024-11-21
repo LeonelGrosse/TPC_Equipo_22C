@@ -152,7 +152,7 @@
             <ItemTemplate>
                 <div>
                     <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
-                    <input id="txtDisciplina" type="text" value="<%#Eval("Descripcion")%>" enabled="false"></input>
+                    <input id="txtDisciplina" type="text" value="<%#Eval("Nombre")%>" enabled="false"></input>
                 </div>
             </ItemTemplate>
         </asp:Repeater>

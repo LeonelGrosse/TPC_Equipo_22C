@@ -121,9 +121,10 @@
                                     {%>
                             <asp:Button ID="btnInscribirse" runat="server" Text="Inscribirse" OnClick="btnInscribirse_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
                             <%}
-                                else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador())
+                                else if (accesorio.Seguridad.UsuarioLogueado.EsOrganizador() || accesorio.Seguridad.UsuarioLogueado.EsAdministrador())
                                 {%>
                             <asp:Button ID="btnModificar" runat="server" Text="Modificar" OnClick="btnModificar_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
+                            <asp:Button ID="btnParticipantes" runat="server" Text="Ver Participantes" OnClick="btnParticipantes_Click" CommandArgument='<%#Eval("IdEvento")%>' CommandName="IdEvento" CssClass="btn btn-card" />
                             <%}
                                 }
                             %>

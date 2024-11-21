@@ -470,49 +470,6 @@ AS BEGIN
             ROLLBACK TRANSACTION
     END CATCH
 END
-
-GO
-
--- CREATE PROCEDURE SP_LISTA_EVENTO
--- AS BEGIN
---     BEGIN TRY
---         Select 
---             E.IDEvento, 
---             E.Nombre, 
---             E.FechaEvento, 
---             E.CostoInscripcion, 
---             E.EdadMinima, 
---             E.EdadMaxima, 
---             E.CuposDisponibles, 
---             E.Estado,
---             P.ID as IDProvincia, 
---             P.Nombre as Provincia, 
---             C.IDCiudad, 
---             C.Nombre as Ciudad, 
---             Dir.ID, 
---             Dir.Calle, 
---             Dir.Altura,  
---             IxE.IDImagen, 
---             IxE.ImgURL
---         FROM 
---             Evento AS E
---         left join 
---             Imagen_x_Evento AS IxE On IxE.IDEvento = E.IDEvento 
---         Inner join 
---             Ubicacion AS U On U.IDUbicacion = E.Ubicacion 
---         Inner join 
---             Ciudad AS C On C.IDCiudad = u.IDCiudad 
---         Inner join 
---         Provincia AS P On P.ID = C.IDProvincia 
---         Inner join
---             Direccion AS Dir On Dir.ID = U.IDDireccion 
---         Where E.Estado = 'D'
---     END TRY
---     BEGIN CATCH
---         PRINT ERROR_MESSAGE()
---     END CATCH
--- END
-
 GO
 
 CREATE OR ALTER PROCEDURE SP_LISTA_EVENTO(@IDEVENTO BIGINT = NULL)

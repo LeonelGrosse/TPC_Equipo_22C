@@ -7,12 +7,15 @@
     <style>
         div {
             margin-bottom: 15px;
-        }
+        }       
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
+        .lbl {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
         }
 
         input[type="text"], textarea {
@@ -125,7 +128,7 @@
             <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
             <%foreach (dominio.Disciplina disciplina in evento.Disciplina)
                 { %>
-            <label><%: disciplina.Nombre %> : <%:disciplina.Distancia %></label>
+            <label class="lbl"><%: disciplina.Nombre %>: <%:disciplina.Distancia %> Km</label>
             <%} %>
         </div>
 

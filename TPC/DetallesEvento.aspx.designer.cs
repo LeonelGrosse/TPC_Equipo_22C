@@ -177,7 +177,7 @@ namespace TPC
         protected global::System.Web.UI.WebControls.TextBox txtEdadMinima;
 
         /// <summary>
-        /// repRepetidor control.
+        /// lblDisciplina control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
