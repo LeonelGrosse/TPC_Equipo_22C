@@ -8,12 +8,12 @@ namespace dominio
 {
     public class Disciplina
     {
-        public int IdDisciplina { get; set; }
-        public string Descripcion { get; set; }
+        public int ID { get; set; }
+        public string Nombre { get; set; }
         public Decimal Distancia { get; set; }
         public override string ToString()
         {
-            return Descripcion;
+            return Nombre;
         }
     }
 }
