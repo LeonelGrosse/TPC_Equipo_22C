@@ -364,5 +364,34 @@ namespace negocio
                 Datos.cerrarConexion();
             }
         }
+
+        public List<string> ObtenerUsuariosInscriptos(int idEvento)
+        {
+            List<string> ListadoDNI = new List<string>(); 
+            try
+            {
+                Datos.LimpiarComando();
+                Datos.SetStoredProcedure("OBTENER_USUARIOS_INSCRIPTOS");
+                Datos.setParametro("@IDEVENTO", idEvento);
+                Datos.ejecutarLectura();
+
+                while (Datos.Lector.Read()) 
+                {
+                    string dni = (string)Datos.Lector["DNI"];
+                    ListadoDNI.Add(dni);
+                }
+
+                return ListadoDNI;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
     }
 }
