@@ -123,7 +123,10 @@
 
         <div>
             <asp:Label ID="lblDisciplina" runat="server" Text="Disciplina"></asp:Label>
-            <asp:TextBox ID="txtDisciplina" runat="server" Enabled="false" CssClass="text"></asp:TextBox>
+            <%foreach (dominio.Disciplina disciplina in evento.Disciplina)
+                { %>
+            <label><%: disciplina.Nombre %> : <%:disciplina.Distancia %></label>
+            <%} %>
         </div>
 
         <div class="button-container">
