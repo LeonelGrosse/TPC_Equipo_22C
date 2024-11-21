@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -60,12 +61,15 @@ namespace TPC
                     if (NuevoEvento.Imagen.URL != null && NuevoEvento.Imagen.URL != "")
                     {
                         ImagenNegocio imagenNegocio = new ImagenNegocio();
-                        NuevoEvento.Imagen.ID = imagenNegocio.AsociarEvento(NuevoEvento.IdEvento,NuevoEvento.Imagen.URL);
+                        NuevoEvento.Imagen.ID = imagenNegocio.AsociarEvento(NuevoEvento.IdEvento, NuevoEvento.Imagen.URL);
                     }
                 }
+
+                MostrarMensaje("El evento se cargo exitosamente");
             }
             catch (Exception ex)
             {
+                MostrarMensaje("Hubo un error, intentelo nuevamente.");
                 throw ex;
             }
         }
@@ -75,13 +79,13 @@ namespace TPC
 
             if (contadorDisciplina <= 1)
             {
-                CargarDropDown(DropDownDisciplina2, "IdDisciplina", "Descripcion", discplina);
+                CargarDropDown(DropDownDisciplina2, "ID", "Nombre", discplina);
                 containerDisciplina2.Visible = true;
             }
 
             if (contadorDisciplina >= 1)
             {
-                CargarDropDown(DropDownDisciplina3, "IdDisciplina", "Descripcion", discplina);
+                CargarDropDown(DropDownDisciplina3, "ID", "Nombre", discplina);
                 containerDisciplina3.Visible = true;
             }
             contadorDisciplina++;
@@ -105,7 +109,7 @@ namespace TPC
         }
 
         protected void BtnCancelarCarga_Click(object sender, EventArgs e)
-        {   
+        {
             LimpiarCampos();
         }
 
@@ -167,7 +171,7 @@ namespace TPC
             List<Ciudad> ciudades = CiudadNegocio.ObtenerConStoredProcedure();
             List<Disciplina> discplina = new DisciplinaNegocio().Listar();
 
-            CargarDropDown(DropDownDisciplina, "IdDisciplina", "Descripcion", discplina);
+            CargarDropDown(DropDownDisciplina, "ID", "Nombre", discplina);
             CargarDropDown(DropDownProvincias, "ID", "Nombre", provincias);
 
             int IDProvincia = int.Parse(DropDownProvincias.SelectedItem.Value);
@@ -191,7 +195,6 @@ namespace TPC
             dropDown.DataTextField = dataTextField;
             dropDown.DataBind();
         }
-
         private void LimpiarCampos()
         {
             NombreEvento.Text = "";
@@ -201,6 +204,15 @@ namespace TPC
             CuposDisponibles.Text = "";
             EdadMinEvento.Text = "";
             EdadMaxEvento.Text = "";
+        }
+        protected void BtnVolverInicio_Click(object sender, EventArgs e)
+        {
+            MostrarMensaje("", false);
+        }
+        private void MostrarMensaje(string mensaje, bool visible = true)
+        {
+            ContainerCard.Visible = visible;
+            CardMsj.Text = mensaje;
         }
     }
 }
