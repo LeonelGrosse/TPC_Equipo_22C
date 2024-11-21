@@ -32,13 +32,17 @@
                 border-radius: 100vw;
             }
 
+
+
         .profile-container-image picture .img {
             width: 100%;
-            max-width: 300px;
+            max-width: 400px;
             height: 100%;
             object-fit: cover;
             object-position: top;
             clip-path: circle();
+            margin: 40px;
+            margin-left: 380px;
         }
 
         .info-controls {
@@ -49,6 +53,7 @@
                 border-radius: 100vw;
                 padding: .5rem 1rem;
             }
+
     </style>
 
     <div class="container-profile card mt-3 bg-dark">
@@ -57,7 +62,21 @@
                 <picture>
                     <asp:Image ID="UrlImagen" CssClass="img img-fluid" runat="server" />
                 </picture>
+
+                <div class="container-btn-aceptar ps-2">
+                    <br />
+                    <br />
+                    <br />
+                    <div class="info-controls w-100 d-flex justify-content-center">
+                        <asp:Button ID="btnModificarImg" Text="Modificar Imagen" CssClass="btn bg-success text-white" OnClick="btnModificarImg_Click" runat="server" />
+                    </div>
+                </div>
+                <div id="ModificarImg" class="info-controls col-6" runat="server" style="margin-left: 400px;" >
+                    <input type="file" id="txtModificarIMG" runat="server" class="form-conrtrol" Visible="false" />
+
+                </div>
             </div>
+
             <div class="container-info">
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
@@ -90,7 +109,7 @@
                         <div class="container-info-password row">
                             <div id="containerControlPassword" class="info-controls" runat="server">
                                 <label for="txtPassword" class="form-label">Contraseña</label>
-                                <asp:TextBox ID="txtPassword"  CssClass="form-control" ReadOnly="true" runat="server" />
+                                <asp:TextBox ID="txtPassword" CssClass="form-control" ReadOnly="true" runat="server" />
                             </div>
                         </div>
                     </ContentTemplate>
@@ -114,5 +133,5 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
 </asp:Content>

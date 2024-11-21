@@ -173,6 +173,28 @@ namespace negocio
             {
                 throw ex;
             }
+            finally
+            {
+                DB.cerrarConexion();
+            }
+        }
+        public void eliminarDeEvento(string dni, int idEvento)
+        {
+            try
+            {
+                DB.SetStoredProcedure("SP_Eliminar_Participante_De_Evento");
+                DB.setParametro("@DNI", dni);
+                DB.setParametro("@IDEVENTO", idEvento);
+                DB.ejecutarLectura();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                DB.cerrarConexion();
+            }
         }
         public Usuario cargar(string email)
         {
@@ -391,11 +413,9 @@ namespace negocio
 
         public void cargarImagen(Usuario usuario,  int id)
         {
-
-
             try
             {
-                DB.setConsulta("INSERT INTO Imagen_x_Usuario (IDUsuario, ImgUrl)\r\nVALUES (@id, @urlimagen);");
+                DB.setConsulta("INSERT INTO Imagen_x_Usuario (IDUsuario, ImgUrl) VALUES (@id, @urlimagen);");
                 DB.setParametro("@id", id);
                 DB.setParametro("@urlimagen", usuario.Imagen.URL);
                 DB.ejecutarAccion();
@@ -410,8 +430,6 @@ namespace negocio
             {
                 DB.cerrarConexion();
             }
-
-
         }
 
         public List<Evento> ListarEventos(int idUsuario)
@@ -535,8 +553,6 @@ namespace negocio
                     {
                         DB.cerrarConexion();
                     }
-
-
                 }
                 return 0;
             }
@@ -548,8 +564,6 @@ namespace negocio
             finally { DB.cerrarConexion(); }
 
         }
-
-
 
         public List<Evento> Filtrar(string campo, int criterio, int idUsuario)
         {
@@ -603,6 +617,31 @@ namespace negocio
             {
                 DB.cerrarConexion();
             }
+        }
+
+        public void modificarImagen(Usuario usuario, int id)
+        {
+
+
+            try
+            {
+                DB.setConsulta("UPDATE Imagen_x_Usuario\r\nSET ImgUrl = @urlImagen\r\nWHERE IDUsuario = @idUsuario;");
+                DB.setParametro("@idUsuario", id);
+                DB.setParametro("@urlImagen", usuario.Imagen.URL);
+                DB.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+            finally
+            {
+                DB.cerrarConexion();
+            }
+
+
         }
     }
 }

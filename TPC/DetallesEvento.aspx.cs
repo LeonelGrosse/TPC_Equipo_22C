@@ -20,7 +20,7 @@ namespace TPC
         Usuario usuario = new Usuario();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante))
+            if (Seguridad.RestringirAcceso(Session["UsuarioActivo"], Roles.Participante) || Session["UsuarioActivo"] == null)
             {
                 Response.Redirect("Default.aspx", false);
                 return;
@@ -53,7 +53,7 @@ namespace TPC
             usuario = (Usuario)Session["UsuarioActivo"];
             int idUsuario = usuario.IdUsuario;
             eventoNegocio.InscribirseEvento(idEvento, idUsuario);
-            Response.Redirect("InscripcionExitosa.aspx", false);
+            Response.Redirect("Eventos.aspx", false);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

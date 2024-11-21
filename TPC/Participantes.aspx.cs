@@ -18,8 +18,10 @@ namespace TPC
         protected void Page_Load(object sender, EventArgs e)
         {
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
-            usuarios =usuarioNegocio.ListarPorEvento(idEvento);
-            CargarGridView();
+            if(!IsPostBack){
+                usuarios =usuarioNegocio.ListarPorEvento(idEvento);      
+                CargarGridView();
+            }
         }
         private void CargarGridView()
         {
@@ -46,6 +48,16 @@ namespace TPC
             }
             gvParticipantes.DataSource = tabla;
             gvParticipantes.DataBind();
+        }
+
+        protected void btnEliminarDeEvento_Click(object sender, EventArgs e)
+        {
+            Button btnEliminar = (Button)sender;
+            string dni = btnEliminar.CommandArgument;
+            int idEvento = int.Parse(Request.Params["idEvento"].ToString());
+            usuarioNegocio.eliminarDeEvento(dni, idEvento);
+            UpdatePanel1.Update();
+            Response.Redirect("Participantes.aspx?idEvento="+ idEvento, false);
         }
     }
 

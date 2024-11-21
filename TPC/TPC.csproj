@@ -121,7 +121,6 @@
     <Content Include="Imagenes\perfil-11111111.jpg" />
     <Content Include="Imagenes\perfil-123.jpg" />
     <Content Include="Imagenes\perfil-42878669.jpg" />
-    <Content Include="InscripcionExitosa.aspx" />
     <Content Include="ListadoEventos.aspx" />
     <Content Include="ListadoUsuarios.aspx" />
     <Content Include="LogIn.aspx" />
@@ -191,13 +190,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="InscripcionExitosa.aspx.cs">
-      <DependentUpon>InscripcionExitosa.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="InscripcionExitosa.aspx.designer.cs">
-      <DependentUpon>InscripcionExitosa.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListadoEventos.aspx.cs">
       <DependentUpon>ListadoEventos.aspx</DependentUpon>

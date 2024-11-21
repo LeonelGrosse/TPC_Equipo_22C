@@ -46,7 +46,7 @@ namespace TPC
             }
             if (usuarioActivo.EsParticipante())
             {
-                Response.Redirect("Eventos.aspx", false);
+                Response.Redirect("PerfilUsuario.aspx", false);
             }
             if (usuarioActivo.EsOrganizador())
             {

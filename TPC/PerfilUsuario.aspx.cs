@@ -106,5 +106,38 @@ namespace TPC
             Validator.ExpresionRegular("txtEmail", "*Formato de email incorrecto. Ejemplo: usuario@proveedor.com.", containerControlEmail, @"^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$");
             Validator.ExpresionRegular("txtPassword", "*Al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial.", containerControlPassword, @"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$");
         }
+
+        protected void btnModificarImg_Click(object sender, EventArgs e)
+        {
+            if (txtModificarIMG.Visible == true)
+            {
+                try
+                {
+                    string ruta = Server.MapPath("./Imagenes/");
+                    txtModificarIMG.PostedFile.SaveAs(ruta + "perfil-" + Seguridad.UsuarioLogueado.Dni + ".jpg");
+
+                    Seguridad.UsuarioLogueado.Imagen.URL = "perfil-" + Seguridad.UsuarioLogueado.Dni + ".jpg";
+
+                    usuarioNegocio.modificarImagen(Seguridad.UsuarioLogueado, Seguridad.UsuarioLogueado.IdUsuario);
+
+                    txtModificarIMG.Visible = false;
+                    CargarDatosUsuario();
+
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+            }
+            else txtModificarIMG.Visible = true;
+
+
+
+
+
+
+        }
+
     }
 }
