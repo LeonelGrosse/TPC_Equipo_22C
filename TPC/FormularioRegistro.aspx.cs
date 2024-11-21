@@ -134,36 +134,6 @@ namespace TPC
         {
             Response.Redirect("Default.aspx");
         }
-
-        protected void btnCargarImagen_Click(object sender, EventArgs e)
-        {
-
-            if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
-            {
-               
-                var file = txtImagen.PostedFile;
-
-                
-                byte[] imageBytes;
-                using (System.IO.Stream stream = file.InputStream)
-                {
-                    imageBytes = new byte[file.ContentLength];
-                    stream.Read(imageBytes, 0, file.ContentLength);
-                }
-
-                
-                string base64Image = Convert.ToBase64String(imageBytes);
-                string imageUrl = $"data:{file.ContentType};base64,{base64Image}";
-
-               
-                imgRegistro.ImageUrl = imageUrl;
-            }
-            else
-            {
-                
-                imgRegistro.ImageUrl = "https://img.freepik.com/vector-premium/icono-marco-fotos-foto-vacia-blanco-vector-sobre-fondo-transparente-aislado-eps-10_399089-1290.jpg";
-            }
-
-        }
+             
     }
 }
