@@ -367,7 +367,7 @@ namespace negocio
 
         public List<string> ObtenerUsuariosInscriptos(int idEvento)
         {
-            List<string> ListadoDNI = new List<string>(); 
+            List<string> ListadoDNI = new List<string>();
             try
             {
                 Datos.LimpiarComando();
@@ -375,13 +375,39 @@ namespace negocio
                 Datos.setParametro("@IDEVENTO", idEvento);
                 Datos.ejecutarLectura();
 
-                while (Datos.Lector.Read()) 
+                while (Datos.Lector.Read())
                 {
                     string dni = (string)Datos.Lector["DNI"];
                     ListadoDNI.Add(dni);
                 }
 
                 return ListadoDNI;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+            finally
+            {
+                Datos.cerrarConexion();
+            }
+        }
+
+        public bool SiEstaInscripto(int idUsuario, int idEvento)
+        {
+            try
+            {
+                Datos.LimpiarComando();
+                Datos.setConsulta("SELECT TOP 1 * FROM Usuario_x_Evento where IDUsuario = @IDUSUARIO AND IDEvento = @IDEVENTO");
+                Datos.setParametro("@IDUSUARIO", idUsuario);
+                Datos.setParametro("@IDEVENTO", idEvento);
+                Datos.ejecutarLectura();
+
+                if (Datos.Lector.Read())
+                    return true;
+
+                return false;
             }
             catch (Exception ex)
             {
