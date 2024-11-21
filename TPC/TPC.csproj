@@ -124,6 +124,7 @@
     <Content Include="MisEventos.aspx" />
     <Content Include="MisInscripciones.aspx" />
     <Content Include="MisResultados.aspx" />
+    <Content Include="ModificarEvento.aspx" />
     <Content Include="obj\Debug\TPC.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\TPC.dll" />
     <Content Include="obj\Debug\TPC.pdb" />
@@ -241,6 +242,13 @@
     </Compile>
     <Compile Include="MisResultados.aspx.designer.cs">
       <DependentUpon>MisResultados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModificarEvento.aspx.cs">
+      <DependentUpon>ModificarEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModificarEvento.aspx.designer.cs">
+      <DependentUpon>ModificarEvento.aspx</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="OrganizadorFormulario.aspx.cs">
