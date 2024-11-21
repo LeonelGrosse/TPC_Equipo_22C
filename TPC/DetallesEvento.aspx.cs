@@ -52,13 +52,31 @@ namespace TPC
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
             usuario = (Usuario)Session["UsuarioActivo"];
             int idUsuario = usuario.IdUsuario;
+
+            if(eventoNegocio.SiEstaInscripto(idUsuario, idEvento))
+            {
+                MostrarMensajeError("Ya esta inscripto.");
+                return;
+            }
+
             eventoNegocio.InscribirseEvento(idEvento, idUsuario);
-            Response.Redirect("Eventos.aspx", false);
+            MostrarMensajeError("Inscripcion exitosa!", true);
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("Eventos.aspx", false);
+        }
+
+        protected void BtnVolverInicio_Click(object sender, EventArgs e)
+        {
+            MostrarMensajeError("", false);
+            Response.Redirect("Eventos.aspx", false);
+        }
+        private void MostrarMensajeError(string mensaje, bool visible = true)
+        {
+            ContainerCard.Visible = visible;
+            CardMsj.Text = mensaje;
         }
     }
 }

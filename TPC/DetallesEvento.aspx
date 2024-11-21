@@ -7,7 +7,7 @@
     <style>
         div {
             margin-bottom: 15px;
-        }       
+        }
 
         .lbl {
             padding: 10px;
@@ -56,6 +56,23 @@
             input[type="button"]:hover, .btn:hover {
                 opacity: 0.9;
                 transform: translateY(-2px);
+            }
+
+        .btn {
+            padding: .6rem .6rem;
+            border-radius: 100vw;
+            font: 600 .85rem Roboto;
+            color: white;
+        }
+
+        .btn-card {
+            background-color: #023373;
+        }
+
+            .btn-card:hover {
+                color: white;
+                background-color: #023373;
+                transform: scale(1.05)
             }
 
         @media (max-width: 600px) {
@@ -135,6 +152,17 @@
         <div class="button-container">
             <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click" CssClass=" btn btn-primary" />
             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" OnClick="btnCancelar_Click" CssClass="btn btn-secondary" />
+        </div>
+    </div>
+
+    <div id="ContainerCard" class="d-flex flex-column justify-content-center align-items-center container-card-msj position-fixed top-0 start-0 w-100 h-100" style="min-height: 80vh;" visible="false" runat="server">
+        <div class="card col-12 " style="width: 26rem; height: 10rem">
+            <div class="card-body d-flex flex-column justify-content-between align-items-center bg-danger bg-opacity-25">
+                <asp:Label ID="CardMsj" Text="" class="card-text fs-6" runat="server" />
+                <div class="d-flex justify-content-center align-items-center text-center">
+                    <asp:Button Text="Volver" ID="BtnVolverInicio" type="button" CssClass="btn btn-card" OnClick="BtnVolverInicio_Click" runat="server" />
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>
