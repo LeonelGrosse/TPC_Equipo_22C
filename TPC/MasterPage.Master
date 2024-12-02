@@ -132,6 +132,7 @@
                                 <li class="nav-item"><a class="" runat="server" href="~/CargarEvento.aspx">Cargar Evento</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/CargarResultados.aspx">Cargar Resultados</a></li>
                                 <li class="nav-item"><a class="" runat="server" href="~/PerfilUsuario.aspx">Perfil</a></li>
+                                <li class="nav-item"><a class="" runat="server" href="~/Contacto.aspx">Contacto</a></li>
                                 <asp:Button ID="btnLogout2" runat="server" Text="Logout" OnClick="btnLogout2_Click" class="logout" />
                             </ul>
 

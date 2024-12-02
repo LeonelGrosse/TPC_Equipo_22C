@@ -45,6 +45,7 @@
     <Compile Include="CiudadNegocio.cs" />
     <Compile Include="DireccionNegocio.cs" />
     <Compile Include="DisciplinaNegocio.cs" />
+    <Compile Include="EmailService.cs" />
     <Compile Include="EventoNegocio.cs" />
     <Compile Include="ImagenNegocio.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />

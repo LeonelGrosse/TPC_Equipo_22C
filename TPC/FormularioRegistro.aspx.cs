@@ -104,7 +104,7 @@ namespace TPC
             // se agrega usuario validado (rol de usuario)
             int idActual = negocio.agregar(usuario);
 
-            //negocio.tomarId(usuario.Dni);
+            
 
             ///CARGAR IMAGEN
             try

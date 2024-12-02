@@ -94,6 +94,7 @@
     <Content Include="bin\TPC.pdb" />
     <Content Include="CargarEvento.aspx" />
     <Content Include="CargarResultados.aspx" />
+    <Content Include="Contacto.aspx" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-grid.rtl.css" />
@@ -159,6 +160,13 @@
     </Compile>
     <Compile Include="CargarResultados.aspx.designer.cs">
       <DependentUpon>CargarResultados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contacto.aspx.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contacto.aspx.designer.cs">
+      <DependentUpon>Contacto.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

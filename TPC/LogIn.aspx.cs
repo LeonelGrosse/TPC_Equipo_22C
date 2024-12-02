@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using dominio;
 using accesorio;
 
 namespace TPC
@@ -42,7 +41,7 @@ namespace TPC
 
             if (usuarioActivo.EsAdministrador())
             {
-                Response.Redirect("ListadoEventos.aspx", false);
+                Response.Redirect("Eventos.aspx", false);
             }
             if (usuarioActivo.EsParticipante())
             {
