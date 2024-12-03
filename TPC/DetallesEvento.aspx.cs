@@ -19,6 +19,7 @@ namespace TPC
         public List<Disciplina> disciplinas = new List<Disciplina>();
         Usuario usuario = new Usuario();
         EmailService emailService = new EmailService();
+
         
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -52,11 +53,13 @@ namespace TPC
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             int idEvento = int.Parse(Request.Params["IdEvento"].ToString());
+            
             usuario = (Usuario)Session["UsuarioActivo"];
             int idUsuario = usuario.IdUsuario;
             string correo = usuario.CorreoElectronico;
 
-            if(eventoNegocio.SiEstaInscripto(idUsuario, idEvento))
+
+            if (eventoNegocio.SiEstaInscripto(idUsuario, idEvento))
             {
                 MostrarMensajeError("Ya esta inscripto.");
                 return;
@@ -64,7 +67,8 @@ namespace TPC
 
             eventoNegocio.InscribirseEvento(idEvento, idUsuario);
             MostrarMensajeError("Inscripcion exitosa!", true);
-            emailService.armarCorreoInscripcion(correo);
+
+            emailService.armarCorreoInscripcion(correo, idEvento);
             try
             {
                 emailService.enviarMail();
